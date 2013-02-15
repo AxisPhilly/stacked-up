@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'devserver',
     'compressor',
     'debug_toolbar',
+    'csvimport',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
