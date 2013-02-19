@@ -1,0 +1,1833 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    password character varying(128) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    is_superuser boolean NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: csvimport_csvimport; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE csvimport_csvimport (
+    id integer NOT NULL,
+    model_name character varying(255) NOT NULL,
+    field_list character varying(255) NOT NULL,
+    upload_file character varying(100) NOT NULL,
+    file_name character varying(255) NOT NULL,
+    encoding character varying(32) NOT NULL,
+    upload_method character varying(50) NOT NULL,
+    error_log text NOT NULL,
+    import_date date NOT NULL,
+    import_user character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.csvimport_csvimport OWNER TO postgres;
+
+--
+-- Name: csvimport_csvimport_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE csvimport_csvimport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.csvimport_csvimport_id_seq OWNER TO postgres;
+
+--
+-- Name: csvimport_csvimport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE csvimport_csvimport_id_seq OWNED BY csvimport_csvimport.id;
+
+
+--
+-- Name: csvimport_importmodel; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE csvimport_importmodel (
+    id integer NOT NULL,
+    csvimport_id integer NOT NULL,
+    numeric_id integer NOT NULL,
+    natural_key character varying(100) NOT NULL,
+    CONSTRAINT csvimport_importmodel_numeric_id_check CHECK ((numeric_id >= 0))
+);
+
+
+ALTER TABLE public.csvimport_importmodel OWNER TO postgres;
+
+--
+-- Name: csvimport_importmodel_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE csvimport_importmodel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.csvimport_importmodel_id_seq OWNER TO postgres;
+
+--
+-- Name: csvimport_importmodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE csvimport_importmodel_id_seq OWNED BY csvimport_importmodel.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    user_id integer NOT NULL,
+    content_type_id integer,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_site_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
+
+
+--
+-- Name: school_data_cohort; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_cohort (
+    id integer NOT NULL,
+    grade_id integer NOT NULL,
+    students integer NOT NULL,
+    year_start integer NOT NULL,
+    year_end integer NOT NULL,
+    "MATH_ADVANCED_PERCENT" integer NOT NULL,
+    "MATH_PROFICIENT_PERCENT" integer NOT NULL,
+    "MATH_BASIC_PERCENT" integer NOT NULL,
+    "MATH_BELOW_BASIC_PERCENT" integer NOT NULL,
+    "READ_ADVANCED_PERCENT" integer NOT NULL,
+    "READ_PROFICIENT_PERCENT" integer NOT NULL,
+    "READ_BASIC_PERCENT" integer NOT NULL,
+    "READ_BELOW_BASIC_PERCENT" integer NOT NULL,
+    "MATH_COMBINED_PERCENT" integer NOT NULL,
+    "READ_COMBINED_PERCENT" integer NOT NULL
+);
+
+
+ALTER TABLE public.school_data_cohort OWNER TO postgres;
+
+--
+-- Name: school_data_cohort_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_cohort_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_cohort_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_cohort_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_cohort_id_seq OWNED BY school_data_cohort.id;
+
+
+--
+-- Name: school_data_curriculum; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_curriculum (
+    id integer NOT NULL,
+    publisher_id integer NOT NULL,
+    grade_level_start integer NOT NULL,
+    grade_level_end integer NOT NULL,
+    is_empowerment boolean DEFAULT false NOT NULL,
+    subject_area character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.school_data_curriculum OWNER TO postgres;
+
+--
+-- Name: school_data_curriculum_books; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_curriculum_books (
+    id integer NOT NULL,
+    curriculum_id integer NOT NULL,
+    textbook_id integer NOT NULL
+);
+
+
+ALTER TABLE public.school_data_curriculum_books OWNER TO postgres;
+
+--
+-- Name: school_data_curriculum_books_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_curriculum_books_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_curriculum_books_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_curriculum_books_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_curriculum_books_id_seq OWNED BY school_data_curriculum_books.id;
+
+
+--
+-- Name: school_data_curriculum_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_curriculum_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_curriculum_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_curriculum_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_curriculum_id_seq OWNED BY school_data_curriculum.id;
+
+
+--
+-- Name: school_data_grade; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_grade (
+    id integer NOT NULL,
+    school_id integer NOT NULL,
+    grade_name integer NOT NULL,
+    "MATH_ADVANCED_PERCENT" character varying(3) NOT NULL
+);
+
+
+ALTER TABLE public.school_data_grade OWNER TO postgres;
+
+--
+-- Name: school_data_grade_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_grade_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_grade_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_grade_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_grade_id_seq OWNED BY school_data_grade.id;
+
+
+--
+-- Name: school_data_inventoryrecord; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_inventoryrecord (
+    id integer NOT NULL,
+    school_id integer NOT NULL,
+    textbook_id integer NOT NULL,
+    qty_onsite integer NOT NULL,
+    qty_to_student_home integer NOT NULL,
+    qty_to_student_class integer NOT NULL,
+    qty_lost_stolen integer NOT NULL,
+    qty_unusable integer NOT NULL,
+    qty_reallocated integer NOT NULL
+);
+
+
+ALTER TABLE public.school_data_inventoryrecord OWNER TO postgres;
+
+--
+-- Name: school_data_inventoryrecord_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_inventoryrecord_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_inventoryrecord_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_inventoryrecord_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_inventoryrecord_id_seq OWNED BY school_data_inventoryrecord.id;
+
+
+--
+-- Name: school_data_publisher; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_publisher (
+    id integer NOT NULL,
+    name character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.school_data_publisher OWNER TO postgres;
+
+--
+-- Name: school_data_publisher_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_publisher_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_publisher_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_publisher_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_publisher_id_seq OWNED BY school_data_publisher.id;
+
+
+--
+-- Name: school_data_school; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_school (
+    id integer NOT NULL,
+    school_id integer NOT NULL,
+    name character varying(200) NOT NULL,
+    grade_start integer NOT NULL,
+    grade_end integer NOT NULL,
+    street_addr character varying(100) NOT NULL,
+    zipcode character varying(5) NOT NULL,
+    city character varying(100) NOT NULL,
+    state character varying(100) NOT NULL,
+    phone character varying(15) NOT NULL,
+    website character varying(100) NOT NULL,
+    school_level character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.school_data_school OWNER TO postgres;
+
+--
+-- Name: school_data_school_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_school_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_school_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_school_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_school_id_seq OWNED BY school_data_school.id;
+
+
+--
+-- Name: school_data_textbook; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE school_data_textbook (
+    id integer NOT NULL,
+    isbn character varying(10) NOT NULL,
+    title character varying(200) NOT NULL,
+    publisher_id integer NOT NULL,
+    grade_level_start integer NOT NULL,
+    grade_level_end integer NOT NULL
+);
+
+
+ALTER TABLE public.school_data_textbook OWNER TO postgres;
+
+--
+-- Name: school_data_textbook_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE school_data_textbook_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.school_data_textbook_id_seq OWNER TO postgres;
+
+--
+-- Name: school_data_textbook_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE school_data_textbook_id_seq OWNED BY school_data_textbook.id;
+
+
+--
+-- Name: south_migrationhistory; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE south_migrationhistory (
+    id integer NOT NULL,
+    app_name character varying(255) NOT NULL,
+    migration character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.south_migrationhistory OWNER TO postgres;
+
+--
+-- Name: south_migrationhistory_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE south_migrationhistory_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.south_migrationhistory_id_seq OWNER TO postgres;
+
+--
+-- Name: south_migrationhistory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE south_migrationhistory_id_seq OWNED BY south_migrationhistory.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY csvimport_csvimport ALTER COLUMN id SET DEFAULT nextval('csvimport_csvimport_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY csvimport_importmodel ALTER COLUMN id SET DEFAULT nextval('csvimport_importmodel_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_site ALTER COLUMN id SET DEFAULT nextval('django_site_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_cohort ALTER COLUMN id SET DEFAULT nextval('school_data_cohort_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_curriculum ALTER COLUMN id SET DEFAULT nextval('school_data_curriculum_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_curriculum_books ALTER COLUMN id SET DEFAULT nextval('school_data_curriculum_books_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_grade ALTER COLUMN id SET DEFAULT nextval('school_data_grade_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_inventoryrecord ALTER COLUMN id SET DEFAULT nextval('school_data_inventoryrecord_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_publisher ALTER COLUMN id SET DEFAULT nextval('school_data_publisher_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_school ALTER COLUMN id SET DEFAULT nextval('school_data_school_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_textbook ALTER COLUMN id SET DEFAULT nextval('school_data_textbook_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY south_migrationhistory ALTER COLUMN id SET DEFAULT nextval('south_migrationhistory_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add permission	1	add_permission
+2	Can change permission	1	change_permission
+3	Can delete permission	1	delete_permission
+4	Can add group	2	add_group
+5	Can change group	2	change_group
+6	Can delete group	2	delete_group
+7	Can add user	3	add_user
+8	Can change user	3	change_user
+9	Can delete user	3	delete_user
+10	Can add content type	4	add_contenttype
+11	Can change content type	4	change_contenttype
+12	Can delete content type	4	delete_contenttype
+13	Can add session	5	add_session
+14	Can change session	5	change_session
+15	Can delete session	5	delete_session
+16	Can add site	6	add_site
+17	Can change site	6	change_site
+18	Can delete site	6	delete_site
+19	Can add migration history	7	add_migrationhistory
+20	Can change migration history	7	change_migrationhistory
+21	Can delete migration history	7	delete_migrationhistory
+22	Can add log entry	8	add_logentry
+23	Can change log entry	8	change_logentry
+24	Can delete log entry	8	delete_logentry
+25	Can add school	9	add_school
+26	Can change school	9	change_school
+27	Can delete school	9	delete_school
+28	Can add address	10	add_address
+29	Can change address	10	change_address
+30	Can delete address	10	delete_address
+31	Can add grade	11	add_grade
+32	Can change grade	11	change_grade
+33	Can delete grade	11	delete_grade
+34	Can add cohort	12	add_cohort
+35	Can change cohort	12	change_cohort
+36	Can delete cohort	12	delete_cohort
+37	Can add publisher	13	add_publisher
+38	Can change publisher	13	change_publisher
+39	Can delete publisher	13	delete_publisher
+40	Can add textbook	14	add_textbook
+41	Can change textbook	14	change_textbook
+42	Can delete textbook	14	delete_textbook
+43	Can add inventory record	15	add_inventoryrecord
+44	Can change inventory record	15	change_inventoryrecord
+45	Can delete inventory record	15	delete_inventoryrecord
+46	Can add curriculum	16	add_curriculum
+47	Can change curriculum	16	change_curriculum
+48	Can delete curriculum	16	delete_curriculum
+49	Can add csv import	17	add_csvimport
+50	Can change csv import	17	change_csvimport
+51	Can delete csv import	17	delete_csvimport
+52	Can add import model	18	add_importmodel
+53	Can change import model	18	change_importmodel
+54	Can delete import model	18	delete_importmodel
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 54, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user (id, username, first_name, last_name, email, password, is_staff, is_active, is_superuser, last_login, date_joined) FROM stdin;
+1	pam			pamela.selle@gmail.com	pbkdf2_sha256$10000$YxphvULLSpT8$OoXk3Ka9ABY5w2vbe8xkSYy704/WVVP39jNJiSjL+kY=	t	t	t	2013-02-15 16:35:18.356508+00	2013-02-15 16:35:18.356508+00
+2	admin			pamela.selle@gmail.com	pbkdf2_sha256$10000$CXFssED3N3Yq$iWaXmVmFI6k0gvSJQ44vnl6dc3cDAdpIG1kYPBCut6g=	t	t	t	2013-02-15 16:35:47.784145+00	2013-02-15 16:35:34.499111+00
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 2, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: csvimport_csvimport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY csvimport_csvimport (id, model_name, field_list, upload_file, file_name, encoding, upload_method, error_log, import_date, import_user) FROM stdin;
+\.
+
+
+--
+-- Name: csvimport_csvimport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('csvimport_csvimport_id_seq', 1, false);
+
+
+--
+-- Data for Name: csvimport_importmodel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY csvimport_importmodel (id, csvimport_id, numeric_id, natural_key) FROM stdin;
+\.
+
+
+--
+-- Name: csvimport_importmodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('csvimport_importmodel_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	permission	auth	permission
+2	group	auth	group
+3	user	auth	user
+4	content type	contenttypes	contenttype
+5	session	sessions	session
+6	site	sites	site
+7	migration history	south	migrationhistory
+8	log entry	admin	logentry
+9	school	school_data	school
+10	address	school_data	address
+11	grade	school_data	grade
+12	cohort	school_data	cohort
+13	publisher	school_data	publisher
+14	textbook	school_data	textbook
+15	inventory record	school_data	inventoryrecord
+16	curriculum	school_data	curriculum
+17	csv import	csvimport	csvimport
+18	import model	csvimport	importmodel
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 18, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+569596502eaf562729a40955afc3a07a	YzE5NTg5NzNlMzY5YWVlODhlY2U4MWIzZWUwYTdkNTY1NWQ1ODkzMTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n	2013-03-01 16:35:47.79851+00
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_site (id, domain, name) FROM stdin;
+1	example.com	example.com
+\.
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_site_id_seq', 1, true);
+
+
+--
+-- Data for Name: school_data_cohort; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_cohort (id, grade_id, students, year_start, year_end, "MATH_ADVANCED_PERCENT", "MATH_PROFICIENT_PERCENT", "MATH_BASIC_PERCENT", "MATH_BELOW_BASIC_PERCENT", "READ_ADVANCED_PERCENT", "READ_PROFICIENT_PERCENT", "READ_BASIC_PERCENT", "READ_BELOW_BASIC_PERCENT", "MATH_COMBINED_PERCENT", "READ_COMBINED_PERCENT") FROM stdin;
+\.
+
+
+--
+-- Name: school_data_cohort_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_cohort_id_seq', 1, false);
+
+
+--
+-- Data for Name: school_data_curriculum; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_curriculum (id, publisher_id, grade_level_start, grade_level_end, is_empowerment, subject_area) FROM stdin;
+\.
+
+
+--
+-- Data for Name: school_data_curriculum_books; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_curriculum_books (id, curriculum_id, textbook_id) FROM stdin;
+\.
+
+
+--
+-- Name: school_data_curriculum_books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_curriculum_books_id_seq', 1, false);
+
+
+--
+-- Name: school_data_curriculum_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_curriculum_id_seq', 1, false);
+
+
+--
+-- Data for Name: school_data_grade; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_grade (id, school_id, grade_name, "MATH_ADVANCED_PERCENT") FROM stdin;
+\.
+
+
+--
+-- Name: school_data_grade_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_grade_id_seq', 1, false);
+
+
+--
+-- Data for Name: school_data_inventoryrecord; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_inventoryrecord (id, school_id, textbook_id, qty_onsite, qty_to_student_home, qty_to_student_class, qty_lost_stolen, qty_unusable, qty_reallocated) FROM stdin;
+\.
+
+
+--
+-- Name: school_data_inventoryrecord_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_inventoryrecord_id_seq', 1, false);
+
+
+--
+-- Data for Name: school_data_publisher; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_publisher (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: school_data_publisher_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_publisher_id_seq', 1, false);
+
+
+--
+-- Data for Name: school_data_school; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_school (id, school_id, name, grade_start, grade_end, street_addr, zipcode, city, state, phone, website, school_level) FROM stdin;
+\.
+
+
+--
+-- Name: school_data_school_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_school_id_seq', 1, false);
+
+
+--
+-- Data for Name: school_data_textbook; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY school_data_textbook (id, isbn, title, publisher_id, grade_level_start, grade_level_end) FROM stdin;
+\.
+
+
+--
+-- Name: school_data_textbook_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('school_data_textbook_id_seq', 1, false);
+
+
+--
+-- Data for Name: south_migrationhistory; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
+1	school_data	0001_initial	2013-02-15 16:30:42.324625+00
+2	school_data	0002_auto__add_grade	2013-02-15 16:30:42.332883+00
+3	school_data	0003_auto__add_textbook__add_curriculum__add_publisher__add_inventoryrecord	2013-02-15 16:30:42.37727+00
+4	school_data	0004_auto__del_address__add_field_school_street_addr__add_field_school_zipc	2013-02-15 16:37:07.464868+00
+5	school_data	0005_auto__add_field_school_phone__add_field_school_website__add_field_scho	2013-02-15 16:53:19.217017+00
+\.
+
+
+--
+-- Name: south_migrationhistory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('south_migrationhistory_id_seq', 5, true);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: csvimport_csvimport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY csvimport_csvimport
+    ADD CONSTRAINT csvimport_csvimport_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: csvimport_importmodel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY csvimport_importmodel
+    ADD CONSTRAINT csvimport_importmodel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_key UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_cohort_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_cohort
+    ADD CONSTRAINT school_data_cohort_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_curriculum_books_curriculum_id_4a9908bf_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_curriculum_books
+    ADD CONSTRAINT school_data_curriculum_books_curriculum_id_4a9908bf_uniq UNIQUE (curriculum_id, textbook_id);
+
+
+--
+-- Name: school_data_curriculum_books_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_curriculum_books
+    ADD CONSTRAINT school_data_curriculum_books_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_curriculum_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_curriculum
+    ADD CONSTRAINT school_data_curriculum_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_grade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_grade
+    ADD CONSTRAINT school_data_grade_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_inventoryrecord_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_inventoryrecord
+    ADD CONSTRAINT school_data_inventoryrecord_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_publisher_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_publisher
+    ADD CONSTRAINT school_data_publisher_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_school_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_school
+    ADD CONSTRAINT school_data_school_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_data_textbook_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY school_data_textbook
+    ADD CONSTRAINT school_data_textbook_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: south_migrationhistory_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY south_migrationhistory
+    ADD CONSTRAINT south_migrationhistory_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: csvimport_importmodel_csvimport_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX csvimport_importmodel_csvimport_id ON csvimport_importmodel USING btree (csvimport_id);
+
+
+--
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
+
+
+--
+-- Name: school_data_cohort_grade_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_cohort_grade_id ON school_data_cohort USING btree (grade_id);
+
+
+--
+-- Name: school_data_curriculum_books_curriculum_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_curriculum_books_curriculum_id ON school_data_curriculum_books USING btree (curriculum_id);
+
+
+--
+-- Name: school_data_curriculum_books_textbook_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_curriculum_books_textbook_id ON school_data_curriculum_books USING btree (textbook_id);
+
+
+--
+-- Name: school_data_curriculum_publisher_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_curriculum_publisher_id ON school_data_curriculum USING btree (publisher_id);
+
+
+--
+-- Name: school_data_grade_school_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_grade_school_id ON school_data_grade USING btree (school_id);
+
+
+--
+-- Name: school_data_inventoryrecord_school_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_inventoryrecord_school_id ON school_data_inventoryrecord USING btree (school_id);
+
+
+--
+-- Name: school_data_inventoryrecord_textbook_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_inventoryrecord_textbook_id ON school_data_inventoryrecord USING btree (textbook_id);
+
+
+--
+-- Name: school_data_textbook_publisher_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX school_data_textbook_publisher_id ON school_data_textbook USING btree (publisher_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_728de91f; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT content_type_id_refs_id_728de91f FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: csvimport_importmodel_csvimport_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY csvimport_importmodel
+    ADD CONSTRAINT csvimport_importmodel_csvimport_id_fkey FOREIGN KEY (csvimport_id) REFERENCES csvimport_csvimport(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: curriculum_id_refs_id_68fbab84; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_curriculum_books
+    ADD CONSTRAINT curriculum_id_refs_id_68fbab84 FOREIGN KEY (curriculum_id) REFERENCES school_data_curriculum(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_fkey FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: grade_id_refs_id_3a7067de; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_cohort
+    ADD CONSTRAINT grade_id_refs_id_3a7067de FOREIGN KEY (grade_id) REFERENCES school_data_grade(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_id_refs_id_3cea63fe; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT group_id_refs_id_3cea63fe FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: publisher_id_refs_id_244a97fa; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_textbook
+    ADD CONSTRAINT publisher_id_refs_id_244a97fa FOREIGN KEY (publisher_id) REFERENCES school_data_publisher(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: publisher_id_refs_id_7a0acdb5; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_curriculum
+    ADD CONSTRAINT publisher_id_refs_id_7a0acdb5 FOREIGN KEY (publisher_id) REFERENCES school_data_publisher(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: school_id_refs_id_111159dd; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_grade
+    ADD CONSTRAINT school_id_refs_id_111159dd FOREIGN KEY (school_id) REFERENCES school_data_school(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: school_id_refs_id_7daadc19; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_inventoryrecord
+    ADD CONSTRAINT school_id_refs_id_7daadc19 FOREIGN KEY (school_id) REFERENCES school_data_school(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: textbook_id_refs_id_275e33a1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_curriculum_books
+    ADD CONSTRAINT textbook_id_refs_id_275e33a1 FOREIGN KEY (textbook_id) REFERENCES school_data_textbook(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: textbook_id_refs_id_7acfbfd7; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY school_data_inventoryrecord
+    ADD CONSTRAINT textbook_id_refs_id_7acfbfd7 FOREIGN KEY (textbook_id) REFERENCES school_data_textbook(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_7ceef80f; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_7ceef80f FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_dfbab7d; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_dfbab7d FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
