@@ -537,16 +537,16 @@ CREATE TABLE school_data_cohort (
     students integer NOT NULL,
     year_start integer NOT NULL,
     year_end integer NOT NULL,
-    "MATH_ADVANCED_PERCENT" integer NOT NULL,
-    "MATH_PROFICIENT_PERCENT" integer NOT NULL,
-    "MATH_BASIC_PERCENT" integer NOT NULL,
-    "MATH_BELOW_BASIC_PERCENT" integer NOT NULL,
-    "READ_ADVANCED_PERCENT" integer NOT NULL,
-    "READ_PROFICIENT_PERCENT" integer NOT NULL,
-    "READ_BASIC_PERCENT" integer NOT NULL,
-    "READ_BELOW_BASIC_PERCENT" integer NOT NULL,
-    "MATH_COMBINED_PERCENT" integer NOT NULL,
-    "READ_COMBINED_PERCENT" integer NOT NULL
+    math_advanced_percent integer NOT NULL,
+    math_proficient_percent integer NOT NULL,
+    math_basic_percent integer NOT NULL,
+    math_below_basic_percent integer NOT NULL,
+    read_advanced_percent integer NOT NULL,
+    read_proficient_percent integer NOT NULL,
+    read_basic_percent integer NOT NULL,
+    read_below_basic_percent integer NOT NULL,
+    math_combined_percent integer NOT NULL,
+    read_combined_percent integer NOT NULL
 );
 
 
@@ -651,8 +651,7 @@ ALTER SEQUENCE school_data_curriculum_id_seq OWNED BY school_data_curriculum.id;
 CREATE TABLE school_data_grade (
     id integer NOT NULL,
     school_id integer NOT NULL,
-    grade_name integer NOT NULL,
-    "MATH_ADVANCED_PERCENT" character varying(3) NOT NULL
+    grade_level integer NOT NULL
 );
 
 
@@ -1504,7 +1503,7 @@ SELECT pg_catalog.setval('django_site_id_seq', 1, true);
 -- Data for Name: school_data_cohort; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY school_data_cohort (id, grade_id, students, year_start, year_end, "MATH_ADVANCED_PERCENT", "MATH_PROFICIENT_PERCENT", "MATH_BASIC_PERCENT", "MATH_BELOW_BASIC_PERCENT", "READ_ADVANCED_PERCENT", "READ_PROFICIENT_PERCENT", "READ_BASIC_PERCENT", "READ_BELOW_BASIC_PERCENT", "MATH_COMBINED_PERCENT", "READ_COMBINED_PERCENT") FROM stdin;
+COPY school_data_cohort (id, grade_id, students, year_start, year_end, math_advanced_percent, math_proficient_percent, math_basic_percent, math_below_basic_percent, read_advanced_percent, read_proficient_percent, read_basic_percent, read_below_basic_percent, math_combined_percent, read_combined_percent) FROM stdin;
 \.
 
 
@@ -1549,7 +1548,7 @@ SELECT pg_catalog.setval('school_data_curriculum_id_seq', 1, false);
 -- Data for Name: school_data_grade; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY school_data_grade (id, school_id, grade_name, "MATH_ADVANCED_PERCENT") FROM stdin;
+COPY school_data_grade (id, school_id, grade_level) FROM stdin;
 \.
 
 
@@ -1870,6 +1869,7 @@ COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
 3	school_data	0003_auto__add_textbook__add_curriculum__add_publisher__add_inventoryrecord	2013-02-15 16:30:42.37727+00
 4	school_data	0004_auto__del_address__add_field_school_street_addr__add_field_school_zipc	2013-02-15 16:37:07.464868+00
 5	school_data	0005_auto__add_field_school_phone__add_field_school_website__add_field_scho	2013-02-15 16:53:19.217017+00
+6	school_data	0006_auto__del_field_cohort_MATH_COMBINED_PERCENT__del_field_cohort_MATH_PR	2013-02-19 21:03:14.388579+00
 \.
 
 
@@ -1877,7 +1877,7 @@ COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
 -- Name: south_migrationhistory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('south_migrationhistory_id_seq', 5, true);
+SELECT pg_catalog.setval('south_migrationhistory_id_seq', 6, true);
 
 
 --
