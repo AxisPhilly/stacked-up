@@ -18,8 +18,7 @@ class School(models.Model):
 
 class Grade(models.Model):
     school = models.ForeignKey(School)
-    grade_name = models.IntegerField()
-    MATH_ADVANCED_PERCENT = models.CharField(max_length=3)
+    grade_level = models.IntegerField()
 
 class Cohort(models.Model):
     YEARS = []
@@ -31,16 +30,16 @@ class Cohort(models.Model):
     # Cohort year, ex. 2008-2009
     year_start = models.IntegerField(max_length=2, choices=YEARS)
     year_end = models.IntegerField(max_length=2, choices=YEARS)
-    MATH_ADVANCED_PERCENT = models.IntegerField()
-    MATH_PROFICIENT_PERCENT = models.IntegerField()
-    MATH_BASIC_PERCENT = models.IntegerField()
-    MATH_BELOW_BASIC_PERCENT = models.IntegerField()
-    READ_ADVANCED_PERCENT = models.IntegerField()
-    READ_PROFICIENT_PERCENT = models.IntegerField()
-    READ_BASIC_PERCENT = models.IntegerField()
-    READ_BELOW_BASIC_PERCENT = models.IntegerField()
-    MATH_COMBINED_PERCENT = models.IntegerField()
-    READ_COMBINED_PERCENT = models.IntegerField()
+    math_advanced_percent = models.IntegerField(blank = True)
+    math_proficient_percent = models.IntegerField(blank = True)
+    math_basic_percent = models.IntegerField(blank = True)
+    math_below_basic_percent = models.IntegerField(blank = True)
+    read_advanced_percent = models.IntegerField(blank = True)
+    read_proficient_percent = models.IntegerField(blank = True)
+    read_basic_percent = models.IntegerField(blank = True)
+    read_below_basic_percent = models.IntegerField(blank = True)
+    math_combined_percent = models.IntegerField(blank = True)
+    read_combined_percent = models.IntegerField(blank = True)
 
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
