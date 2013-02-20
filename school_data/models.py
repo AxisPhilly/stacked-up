@@ -23,6 +23,9 @@ class Grade(models.Model):
     school = models.ForeignKey(School)
     grade_level = models.IntegerField()
 
+    def __unicode__(self):
+        return str(self.grade_level)
+
 
 class Cohort(models.Model):
     YEARS = []
@@ -34,16 +37,16 @@ class Cohort(models.Model):
     # Cohort year, ex. 2008-2009
     year_start = models.IntegerField(max_length=2, choices=YEARS)
     year_end = models.IntegerField(max_length=2, choices=YEARS)
-    math_advanced_percent = models.IntegerField(blank=True)
-    math_proficient_percent = models.IntegerField(blank=True)
-    math_basic_percent = models.IntegerField(blank=True)
-    math_below_basic_percent = models.IntegerField(blank=True)
-    read_advanced_percent = models.IntegerField(blank=True)
-    read_proficient_percent = models.IntegerField(blank=True)
-    read_basic_percent = models.IntegerField(blank=True)
-    read_below_basic_percent = models.IntegerField(blank=True)
-    math_combined_percent = models.IntegerField(blank=True)
-    read_combined_percent = models.IntegerField(blank=True)
+    math_advanced_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    math_proficient_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    math_basic_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    math_below_basic_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    read_advanced_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    read_proficient_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    read_basic_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    read_below_basic_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    math_combined_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
+    read_combined_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
 
 
 class Publisher(models.Model):
