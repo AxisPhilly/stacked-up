@@ -31,7 +31,6 @@ class Cohort(models.Model):
         YEARS.append((r, r))
 
     grade = models.ForeignKey(Grade)
-    students = models.IntegerField()
     # Cohort year, ex. 2008-2009
     year_start = models.IntegerField(max_length=2, choices=YEARS)
     year_end = models.IntegerField(max_length=2, choices=YEARS)
@@ -46,8 +45,10 @@ class Cohort(models.Model):
     math_combined_percent = models.IntegerField(blank=True)
     read_combined_percent = models.IntegerField(blank=True)
 
+
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
+
 
 class Textbook(models.Model):
     isbn = models.CharField(max_length=10)
@@ -55,6 +56,7 @@ class Textbook(models.Model):
     publisher = models.ForeignKey(Publisher)
     grade_level_start = models.IntegerField()
     grade_level_end = models.IntegerField()
+
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)
@@ -66,11 +68,12 @@ class InventoryRecord(models.Model):
     qty_unusable = models.IntegerField()
     qty_reallocated = models.IntegerField()
 
+
 class Curriculum(models.Model):
-    SUBJECTS = [('Reading','Reading'),
-                ('Mathematics','Mathematics'),
-                ('Language Arts','Language Arts'),
-                ('Science','Science'),
+    SUBJECTS = [('Reading', 'Reading'),
+                ('Mathematics', 'Mathematics'),
+                ('Language Arts', 'Language Arts'),
+                ('Science', 'Science'),
                 ('Social Studies', 'Social Studies')]
     books = models.ManyToManyField(Textbook)
     publisher = models.ForeignKey(Publisher)
