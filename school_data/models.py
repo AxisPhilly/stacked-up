@@ -1,45 +1,50 @@
 from django.db import models
 from datetime import datetime
 
+
 class School(models.Model):
     school_id = models.IntegerField()
-    name = models.CharField(max_length = 200, blank = True)
+    name = models.CharField(max_length=200, blank=True)
     grade_start = models.IntegerField()
     grade_end = models.IntegerField()
-    street_addr = models.CharField(max_length = 100, blank = True)
-    zipcode = models.CharField(max_length = 5, blank = True)
-    city = models.CharField(max_length = 100, blank = True)
-    state = models.CharField(max_length = 100, blank = True)
-    phone = models.CharField(max_length = 15, blank = True)
-    website = models.CharField(max_length = 100, blank = True)
-    school_level = models.CharField(max_length = 100, blank = True)
+    street_addr = models.CharField(max_length=100, blank=True)
+    zipcode = models.CharField(max_length=5, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    state = models.CharField(max_length=100, blank=True)
+    phone = models.CharField(max_length=15, blank=True)
+    website = models.CharField(max_length=100, blank=True)
+    school_level = models.CharField(max_length=100, blank=True)
+
     def __unicode__(self):
         return self.name
+
 
 class Grade(models.Model):
     school = models.ForeignKey(School)
     grade_level = models.IntegerField()
 
+
 class Cohort(models.Model):
     YEARS = []
-    for r in range(2008, (datetime.now().year+1)):
-        YEARS.append((r,r))
+
+    for r in range(2008, (datetime.now().year + 1)):
+        YEARS.append((r, r))
 
     grade = models.ForeignKey(Grade)
     students = models.IntegerField()
     # Cohort year, ex. 2008-2009
     year_start = models.IntegerField(max_length=2, choices=YEARS)
     year_end = models.IntegerField(max_length=2, choices=YEARS)
-    math_advanced_percent = models.IntegerField(blank = True)
-    math_proficient_percent = models.IntegerField(blank = True)
-    math_basic_percent = models.IntegerField(blank = True)
-    math_below_basic_percent = models.IntegerField(blank = True)
-    read_advanced_percent = models.IntegerField(blank = True)
-    read_proficient_percent = models.IntegerField(blank = True)
-    read_basic_percent = models.IntegerField(blank = True)
-    read_below_basic_percent = models.IntegerField(blank = True)
-    math_combined_percent = models.IntegerField(blank = True)
-    read_combined_percent = models.IntegerField(blank = True)
+    math_advanced_percent = models.IntegerField(blank=True)
+    math_proficient_percent = models.IntegerField(blank=True)
+    math_basic_percent = models.IntegerField(blank=True)
+    math_below_basic_percent = models.IntegerField(blank=True)
+    read_advanced_percent = models.IntegerField(blank=True)
+    read_proficient_percent = models.IntegerField(blank=True)
+    read_basic_percent = models.IntegerField(blank=True)
+    read_below_basic_percent = models.IntegerField(blank=True)
+    math_combined_percent = models.IntegerField(blank=True)
+    read_combined_percent = models.IntegerField(blank=True)
 
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
