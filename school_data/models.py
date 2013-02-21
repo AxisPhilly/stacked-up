@@ -24,7 +24,7 @@ class Grade(models.Model):
     grade_level = models.IntegerField()
 
     def __unicode__(self):
-        return str(self.grade_level)
+        return "%s, Grade %s" % (self.school.name, self.grade_level)
 
 
 class Cohort(models.Model):
