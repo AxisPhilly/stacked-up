@@ -1,3 +1,4 @@
+.DS_Store
 .vagrant
 settings/local.py
 static
