@@ -57,9 +57,6 @@ class Textbook(models.Model):
     isbn = models.CharField(max_length=10)
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
-    grade_level_start = models.IntegerField()
-    grade_level_end = models.IntegerField()
-
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)
