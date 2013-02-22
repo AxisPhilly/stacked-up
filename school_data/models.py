@@ -51,12 +51,16 @@ class Cohort(models.Model):
 
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
-
+    publisher_id = models.CharField(max_length=50, blank=True)
+    def __unicode__(self):
+        return self.name
 
 class Textbook(models.Model):
     isbn = models.CharField(max_length=10)
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
+    def __unicode__(self):
+        return self.title
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)
@@ -67,7 +71,8 @@ class InventoryRecord(models.Model):
     qty_lost_stolen = models.IntegerField()
     qty_unusable = models.IntegerField()
     qty_reallocated = models.IntegerField()
-
+    def __unicode__(self):
+        return "%s, %s" % (self.school.name, self.textbook.title)
 
 class Curriculum(models.Model):
     SUBJECTS = [('Reading', 'Reading'),
