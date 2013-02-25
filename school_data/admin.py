@@ -1,4 +1,4 @@
-from school_data.models import School, Grade, Cohort, Publisher
+from school_data.models import School, Grade, Cohort, Publisher, Textbook, InventoryRecord
 from django.contrib import admin
 
 admin.site.register(School)
@@ -17,8 +17,9 @@ class CohortAdmin(admin.ModelAdmin):
 admin.site.register(Cohort, CohortAdmin)
 
 admin.site.register(Publisher)
+admin.site.register(Textbook)
 
-# class InventoryRecordAdmin(admin.ModelAdmin):
-#     readonly_fields = ('school', 'textbook')
+class InventoryRecordAdmin(admin.ModelAdmin):
+    readonly_fields = ('school', 'textbook')
 
-# admin.site.register(InventoryRecord, InventoryAdmin)
+admin.site.register(InventoryRecord, InventoryRecordAdmin)
