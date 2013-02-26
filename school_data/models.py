@@ -48,12 +48,17 @@ class Cohort(models.Model):
     math_combined_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
     read_combined_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
 
+class PublisherGroup(models.Model):
+    name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
 
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
     publisher_id = models.CharField(max_length=50, blank=True)
+    group = models.ForeignKey(PublisherGroup, blank=True)
     def __unicode__(self):
-        return self.name
+        return "%s, part of %s" % (self.name, self.group.name)
 
 class Textbook(models.Model):
     isbn = models.CharField(max_length=10)

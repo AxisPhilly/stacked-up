@@ -1,4 +1,4 @@
-from school_data.models import School, Grade, Cohort, Publisher, Textbook, InventoryRecord
+from school_data.models import School, Grade, Cohort, PublisherGroup, Publisher, Textbook, InventoryRecord
 from django.contrib import admin
 
 admin.site.register(School)
@@ -17,6 +17,9 @@ class CohortAdmin(admin.ModelAdmin):
 admin.site.register(Cohort, CohortAdmin)
 
 admin.site.register(Publisher)
+
+admin.site.register(PublisherGroup)
+
 admin.site.register(Textbook)
 
 class InventoryRecordAdmin(admin.ModelAdmin):
