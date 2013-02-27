@@ -1,4 +1,4 @@
-from school_data.models import School, Grade, Cohort, PublisherGroup, Publisher, Textbook, InventoryRecord
+from .models import School, Grade, Cohort, PublisherGroup, Publisher, Textbook, InventoryRecord
 from django.contrib import admin
 
 admin.site.register(School)
