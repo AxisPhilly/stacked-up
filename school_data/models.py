@@ -65,7 +65,7 @@ class Textbook(models.Model):
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
     def __unicode__(self):
-        return self.title
+        return "%s, %s" % (self.isbn, self.title)
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)

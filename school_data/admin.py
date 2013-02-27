@@ -20,7 +20,10 @@ admin.site.register(Publisher)
 
 admin.site.register(PublisherGroup)
 
-admin.site.register(Textbook)
+class TextbookAdmin(admin.ModelAdmin):
+    readonly_fields = ('publisher',)
+
+admin.site.register(Textbook, TextbookAdmin)
 
 class InventoryRecordAdmin(admin.ModelAdmin):
     readonly_fields = ('school', 'textbook')
