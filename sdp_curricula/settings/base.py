@@ -90,9 +90,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'zo%is*55lc6902^e^%zdp&amp;qaj(8x9)kbji4v6og&amp;pk&amp;m=*)2%&amp;'
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
