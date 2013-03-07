@@ -69,7 +69,7 @@ class Textbook(models.Model):
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
     # Cost only loaded for books associated with a state curricula
-    cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     isTeacherEdition = models.BooleanField(default=False)
     def __unicode__(self):
         return "%s, %s" % (self.isbn, self.title)
@@ -105,6 +105,6 @@ class CurriculumSet(models.Model):
     curriculum = models.ForeignKey(Curriculum)
     name = models.CharField(max_length=100)
     books = models.ManyToManyField(Textbook)
-    grade_level_start = models.IntegerField()
-    grade_level_end = models.IntegerField()
+    grade_level_start = models.IntegerField(null=True)
+    grade_level_end = models.IntegerField(null=True)
 
