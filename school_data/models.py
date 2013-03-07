@@ -48,6 +48,10 @@ class Cohort(models.Model):
     math_combined_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
     read_combined_percent = models.DecimalField(blank=True, max_digits=5, decimal_places=1)
 
+class Cohort2012To2013(models.Model):
+    grade = models.ForeignKey(Grade)
+    size = models.PositiveIntegerField()
+
 class PublisherGroup(models.Model):
     name = models.CharField(max_length=100)
     def __unicode__(self):
@@ -64,6 +68,9 @@ class Textbook(models.Model):
     isbn = models.CharField(max_length=10)
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
+    # Cost only loaded for books associated with a state curricula
+    cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    isTeacherEdition = models.BooleanField(default=False)
     def __unicode__(self):
         return "%s, %s" % (self.isbn, self.title)
 
@@ -80,14 +87,24 @@ class InventoryRecord(models.Model):
         return "%s, %s" % (self.school.name, self.textbook.title)
 
 class Curriculum(models.Model):
+    """ 
+    The superset of curriculum, may include many 
+    curriculum sets for multiple grades 
+    """
+    name = models.CharField(max_length=100)
     SUBJECTS = [('Reading', 'Reading'),
                 ('Mathematics', 'Mathematics'),
                 ('Language Arts', 'Language Arts'),
                 ('Science', 'Science'),
                 ('Social Studies', 'Social Studies')]
-    books = models.ManyToManyField(Textbook)
-    publisher = models.ForeignKey(Publisher)
-    grade_level_start = models.IntegerField()
-    grade_level_end = models.IntegerField()
+    publisher = models.ForeignKey(PublisherGroup)
     is_empowerment = models.BooleanField(default=False)
     subject_area = models.CharField(max_length=100, choices=SUBJECTS)
+
+class CurriculumSet(models.Model):
+    curriculum = models.ForeignKey(Curriculum)
+    name = models.CharField(max_length=100)
+    books = models.ManyToManyField(Textbook)
+    grade_level_start = models.IntegerField()
+    grade_level_end = models.IntegerField()
+
