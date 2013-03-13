@@ -9,7 +9,6 @@ class GradeAdmin(admin.ModelAdmin):
 
 admin.site.register(Grade, GradeAdmin)
 
-
 class CohortAdmin(admin.ModelAdmin):
     def queryset(self, request):
         return Cohort.objects.all().prefetch_related('grade')
@@ -24,7 +23,7 @@ admin.site.register(Publisher)
 admin.site.register(PublisherGroup)
 
 class TextbookAdmin(admin.ModelAdmin):
-    readonly_fields = ('publisher',)
+    readonly_fields = ('publisher')
 
 admin.site.register(Textbook, TextbookAdmin)
 
