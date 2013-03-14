@@ -71,12 +71,16 @@ class Textbook(models.Model):
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
 
-    MATERIALS = [('Textbook', 'Textbook'),
+    MATERIALS = [('Book', 'Book'),
+                ('Set','Set'),
+                ('Kit','Kit'),
+                ('Visual', 'Visual'),
                 ('Manipulative', 'Manipulative'),
                 ('CD', 'CD'),
                 ('CD-ROM', 'CD-ROM'),
-                ('DVD', 'DVD')]
-    material_type = models.CharField(max_length=20, default='Textbook', choices=MATERIALS)
+                ('DVD', 'DVD'),
+                ('Testing','Testing')]
+    material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
     # Cost only loaded for books associated with a state curricula
     cost = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     isTeacherEdition = models.BooleanField(default=False)
@@ -121,8 +125,8 @@ class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)
 
     # TODO specify related_name so we can have these
-    # materials = models.ManyToManyField(Textbook)
-    # necessary_materials = models.ManyToManyField(Textbook) # comprised of members of materials
+    materials = models.ManyToManyField(Textbook, related_name='materials')
+    necessary_materials = models.ManyToManyField(Textbook, related_name='necessary_materials') # comprised of members of materials
 
     grade_level_start = models.IntegerField(null=True)
     grade_level_end = models.IntegerField(null=True)
