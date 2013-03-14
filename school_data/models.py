@@ -70,7 +70,7 @@ class Textbook(models.Model):
     isbn = models.CharField(max_length=10)
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
-
+    # ordering id, nullable 
     MATERIALS = [('Book', 'Book'),
                 ('Set','Set'),
                 ('Kit','Kit'),
@@ -124,7 +124,6 @@ class Curriculum(models.Model):
 class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)
 
-    # TODO specify related_name so we can have these
     materials = models.ManyToManyField(Textbook, related_name='materials')
     necessary_materials = models.ManyToManyField(Textbook, related_name='necessary_materials') # comprised of members of materials
 
@@ -132,7 +131,7 @@ class GradeCurriculum(models.Model):
     grade_level_end = models.IntegerField(null=True)
 
     is_approved_empowerment = models.BooleanField(default=False)
-    is_approved_general = models.BooleanField(default=True)
+    is_approved_general = models.BooleanField(default=False)
     approved_year = models.CharField(null=True,max_length=10, default='2012_2013')
 
     class Meta:
