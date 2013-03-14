@@ -1,5 +1,6 @@
-from .models import School, Grade, Cohort, PublisherGroup, Publisher, Textbook, InventoryRecord
 from django.contrib import admin
+from django import forms
+from .models import School, Grade, Cohort, PublisherGroup, Publisher, Textbook, InventoryRecord, Curriculum, GradeCurriculum
 
 admin.site.register(School)
 
@@ -23,7 +24,7 @@ admin.site.register(Publisher)
 admin.site.register(PublisherGroup)
 
 class TextbookAdmin(admin.ModelAdmin):
-    readonly_fields = ('publisher')
+    readonly_fields = ('publisher',)
 
 admin.site.register(Textbook, TextbookAdmin)
 
@@ -35,3 +36,19 @@ class InventoryRecordAdmin(admin.ModelAdmin):
     list_display = ('school', 'textbook', 'qty_onsite', 'qty_to_student_home', 'qty_to_student_class', 'qty_lost_stolen', 'qty_unusable', 'qty_reallocated')
 
 admin.site.register(InventoryRecord, InventoryRecordAdmin)
+
+admin.site.register(Curriculum)
+
+class GradeCurriculumAdminForm(forms.ModelForm):
+  class Meta:
+    model = GradeCurriculum
+
+  def __init__(self, *args, **kwargs):
+    super(GradeCurriculumAdminForm, self).__init__(*args, **kwargs)
+    if self.instance.id:
+        self.fields['necessary_materials'].queryset = self.instance.materials.all()
+
+class GradeCurriculumAdmin(admin.ModelAdmin):
+    form = GradeCurriculumAdminForm
+
+admin.site.register(GradeCurriculum, GradeCurriculumAdmin)

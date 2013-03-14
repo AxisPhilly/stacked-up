@@ -135,3 +135,8 @@ class GradeCurriculum(models.Model):
     is_approved_general = models.BooleanField(default=True)
     approved_year = models.CharField(null=True,max_length=10, default='2012_2013')
 
+    class Meta:
+        verbose_name_plural = "grade curricula"
+
+    def __unicode__(self):
+        return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))
