@@ -67,7 +67,7 @@ class Publisher(models.Model):
         return "%s, part of %s" % (self.name, self.group.name)
 
 class Textbook(models.Model):
-    isbn = models.CharField(max_length=10)
+    isbn = models.CharField(max_length=13)
     title = models.CharField(max_length=200)
     publisher = models.ForeignKey(Publisher)
     # ordering id, nullable 
