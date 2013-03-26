@@ -140,7 +140,10 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'core',
-    'school_data',
+    'schools',
+    'students',
+    'curricula',
+    'vendors',
 )
 
 EMAIL_SUBJECT_PREFIX = '[sdp_curricula] '
