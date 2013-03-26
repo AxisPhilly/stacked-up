@@ -8,6 +8,9 @@ class SchoolType(models.Model):
     name = models.CharField(max_length=20)
     district = models.ForeignKey(District)
 
+    def __unicode__(self):
+        return self.name
+
 class School(models.Model):
     school_type = models.ForeignKey(SchoolType, null=True)
     school_id = models.IntegerField()
