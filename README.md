@@ -1,6 +1,6 @@
 # Curricula Navigator
 
-This project stores and 
+This project stores and ...
 
 ## Running locally
 

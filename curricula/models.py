@@ -1,10 +1,13 @@
 from django.db import models
 from schools.models import SchoolType
 
+
 class PublisherGroup(models.Model):
     name = models.CharField(max_length=100)
+
     def __unicode__(self):
         return self.name
+
 
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
@@ -13,6 +16,7 @@ class Publisher(models.Model):
 
     def __unicode__(self):
         return "%s, part of %s" % (self.name, self.group.name)
+
 
 class LearningMaterial(models.Model):
     """ Learning material has an ISBN and/or an order code.
@@ -26,14 +30,14 @@ class LearningMaterial(models.Model):
     publisher = models.ForeignKey(Publisher)
 
     MATERIALS = [('Book', 'Book'),
-                ('Set','Set'),
-                ('Kit','Kit'),
+                ('Set', 'Set'),
+                ('Kit', 'Kit'),
                 ('Visual', 'Visual'),
                 ('Manipulative', 'Manipulative'),
                 ('CD', 'CD'),
                 ('CD-ROM', 'CD-ROM'),
                 ('DVD', 'DVD'),
-                ('Testing','Testing')]
+                ('Testing', 'Testing')]
     material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
 
     isTeacherEdition = models.BooleanField(default=False)
@@ -41,10 +45,11 @@ class LearningMaterial(models.Model):
     def __unicode__(self):
         return "%s, %s" % (self.isbn, self.title)
 
+
 class Curriculum(models.Model):
-    """ 
-    The superset of curriculum, may include many 
-    curriculum sets for multiple grades 
+    """
+    The superset of curriculum, may include many
+    curriculum sets for multiple grades
     """
     name = models.CharField(max_length=100)
     SUBJECTS = [('Reading', 'Reading'),
@@ -54,22 +59,23 @@ class Curriculum(models.Model):
                 ('Social Studies', 'Social Studies')]
     publisher = models.ForeignKey(PublisherGroup)
     subject_area = models.CharField(max_length=25, choices=SUBJECTS)
-    secondary_subject_area = models.CharField(max_length=25, null=True, choices=SUBJECTS) # if necessary
+    secondary_subject_area = models.CharField(max_length=25, null=True, choices=SUBJECTS)  # if necessary
 
     class Meta:
         verbose_name_plural = "curricula"
+
 
 class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)
 
     materials = models.ManyToManyField(LearningMaterial, related_name='materials')
-    necessary_materials = models.ManyToManyField(LearningMaterial, related_name='necessary_materials') # comprised of members of materials
+    necessary_materials = models.ManyToManyField(LearningMaterial, related_name='necessary_materials')  # comprised of members of materials
 
     grade_level_start = models.IntegerField(null=True)
     grade_level_end = models.IntegerField(null=True)
 
     approved_for_type = models.ManyToManyField(SchoolType, related_name="approved_school_types")
-    approved_year = models.CharField(null=True,max_length=10, default='2012_2013')
+    approved_year = models.CharField(null=True, max_length=10, default='2012_2013')
 
     class Meta:
         verbose_name_plural = "grade curricula"

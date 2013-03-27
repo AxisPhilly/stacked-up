@@ -3,9 +3,11 @@ from datetime import datetime
 from schools.models import District, SchoolType, School
 from curricula.models import LearningMaterial
 
+
 class Vendor(models.Model):
     name = models.CharField(max_length=100)
-    district = models.ManyToManyField(District, related_name='districts')
+    districts = models.ManyToManyField(District, related_name='districts')
+
 
 class NegotiatedPrice(models.Model):
     YEARS = []
@@ -15,8 +17,10 @@ class NegotiatedPrice(models.Model):
     vendor = models.ForeignKey(Vendor, null=True)
     value = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
+    material = models.ForeignKey(LearningMaterial)
     negotiated_for_school_type = models.ManyToManyField(SchoolType, related_name='school_types')
     negotiated_year = models.PositiveIntegerField(max_length=4, choices=YEARS, default=2012)
+
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)
@@ -27,5 +31,6 @@ class InventoryRecord(models.Model):
     qty_lost_stolen = models.IntegerField()
     qty_unusable = models.IntegerField()
     qty_reallocated = models.IntegerField()
+
     def __unicode__(self):
         return "%s, %s" % (self.school.name, self.material.title)
