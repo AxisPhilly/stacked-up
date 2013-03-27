@@ -12,15 +12,10 @@ Getting started:
 4. Follow the startup procedure:
 
     vagrant up # this will take a while your first time
-
     vagrant ssh # ssh into the virtual machine
-
     pip install -r requirements.txt # install the requirements, you should only have to do this the first time
-
-    (then, within the SSH session:)
-      
+    # then, within the SSH session:
     pg_restore -U postgres -d sdp_curricula sdp_curricula.dump # load all the datas
-
     ./manage.py runserver 0.0.0.0:8000
 
 Your app is then accessible on `localhost:8111` (where your vagrant port was setup, note that it will not be on 8000).
