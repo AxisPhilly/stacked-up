@@ -142,7 +142,8 @@ INSTALLED_APPS = (
     'core',
     'school_data',
     'schools',
-    'students'
+    'students',
+    'curricula'
 )
 
 EMAIL_SUBJECT_PREFIX = '[sdp_curricula] '
