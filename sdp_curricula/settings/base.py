@@ -132,15 +132,16 @@ INSTALLED_APPS = (
     'devserver',
     'compressor',
     'debug_toolbar',
-    'csvimport',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-    'core',
-    'school_data',
+    'schools',
+    'students',
+    'curricula',
+    'vendors'
 )
 
 EMAIL_SUBJECT_PREFIX = '[sdp_curricula] '
