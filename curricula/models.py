@@ -64,6 +64,8 @@ class Curriculum(models.Model):
     class Meta:
         verbose_name_plural = "curricula"
 
+    def __unicode__(self):
+        return self.name
 
 class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)

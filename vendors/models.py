@@ -21,6 +21,8 @@ class NegotiatedPrice(models.Model):
     negotiated_for_school_type = models.ManyToManyField(SchoolType, related_name='school_types')
     negotiated_year = models.PositiveIntegerField(max_length=4, choices=YEARS, default=2012)
 
+    def __unicode__(self):
+        return "%s, %s" % (self.vendor.name, self.value)
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)
