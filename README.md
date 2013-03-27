@@ -11,7 +11,7 @@ Getting started:
 3. `cd` to this repository
 4. Follow the startup procedure:
 
-	vagrant up # this will take a while your first time
+    vagrant up # this will take a while your first time
 
     vagrant ssh # ssh into the virtual machine
 
