@@ -60,6 +60,9 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default, emp
             try:
                 material = LearningMaterial.objects.get(isbn=isbn)
                 print 'Found material ' + material.title
+                material.title = title
+                material.save()
+                print 'Material title updated to ' + title
                 if row[4] == 'TRUE':
                     material.isTeacherEdition = True
                     material.save()
