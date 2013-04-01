@@ -128,7 +128,7 @@ if __name__ == "__main__":
         print 'Using the csv ' + csv_filepathname
     except IndexError:
         print 'Not enough arguments: vendor name and csv path expected'
-    data = csv.reader(open(csv_filepathname, 'rU'), delimiter=';', quotechar='"')
+    data = csv.reader(open(csv_filepathname, 'rU'), delimiter=',', quotechar='"')
     data.next()
     info = data.next()
     print info
