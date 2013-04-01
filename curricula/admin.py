@@ -8,6 +8,7 @@ admin.site.register(Publisher)
 
 class LearningMaterialAdmin(admin.ModelAdmin):
     readonly_fields = ('publisher',)
+    search_fields = ['title', 'isbn']
 
 admin.site.register(LearningMaterial, LearningMaterialAdmin)
 
