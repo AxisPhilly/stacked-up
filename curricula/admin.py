@@ -24,5 +24,6 @@ class GradeCurriculumAdminForm(forms.ModelForm):
 
 class GradeCurriculumAdmin(admin.ModelAdmin):
     form = GradeCurriculumAdminForm
+    readonly_fields = ('materials',)
 
 admin.site.register(GradeCurriculum, GradeCurriculumAdmin)

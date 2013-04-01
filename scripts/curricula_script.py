@@ -42,17 +42,25 @@ def is_empowerment(info):
         return True
 
 
+def is_default(info):
+    if len(info) > 9:
+        if info[8] != 'FALSE':
+            return True
+
+
 def add_school_types(info, g, default, empowerment):
-    g.approved_for_type.add(default)
-    g.save()
-    print 'Approved for default'
+    if is_default(info):
+        g.approved_for_type.add(default)
+        g.save()
+        print 'Approved for default'
     if is_empowerment(info):
         g.approved_for_type.add(empowerment)
         g.save()
         print 'Approved for empowerment'
 
 
-def iterate_through_data(data, publisher, grade_curriculum, vendor, default, empowerment, is_empowerment):
+def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
+    empowerment, is_empowerment, is_default):
     for row in data:
         isbn = row[1].strip().replace('-', '')
         if len(row[1]) > 4:
@@ -88,21 +96,22 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default, emp
                 grade_curriculum.save()
                 print 'Material added to grade curriculum'
 
-            if '$' in row[2]:
-                price = float(re.sub('[\$,]', '', row[2]))
-                try:
-                    n = NegotiatedPrice.objects.get(value=price, material=material)
-                    print 'We have a price for this :)'
-                except NegotiatedPrice.DoesNotExist:
-                    n = NegotiatedPrice(value=price, vendor=vendor, material=material)
-                    n.save()
-                    print 'Created the price'
-                print material.title + ' has a price of ' + str(n.value)
+            # if '$' in row[2]:
+            price = float(re.sub('[\$,]', '', row[2]))
+            try:
+                n = NegotiatedPrice.objects.get(value=price, material=material)
+                print 'We have a price for this :)'
+            except NegotiatedPrice.DoesNotExist:
+                n = NegotiatedPrice(value=price, vendor=vendor, material=material)
+                n.save()
+                print 'Created the price'
+            print material.title + ' has a price of ' + str(n.value)
+            if is_default:
                 n.negotiated_for_school_type.add(default)
                 print 'Priced for default'
-                if is_empowerment:
-                    n.negotiated_for_school_type.add(empowerment)
-                    print 'Priced for empowerment'
+            if is_empowerment:
+                n.negotiated_for_school_type.add(empowerment)
+                print 'Priced for empowerment'
 
 
 if __name__ == "__main__":
@@ -122,6 +131,7 @@ if __name__ == "__main__":
     data = csv.reader(open(csv_filepathname, 'rU'), delimiter=',', quotechar='"')
     data.next()
     info = data.next()
+    print info
     c_name = info[0]
     c_pub = Publisher.objects.get(name=info[3])
     print 'Found a publisher named ' + c_pub.name
@@ -133,4 +143,5 @@ if __name__ == "__main__":
     data.next()
     data.next()
     print 'Starting data iteration ...'
-    iterate_through_data(data, c_pub, g, v, default, empowerment, is_empowerment(info))
+    iterate_through_data(data, c_pub, g, v, default,
+        empowerment, is_empowerment(info), is_default(info))
