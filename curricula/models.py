@@ -37,6 +37,8 @@ class LearningMaterial(models.Model):
                 ('CD', 'CD'),
                 ('CD-ROM', 'CD-ROM'),
                 ('DVD', 'DVD'),
+                ('Subscription', 'Subscription'),
+                ('VHS', 'VHS'),
                 ('Testing', 'Testing')]
     material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
 
@@ -70,8 +72,8 @@ class Curriculum(models.Model):
 class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)
 
-    materials = models.ManyToManyField(LearningMaterial, related_name='materials')
-    necessary_materials = models.ManyToManyField(LearningMaterial, related_name='necessary_materials')  # comprised of members of materials
+    materials = models.ManyToManyField(LearningMaterial, related_name='curricula')
+    necessary_materials = models.ManyToManyField(LearningMaterial, related_name='required_in', blank=True)  # comprised of members of materials
 
     grade_level_start = models.IntegerField(null=True)
     grade_level_end = models.IntegerField(null=True)

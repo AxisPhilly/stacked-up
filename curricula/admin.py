@@ -8,6 +8,7 @@ admin.site.register(Publisher)
 
 class LearningMaterialAdmin(admin.ModelAdmin):
     readonly_fields = ('publisher',)
+    search_fields = ['title', 'isbn']
 
 admin.site.register(LearningMaterial, LearningMaterialAdmin)
 
@@ -24,5 +25,6 @@ class GradeCurriculumAdminForm(forms.ModelForm):
 
 class GradeCurriculumAdmin(admin.ModelAdmin):
     form = GradeCurriculumAdminForm
+    readonly_fields = ('materials',)
 
 admin.site.register(GradeCurriculum, GradeCurriculumAdmin)
