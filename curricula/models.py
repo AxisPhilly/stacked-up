@@ -37,6 +37,8 @@ class LearningMaterial(models.Model):
                 ('CD', 'CD'),
                 ('CD-ROM', 'CD-ROM'),
                 ('DVD', 'DVD'),
+                ('Subscription', 'Subscription'),
+                ('VHS', 'VHS'),
                 ('Testing', 'Testing')]
     material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
 
