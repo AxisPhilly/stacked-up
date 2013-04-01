@@ -8,6 +8,8 @@ class Vendor(models.Model):
     name = models.CharField(max_length=100)
     districts = models.ManyToManyField(District, related_name='districts')
 
+    def __unicode__(self):
+        return self.name
 
 class NegotiatedPrice(models.Model):
     YEARS = []
@@ -22,7 +24,7 @@ class NegotiatedPrice(models.Model):
     negotiated_year = models.PositiveIntegerField(max_length=4, choices=YEARS, default=2012)
 
     def __unicode__(self):
-        return "%s, %s" % (self.vendor.name, self.value)
+        return "%s, %s, %s" % (self.vendor.name, self.value, self.material.title)
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)
