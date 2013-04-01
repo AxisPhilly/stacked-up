@@ -22,16 +22,16 @@ class Cohort(models.Model):
     year_end = models.IntegerField(max_length=4, choices=YEARS)
 
     # PSSA Scores
-    math_advanced_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    math_proficient_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    math_basic_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    math_below_basic_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    read_advanced_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    read_proficient_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    read_basic_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    read_below_basic_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    math_combined_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
-    read_combined_percent = models.DecimalField(null=True, max_digits=5, decimal_places=1)
+    math_advanced_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    math_proficient_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    math_basic_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    math_below_basic_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    read_advanced_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    read_proficient_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    read_basic_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    read_below_basic_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    math_combined_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
+    read_combined_percent = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=1)
 
     # Number of students in the grade for that year
-    number_of_students = models.PositiveIntegerField(null=True)
+    number_of_students = models.PositiveIntegerField(blank=True, null=True)
