@@ -31,7 +31,7 @@ This is how you'll start the app when you want to work on it. You are now in a v
 
 [Pam Selle](http://github.com/pselle)
 
-[Jeff Frankel](http://github.com/jfrankl)
+[Jeff Frankl](http://github.com/jfrankl)
 
 ## Thanks
 
