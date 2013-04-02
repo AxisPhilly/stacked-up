@@ -61,7 +61,7 @@ class Curriculum(models.Model):
                 ('Social Studies', 'Social Studies')]
     publisher = models.ForeignKey(PublisherGroup)
     subject_area = models.CharField(max_length=25, choices=SUBJECTS)
-    secondary_subject_area = models.CharField(max_length=25, null=True, choices=SUBJECTS)  # if necessary
+    secondary_subject_area = models.CharField(max_length=25, null=True, blank=True, choices=SUBJECTS)  # if necessary
 
     class Meta:
         verbose_name_plural = "curricula"
