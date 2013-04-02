@@ -25,7 +25,7 @@ class LearningMaterial(models.Model):
     isbn = models.CharField(max_length=13, null=True)
     ordering_code = models.CharField(max_length=30, null=True)
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=300)
 
     publisher = models.ForeignKey(Publisher)
 
