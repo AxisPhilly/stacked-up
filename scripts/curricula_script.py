@@ -9,7 +9,7 @@ project_dir = abspath(dirname(dirname(__file__)))
 sys.path.insert(0, project_dir)
 os.environ["DJANGO_SETTINGS_MODULE"] = "sdp_curricula.settings"
 
-from curricula.models import LearningMaterial, Publisher, Curriculum, GradeCurriculum
+from curricula.models import LearningMaterial, Publisher, PublisherGroup, Curriculum, GradeCurriculum
 from vendors.models import Vendor, NegotiatedPrice
 from schools.models import SchoolType
 
@@ -46,6 +46,8 @@ def is_default(info):
     if len(info) > 9:
         if info[8] != 'FALSE':
             return True
+    else:
+        return True
 
 
 def add_school_types(info, g, default, empowerment):
@@ -65,14 +67,19 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
         isbn = row[1].strip().replace('-', '')
         if len(isbn) == 10:
             isbn = convert_10_to_13(isbn)
-        if len(row[1]) > 4:
+        if len(row[2]) > 1:
             title = row[0].strip().replace('*', '')
             try:
-                material = LearningMaterial.objects.get(isbn=isbn)
+                if isbn == '':
+                    print title
+                    material = LearningMaterial.objects.get(title=title)
+                    print 'Empty ISBN'
+                else:
+                    material = LearningMaterial.objects.get(isbn=isbn)
+                    material.title = title
+                    material.save()
+                    print 'Material title updated to ' + title
                 print 'Found material ' + material.title
-                material.title = title
-                material.save()
-                print 'Material title updated to ' + title
                 if row[4] == 'TRUE':
                     material.isTeacherEdition = True
                     material.save()
@@ -91,7 +98,10 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                 material.save()
                 print 'Material created: ' + material.title
             try:
-                grade_curriculum.materials.get(isbn=material.isbn)
+                if isbn == '':
+                    grade_curriculum.materials.get(title=material.title)
+                else:
+                    grade_curriculum.materials.get(isbn=material.isbn)
                 print 'Looks like we already added this one to the curriculum!'
             except LearningMaterial.DoesNotExist:
                 grade_curriculum.materials.add(material)
@@ -115,6 +125,7 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                 n.negotiated_for_school_type.add(empowerment)
                 print 'Priced for empowerment'
 
+
 def check_digit_10(isbn):
     assert len(isbn) == 9
     sum = 0
@@ -123,20 +134,28 @@ def check_digit_10(isbn):
         w = i + 1
         sum += w * c
     r = sum % 11
-    if r == 10: return 'X'
-    else: return str(r)
+    if r == 10:
+        return 'X'
+    else:
+        return str(r)
+
 
 def check_digit_13(isbn):
     assert len(isbn) == 12
     sum = 0
     for i in range(len(isbn)):
         c = int(isbn[i])
-        if i % 2: w = 3
-        else: w = 1
+        if i % 2:
+            w = 3
+        else:
+            w = 1
         sum += w * c
     r = 10 - (sum % 10)
-    if r == 10: return '0'
-    else: return str(r)
+    if r == 10:
+        return '0'
+    else:
+        return str(r)
+
 
 def convert_10_to_13(isbn):
     assert len(isbn) == 10
@@ -164,14 +183,19 @@ if __name__ == "__main__":
     info = data.next()
     print info
     c_name = info[0]
-    c_pub = Publisher.objects.get(name=info[3])
+    try:
+        c_pub = Publisher.objects.get(name=info[3])
+    except Publisher.DoesNotExist:
+        new_group = PublisherGroup(name=info[3])
+        new_group.save()
+        c_pub = Publisher(name=info[3], group=new_group)
+        c_pub.save()
     print 'Found a publisher named ' + c_pub.name
     c = define_curriculum(info, c_name, c_pub)
     g = define_grade_curriculum(info, c)
     default = SchoolType.objects.get(name="Default")
     empowerment = SchoolType.objects.get(name="Empowerment")
     add_school_types(info, g, default, empowerment)
-    data.next()
     data.next()
     print 'Starting data iteration ...'
     iterate_through_data(data, c_pub, g, v, default,
