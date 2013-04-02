@@ -184,7 +184,7 @@ if __name__ == "__main__":
     print info
     c_name = info[0]
     try:
-        c_pub = Publisher.objects.get(name=info[3])
+        c_pub = Publisher.objects.filter(name=info[3])[0]
     except Publisher.DoesNotExist:
         new_group = PublisherGroup(name=info[3])
         new_group.save()
