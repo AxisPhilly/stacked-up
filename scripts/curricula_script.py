@@ -43,7 +43,7 @@ def is_empowerment(info):
 
 
 def is_default(info):
-    if len(info) > 9:
+    if len(info) > 8:
         if info[8] != 'FALSE':
             return True
     else:
