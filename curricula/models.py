@@ -37,6 +37,7 @@ class LearningMaterial(models.Model):
                 ('CD', 'CD'),
                 ('CD-ROM', 'CD-ROM'),
                 ('DVD', 'DVD'),
+                ('Software', 'Software'),
                 ('Subscription', 'Subscription'),
                 ('VHS', 'VHS'),
                 ('Testing', 'Testing')]
