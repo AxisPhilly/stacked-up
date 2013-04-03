@@ -64,9 +64,9 @@ def add_school_types(info, g, default, empowerment):
 def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
     empowerment, is_empowerment, is_default):
     for row in data:
-        ordering_code = row[1].strip()
+        ordering_code = row[0].strip()
         if len(row[2]) > 1:
-            title = row[0].strip().replace('*', '')
+            title = row[1].strip().replace('*', '')
             try:
                 if ordering_code == '':
                     print title
