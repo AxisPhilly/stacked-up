@@ -10,8 +10,6 @@ admin.site.register(Grade, GradeAdmin)
 
 
 class CohortAdmin(admin.ModelAdmin):
-    def queryset(self, request):
-        return Cohort.objects.all().prefetch_related('grade')
 
     readonly_fields = ('grade',)
     list_display = ('grade', 'year_start', 'year_end',

@@ -11,6 +11,7 @@ class Vendor(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class NegotiatedPrice(models.Model):
     YEARS = []
     for r in range(2012, (datetime.now().year + 1)):
@@ -25,6 +26,7 @@ class NegotiatedPrice(models.Model):
 
     def __unicode__(self):
         return "%s, %s, %s" % (self.vendor.name, self.value, self.material.title)
+
 
 class InventoryRecord(models.Model):
     school = models.ForeignKey(School)

@@ -1,0 +1,16 @@
+{% include "header.html" %}
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full">
+			     	<h2>Curriculum Matches for {{ school_name }}</h2>
+			     	{% if book_list %}
+						{% for book in book_list %}
+							<li>{{ book.curriculum }} for Grade {{ book.grade_level_start }} to {{ book.grade_level_end }}</li>
+						{% endfor %}
+					{% else %}
+						<li>Nothing found, ya'll</li>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+{% include "footer.html" %}

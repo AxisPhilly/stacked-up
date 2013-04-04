@@ -1,0 +1,79 @@
+{% include "header.html" %}
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full">    	
+     				<h1>Books at {{ school_name }}</h1>
+					<h2>
+						Grades {{ grade_start }} to {{ grade_end }}
+					</h2>
+						<h4>Matched Curricula</h4>
+    				{{ returner|safe }}					
+					<hr>
+			     	<table>
+			     		<h4>Complete Inventory</h4>
+			     		<tr>			
+							<th>
+								Title
+							</th>			     			
+							<th>
+								On Site
+							</th>
+							<th>
+								Student Home
+							</th>	
+							<th>
+								Student Class
+							</th>	 	
+							<th>
+								Stolen
+							</th>	 
+							<th>
+								Unusable
+							</th>	 											     							     			
+							<th>
+								Teacher
+							</th>
+							<th>
+								Material Type
+							</th>
+							<th>
+								ISBN
+							</th>			
+						</tr>
+						{% for book in book_inventory %}
+					    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+					    		<td>
+							    	<a href="/book/{{book.material.isbn}}">{{ book.material.title }}</a>
+								</td>					    		
+					    		<td>
+					    			{{ book.qty_onsite }}
+					    		</td>		
+					    		<td>
+					    			{{ book.qty_to_student_home }}
+					    		</td>
+					    		<td>
+					    			{{ book.qty_to_student_class }}
+					    		</td>		 
+					    		<td>
+					    			{{ book.qty_lost_stolen }}
+					    		</td>		  		   
+					    		<td>
+					    			{{ book.qty_unusable }}
+					    		</td>		  		   		    				    		 		    		
+					    		<td>
+					    			{{ book.material.isTeacherEdition }} 
+					    		</td>
+					    		<td>
+					    			{{ book.material.material_type }}
+					    		</td>
+					    		<td>
+					    			{{ book.material.isbn }}
+					    		</td>
+					    	</tr>
+					{% endfor %}
+					</ul>
+					</table>
+				</div>
+			</div>
+		</div>					
+{% include "footer.html" %}

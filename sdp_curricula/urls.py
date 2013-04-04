@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from vendors.views import VendorListView, MatchWithCurriculum, IndexListView
 from django.contrib import admin
 admin.autodiscover()
 
@@ -13,4 +13,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^school/(?P<id>(.+))/$',
+        VendorListView.as_view()),
+    url(r'^book/(?P<id>(.+))/$',
+        MatchWithCurriculum.as_view()),
+    url(r'$',
+        IndexListView.as_view()),
 )
