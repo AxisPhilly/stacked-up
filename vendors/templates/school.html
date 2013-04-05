@@ -13,7 +13,7 @@
      				<h5>ID</h5>{{ school.school_id }}
      			</div>
 				<div class="three columns mobile-full">			     		
-     				<h5>Address</h5>{{ school.street_addr }}
+     				<h5>Address</h5>{{ school.street_addr.title }}
      			</div>			     	
 				<div class="three columns mobile-full">			     		
      				<h5>Grade</h5>{{ school.grade_start }} to {{ school.grade_end }}
@@ -22,7 +22,7 @@
      				<h5>Type</h5>{{ school.school_type }}
      			</div>
 				<div class="two columns mobile-full">			     		
-     				<h5>Level</h5>{{ school.school_level }}
+     				<h5>Level</h5>{{ school.school_level.title }}
      			</div>	     								     			
  			</div>	  
  			<hr>
