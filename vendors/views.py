@@ -22,7 +22,7 @@ class VendorListView(ListView):
             a[str(x.material.isbn)] = {}
             a[str(x.material.isbn)]["title"] = x.material.title.encode("utf-8")
             a[str(x.material.isbn)]["teacher"] = str(x.material.isTeacherEdition)
-            a[str(x.material.isbn)]["publisher"] = str(x.material.publisher)
+            a[str(x.material.isbn)]["publisher"] = [str(x.material.publisher.name), str(x.material.publisher.group), str(x.material.publisher.pk)]
             a[str(x.material.isbn)]["material"] = str(x.material.material_type)
             r = LearningMaterial.objects.get(isbn=str(x.material.isbn))
             v = InventoryRecord.objects.filter(school=self.school, material=r)
@@ -72,10 +72,11 @@ class VendorListView(ListView):
                 title = x[key]['title']
                 book_count_list = x[key]['book_count_list']
                 curriculum_set = (curricula_title, curricula_grade, curricula_subject, curricula_publisher, curricula_id)
-                if key in a:
-                    a[curriculum_set] = a[curriculum_set] + count
-                else:
+                try:
+                    a[curriculum_set] = count + a[curriculum_set]
+                except KeyError:
                     a[curriculum_set] = count
+
                 isbn = key
                 publisher = x[key]['publisher']
                 teacher = x[key]['teacher']
@@ -90,10 +91,11 @@ class VendorListView(ListView):
                 material_type = x[key]['material']
                 isbn = key
                 unmatched[isbn] = [count, title, publisher, book_count_list, teacher, material_type]
-        context['school'] = self.school
-        context['matched_curricula'] = a
         context['matched_books'] = matched
         context['unmatched_books'] = unmatched
+        context['school'] = self.school
+        context['matched_curricula'] = a
+        context['returned'] = a
         return context
 
 

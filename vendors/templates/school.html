@@ -1,4 +1,5 @@
 {% include "header.html" %}
+{{ returned|safe }}
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full" style="padding: .5em; background-color: #eee">
@@ -71,8 +72,11 @@
 									Title
 								</th>			     			
 								<th>
-									On Site
+									Publisher
 								</th>
+								<th>
+									On Site
+								</th>								
 								<th>
 									Student Home
 								</th>	
@@ -99,7 +103,10 @@
 						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
 						    		<td>
 								    	<a href="/book/{{ key }}/">{{ book.1 }}</a>
-									</td>					    		
+									</td>	
+									<td>
+										{{ book.2.0 }}{% if book.2.1 == "Default" %} {% else %}, {{ book.2.1 }} {% endif %}
+									</td>			    		
 						    		<td>
 						    			{{ book.3.0 }}
 						    		</td>		
@@ -139,8 +146,11 @@
 									Title
 								</th>			     			
 								<th>
-									On Site
+									Publisher
 								</th>
+								<th>
+									On Site
+								</th>								
 								<th>
 									Student Home
 								</th>	
@@ -168,7 +178,10 @@
 						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
 						    		<td>
 								    	<a href="/book/{{ key }}/">{{ book.1 }}</a>
-									</td>					    		
+									</td>		
+									<td>
+										{{ book.2.0 }}{% if book.2.1 == "Default" %} {% else %}, {{ book.2.1 }} {% endif %}
+									</td>													    		
 						    		<td>
 						    			{{ book.3.0 }}
 						    		</td>		
