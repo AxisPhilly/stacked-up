@@ -83,6 +83,7 @@ class GradeCurriculum(models.Model):
 
     class Meta:
         verbose_name_plural = "grade curricula"
+        ordering = ["curriculum", "grade_level_start"]
 
     def __unicode__(self):
         return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))

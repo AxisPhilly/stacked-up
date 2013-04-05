@@ -1,7 +1,7 @@
 from vendors.models import InventoryRecord
 from schools.models import School
 from curricula.models import GradeCurriculum, LearningMaterial
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
 
 
 class VendorListView(ListView):
@@ -74,7 +74,7 @@ class VendorListView(ListView):
                 curriculum_set = (curricula_title, curricula_grade, curricula_subject, curricula_publisher, curricula_id)
                 try:
                     a[curriculum_set] = count + a[curriculum_set]
-                except KeyError:
+                except KeyError:    
                     a[curriculum_set] = count
 
                 isbn = key
@@ -105,8 +105,8 @@ class MatchWithCurriculum(ListView):
     template_name = "match.html"
 
     def get_queryset(self):
-        self.school = LearningMaterial.objects.get(isbn=self.kwargs['id'])
-        return self.school
+            self.school = LearningMaterial.objects.get(isbn=self.kwargs['id'])
+            return self.school
 
     def get_context_data(self, **kwargs):
         context = super(MatchWithCurriculum, self).get_context_data(**kwargs)
@@ -116,11 +116,27 @@ class MatchWithCurriculum(ListView):
         return context
 
 
-class CurriculumDetailView(DetailView):
+class CurriculumDetailView(ListView):
 
     context_object_name = "curriculum_list"
     template_name = "curriculum.html"
-    model = School
+
+    def get_queryset(self):
+        self.curriculum = GradeCurriculum.objects.get(id=self.kwargs['id'])
+        return self.curriculum
+
+    def get_context_data(self, **kwargs):
+        context = super(CurriculumDetailView, self).get_context_data(**kwargs)
+        self.curriculum
+        context['book_list'] = "hey"
+        return context
+
+
+class CurriculumListView(ListView):
+
+    context_object_name = "curricula"
+    template_name = "curricula.html"
+    model = GradeCurriculum
 
 
 class IndexListView(ListView):
