@@ -9,7 +9,24 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full">
-			     	<h2>{{ book_name }}</h2>
+			     	<h2>
+			     		{{ book_name }}
+			     	</h2>
+					<div class="section row">
+						<div class="three columns mobile-full">			     		
+		     				<h5>ISBN</h5>{{ book_detail.isbn }}
+		     			</div>
+						<div class="three columns mobile-full">			     		
+		     				<h5>Publisher</h5>{{ book_detail.publisher }}
+		     			</div>			     	
+						<div class="three columns mobile-full">			     		
+		     				<h5>Teacher's Edition</h5>{{ book_detail.isTeacherEdition }}
+		     			</div>		
+						<div class="three columns mobile-full">			     		
+		     				<h5>Material Type</h5>{{ book_detail.material_type }}
+		     			</div>					     			
+	     			</div>	     				     	
+			     	<hr>
 			     	<h4>In Curricula</h4>
 			     	{% if book_list %}
 						{% for book in book_list %}

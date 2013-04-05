@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-from vendors.views import VendorListView, MatchWithCurriculum, IndexListView
+from vendors.views import VendorListView, MatchWithCurriculum, IndexListView, CurriculumDetailView
+from curricula.models import GradeCurriculum
 from django.contrib import admin
 admin.autodiscover()
 
@@ -17,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^school/(?P<id>(.+))/$',
         VendorListView.as_view()),
+    url(r'^curriculum/(?P<pk>(.+))/$',
+        CurriculumDetailView.as_view(model=GradeCurriculum)),
     url(r'^book/(?P<id>(.+))/$',
         MatchWithCurriculum.as_view()),
 )

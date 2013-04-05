@@ -42,7 +42,6 @@ class LearningMaterial(models.Model):
                 ('VHS', 'VHS'),
                 ('Testing', 'Testing')]
     material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
-
     isTeacherEdition = models.BooleanField(default=False)
 
     def __unicode__(self):
