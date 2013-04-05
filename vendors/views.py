@@ -139,6 +139,6 @@ class CurriculumListView(ListView):
 
 class IndexListView(ListView):
 
-    context_object_name = "school_list"
+    context_object_name = "schools"
     template_name = "index.html"
     model = School

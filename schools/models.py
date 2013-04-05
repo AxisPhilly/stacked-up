@@ -1,7 +1,9 @@
 from django.db import models
 
+
 class District(models.Model):
     name = models.CharField(max_length=100)
+
 
 class SchoolType(models.Model):
     name = models.CharField(max_length=20)
@@ -9,6 +11,7 @@ class SchoolType(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class School(models.Model):
     school_type = models.ForeignKey(SchoolType, null=True)
@@ -26,3 +29,6 @@ class School(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        ordering = ["school_level", "name"]
