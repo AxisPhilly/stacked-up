@@ -171,7 +171,7 @@ h5,
 h6 {
   margin: 0;
   color: #222222;
-  line-height: 1.1em;
+  line-height: 1.2em;
   font-weight: bold;  
   margin-bottom: 1em;  
 }
@@ -544,7 +544,7 @@ textarea {
   width: 15%;
 }
 .three {
-  width: 23.5%;
+  width: 22.5%;
 }
 .four {
   width: 32%;

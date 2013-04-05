@@ -9,7 +9,7 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full">
-			     	<h2>{{ curriculum_list.curriculum }}, Grade {{ curriculum_list.grade_level_start }} to {{ curriculum_list.grade_level_end }}</h2>
+			     	<h2>{{ curriculum_list.curriculum }}, Grade {{ curriculum_list.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ curriculum_list.grade_level_end }} {% endif %}</h2>
 						<div class="section row">
 							<div class="three columns mobile-full">			     		
 			     				<h5>Subject</h5>{{ curriculum_list.curriculum.subject_area }}
@@ -18,7 +18,7 @@
 			     				<h5>Publisher</h5>{{ curriculum_list.curriculum.publisher }}
 			     			</div>			     	
 							<div class="three columns mobile-full">			     		
-			     				<h5>Grade</h5>{{ curriculum_list.grade_level_start }} to {{ curriculum_list.grade_level_end }}
+			     				<h5>Grade</h5>{{ curriculum_list.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ curriculum_list.grade_level_end }} {% endif %}
 			     			</div>		
 							<div class="three columns mobile-full">			     		
 			     				<h5>Approved</h5>

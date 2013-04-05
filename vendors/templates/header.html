@@ -6,6 +6,12 @@
   		<link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/base.css">		
 		<style type="text/css">
 		</style>
+		<script src="http://vanilla-masonry.desandro.com/masonry.min.js"></script>
+		<script>
+			window.onload = function() {
+  				var wall = new Masonry( document.getElementById('container') );
+  			};
+  		</script>		
     </head>
     <body>    
     	<div id="header"></div>

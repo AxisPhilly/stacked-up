@@ -127,8 +127,6 @@ class CurriculumDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CurriculumDetailView, self).get_context_data(**kwargs)
-        self.curriculum
-        context['book_list'] = "hey"
         return context
 
 
