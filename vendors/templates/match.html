@@ -1,14 +1,22 @@
 {% include "header.html" %}
 		<div class="container content-inner">
 			<div class="section row">
+				<div class="twelve columns mobile-full" style="padding: .5em; background-color: #eee">
+					<div><a href="/">Home</a> > Book</div>
+				</div>
+			</div>
+		</div>	
+		<div class="container content-inner">
+			<div class="section row">
 				<div class="twelve columns mobile-full">
-			     	<h2>Curriculum Matches for {{ school_name }}</h2>
+			     	<h2>{{ book_name }}</h2>
+			     	<h4>In Curricula</h4>
 			     	{% if book_list %}
 						{% for book in book_list %}
 							<li>{{ book.curriculum }} for Grade {{ book.grade_level_start }} to {{ book.grade_level_end }}</li>
 						{% endfor %}
 					{% else %}
-						<li>Nothing found, ya'll</li>
+						<li>No matches</li>
 					{% endif %}
 				</div>
 			</div>
