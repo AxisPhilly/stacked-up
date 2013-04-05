@@ -741,3 +741,13 @@ textarea {
   width: 80px;
   float: left;
 }
+
+#breadcrumbs {
+
+}
+
+#header {
+  background-color: black; 
+  height: 4em; 
+  margin-bottom: 2em
+}
