@@ -60,9 +60,12 @@ class VendorListView(ListView):
                     a[key] = total
             html = ""
             for key, value in sorted(a.iteritems(), key=lambda (k,v): (v,k), reverse=True):
-                html += '<div class="section row"><div class="twelve columns mobile-full"><div class="number"><h4>'+str(value)+'</h4></div><div class="curriculum">'+str(key)+'</div></div></div>' # I'm sorry this is terrible I will fix it.
-
-        context['returner'] = html
+                html += '<div class="section row"><div class="twelve columns mobile-full"><div class="number"><h4>'+str(value)+'</h4></div><div class="curriculum">'+str(key)+'</div></div></div>'  # I'm sorry this is terrible I will fix it.
+        try:
+            x
+            context['returner'] = html
+        except NameError:
+            context['returner'] = "No School Data"
         context['school_name'] = self.s.name
         context['grade_start'] = self.s.grade_start
         context['grade_end'] = self.s.grade_end
@@ -80,7 +83,7 @@ class MatchWithCurriculum(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(MatchWithCurriculum, self).get_context_data(**kwargs)
-        context['school_name'] = self.s.title
+        context['book_name'] = self.s.title
         return context
 
 

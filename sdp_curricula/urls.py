@@ -12,11 +12,11 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    url(r'^$',
+        IndexListView.as_view()),    
     url(r'^admin/', include(admin.site.urls)),
     url(r'^school/(?P<id>(.+))/$',
         VendorListView.as_view()),
     url(r'^book/(?P<id>(.+))/$',
         MatchWithCurriculum.as_view()),
-    url(r'$',
-        IndexListView.as_view()),
 )
