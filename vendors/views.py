@@ -88,11 +88,4 @@ class IndexListView(ListView):
 
     context_object_name = "school_list"
     template_name = "index.html"
-
-    def get_queryset(self):
-        self.s = School.objects.all()
-        return self.s
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexListView, self).get_context_data(**kwargs)
-        return context
+    model = School
