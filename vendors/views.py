@@ -38,6 +38,7 @@ class VendorListView(ListView):
                 t.append(str(u.curriculum.subject_area))
                 t.append(str(u.grade_level_start))
                 t.append(str(u.grade_level_end))
+                t.append(str(u.curriculum.publisher))                
                 a[str(x.material.isbn)]["curricula"] = t
         context = super(VendorListView, self).get_context_data(**kwargs)
         x = a
@@ -48,27 +49,22 @@ class VendorListView(ListView):
                 print curricula
                 print len(curricula)
                 curricula_title = curricula[0]
+                curricula_subject = curricula[1]
+                curricula_publisher = curricula[4]
                 curricula_grade = ""
                 for g in range(0, len(curricula)/4):
-                    curricula_grade = curricula_grade + curricula[4 * g + 2] + " to " + curricula[4 * g + 3] + ", "
+                    curricula_grade = curricula_grade + curricula[5 * g + 2] + " to " + curricula[4 * g + 3] + ", "
                 curricula_grade = curricula_grade[:-2]
                 total = x[key]['total']
-                key = (curricula_title, curricula_grade)
+                key = (curricula_title, curricula_grade, curricula_subject, curricula_publisher)
                 if key in a:
                     a[key] = a[key] + total
                 else:
                     a[key] = total
-            html = ""
-            for key, value in sorted(a.iteritems(), key=lambda (k,v): (v,k), reverse=True):
-                html += '<div class="section row"><div class="twelve columns mobile-full"><div class="number"><h4>'+str(value)+'</h4></div><div class="curriculum">'+str(key)+'</div></div></div>'  # I'm sorry this is terrible I will fix it.
-        try:
-            x
-            context['returner'] = html
-        except NameError:
-            context['returner'] = "No School Data"
         context['school_name'] = self.s.name
         context['grade_start'] = self.s.grade_start
         context['grade_end'] = self.s.grade_end
+        context['matched_curricula'] = a
         return context
 
 

@@ -13,8 +13,35 @@
 					<h2>
 						Grades {{ grade_start }} to {{ grade_end }}
 					</h2>
-						<h4>Matched Curricula</h4>
-    				{{ returner|safe }}					
+					<h4>Matched Curricula</h4>
+					<table>
+						<tr>
+							<th>
+								Total
+							</th>
+							<th>
+								Subject
+							</th>								
+							<th>
+								Curriculum
+							</th>	
+							<th>
+								Publisher
+							</th>								
+							<th>
+								Grade
+							</th>	
+						</tr>													
+						{% for key, value in matched_curricula.items %}
+							<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+								<td><h4>{{ value }}</h4></td>
+								<td>{{ key.0 }}</td>
+								<td>{{ key.2 }}</td>	
+								<td>{{ key.3 }}</td>															
+								<td>{{ key.1 }}</td>
+							</tr>
+						{% endfor %}
+					</table>    						
 					<hr>
 		     		<h4>Complete Inventory</h4>
 			     	<table>
