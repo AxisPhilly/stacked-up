@@ -266,6 +266,7 @@ hr {
    ========================================================================== */
 table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   border-left: 0;
   background-color: #fff;
@@ -278,6 +279,7 @@ table {
 table th,
 table td {
   line-height: 1.4em;
+  padding: .5em 1em;
   text-align: left;
 }
 table thead th {
@@ -708,7 +710,6 @@ textarea {
   /* Mobile Tables */
   table th,
   table td {
-    padding: 4px;
   }
   /* Mobile Forms */
   input[type=text],
