@@ -1,0 +1,41 @@
+{% include "header.html" %}
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full" id="breadcrumbs">
+					<div><a href="/">Home</a> > Learning Materials</div>
+				</div>
+			</div>
+		</div>	
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full">
+			     	<h2>
+			     		{{ book_name }}
+			     	</h2>
+					<div class="section row">
+						<div class="three columns mobile-full">			     		
+		     				<h5>ISBN</h5>{{ learning_material_detail.isbn }}
+		     			</div>
+						<div class="three columns mobile-full">			     		
+		     				<h5>Publisher</h5>{{ learning_material_detail.publisher }}
+		     			</div>			     	
+						<div class="three columns mobile-full">			     		
+		     				<h5>Teacher's Edition</h5>{{ learning_material_detail.isTeacherEdition }}
+		     			</div>		
+						<div class="three columns mobile-full">			     		
+		     				<h5>Material Type</h5>{{ learning_material_detail.material_type }}
+		     			</div>					     			
+	     			</div>	     				     	
+			     	<hr>
+			     	<h4>In Curricula</h4>
+			     	{% if book_list %}
+						{% for book in book_list %}
+							<li><a href="/curriculum/{{ book.pk }}">{{ book.curriculum }}, Grade {{ book.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ book.grade_level_end }} {% endif %}</a></li>
+						{% endfor %}
+					{% else %}
+						<li>No matches</li>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+{% include "footer.html" %}
