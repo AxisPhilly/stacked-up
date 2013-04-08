@@ -15,7 +15,7 @@
 					    <h3>{{ curriculum.grouper }}</h3>
 					    <ul>
 					        {% for item in curriculum.list %}
-					          <li><a href="/curriculum/{{ item.pk }}">Grade {{ item.grade_level_start }} {% if item.grade_level_start == item.grade_level_end %} {% else %} to {{ item.grade_level_end }} {% endif %}</a></li>
+					          <li><a href="/gradecurriculum/{{ item.pk }}">Grade {{ item.grade_level_start }} {% if item.grade_level_start == item.grade_level_end %} {% else %} to {{ item.grade_level_end }} {% endif %}</a></li>
 					        {% endfor %}
 					    </ul>
 					    <hr>

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from curricula.views import LearningMaterialDetailView, CurriculumDetailView, CurriculumListView
+from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, IndexListView
 from schools.views import SchoolDetailView, SchoolsListView
 from django.contrib import admin
 admin.autodiscover()
@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^$',
-    #     IndexListView.as_view()),
+    url(r'^$',
+        IndexListView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^schools/$',
         SchoolsListView.as_view()),
@@ -22,8 +22,8 @@ urlpatterns = patterns('',
         SchoolDetailView.as_view()),
     url(r'^curricula/$',
         CurriculumListView.as_view()),
-    url(r'^curriculum/(?P<id>(.+))/$',
-        CurriculumDetailView.as_view()),
+    url(r'^gradecurriculum/(?P<id>(.+))/$',
+        GradeCurriculumDetailView.as_view()),
     url(r'^learningmaterial/(?P<id>(.+))/$',
         LearningMaterialDetailView.as_view()),
 )

@@ -52,7 +52,7 @@
 							{% for key, value in matched_curricula.items %}
 								<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
 									<td><div class="h4">{{ value }}</div></td>
-									<td><a href="/curriculum/{{ key.4 }}/">{{ key.0 }}</a></td>
+									<td><a href="/gradecurriculum/{{ key.4 }}/">{{ key.0 }}</a></td>
 									<td>{{ key.2 }}</td>	
 									<td>{{ key.3 }}</td>	
 									<td>{{ key.1 }}</td>
