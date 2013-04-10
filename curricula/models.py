@@ -51,7 +51,6 @@ class LearningMaterial(models.Model):
         ordering = ["title"]
 
 
-
 class Curriculum(models.Model):
     """
     The superset of curriculum, may include many
@@ -73,10 +72,11 @@ class Curriculum(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)
 
-    materials = models.ManyToManyField(LearningMaterial, related_name='curricula')
+    materials = models.ManyToManyField(LearningMaterial, related_name='materials')
     necessary_materials = models.ManyToManyField(LearningMaterial, related_name='required_in', blank=True)  # comprised of members of materials
 
     grade_level_start = models.IntegerField(null=True)
