@@ -1,5 +1,4 @@
 from django.db import models
-from schools.models import SchoolType
 
 
 class PublisherGroup(models.Model):
@@ -81,9 +80,6 @@ class GradeCurriculum(models.Model):
 
     grade_level_start = models.IntegerField(null=True)
     grade_level_end = models.IntegerField(null=True)
-
-    approved_for_type = models.ManyToManyField(SchoolType, related_name="approved_school_types")
-    approved_year = models.CharField(null=True, max_length=10, default='2012_2013')
 
     class Meta:
         verbose_name_plural = "grade curricula"
