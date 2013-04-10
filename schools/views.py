@@ -10,7 +10,7 @@ class SchoolCurriculaMatch(ListView):
 
     def get_queryset(self):
         self.school = School.objects.get(school_id=self.kwargs['id'])
-        each_book = InventoryRecord.objects.filter(school=self.school)
+        each_book = InventoryRecord.objects.filter(school=self.school).prefetch_related('material__publisher__group')
         return each_book
 
     def get_context_data(self, **kwargs):
@@ -20,7 +20,7 @@ class SchoolCurriculaMatch(ListView):
         unmatched_books = {}
         matched_curricula = {}
         for book in all_books:
-            match_list = book.material.curricula.all()
+            match_list = book.material.curricula.all().prefetch_related('curriculum__publisher')
             title = book.material.title
             isbn = book.material.isbn
             teacher_edition = book.material.isTeacherEdition
@@ -53,7 +53,7 @@ class SchoolInventory(ListView):
 
     def get_queryset(self):
         self.school = School.objects.get(school_id=self.kwargs['id'])
-        each_book = InventoryRecord.objects.filter(school=self.school)
+        each_book = InventoryRecord.objects.filter(school=self.school).prefetch_related('material__publisher__group').order_by('material')
         return each_book
 
     def get_context_data(self, **kwargs):
