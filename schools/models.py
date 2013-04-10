@@ -15,7 +15,8 @@ class SchoolType(models.Model):
 
 class School(models.Model):
     school_type = models.ForeignKey(SchoolType, null=True)
-    school_id = models.IntegerField()
+    school_id = models.IntegerField(null=True)
+    school_code = models.CharField(max_length=4, null=True)
     name = models.CharField(max_length=200, blank=True)
     grade_start = models.IntegerField()
     grade_end = models.IntegerField()
