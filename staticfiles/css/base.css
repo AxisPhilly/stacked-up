@@ -751,3 +751,7 @@ textarea {
   height: 4em; 
   margin-bottom: 2em
 }
+
+.school-header h2 {
+  margin-bottom: 0;
+}

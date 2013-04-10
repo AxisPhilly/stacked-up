@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, IndexListView
-from schools.views import SchoolDetailView, SchoolsListView
+from schools.views import SchoolDetailView, SchoolsListView, SchoolCurriculaMatch, SchoolInventory
 from django.contrib import admin
 admin.autodiscover()
 
@@ -18,6 +18,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^schools/$',
         SchoolsListView.as_view()),
+    url(r'^school/match/(?P<id>(.+))/$',
+        SchoolCurriculaMatch.as_view()),
+    url(r'^school/inventory/(?P<id>(.+))/$',
+        SchoolInventory.as_view()),
     url(r'^school/(?P<id>(.+))/$',
         SchoolDetailView.as_view()),
     url(r'^curricula/$',

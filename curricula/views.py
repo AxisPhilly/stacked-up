@@ -5,7 +5,7 @@ from django.views.generic import ListView
 class LearningMaterialDetailView(ListView):
 
     context_object_name = "learning_material_detail"
-    template_name = "match.html"
+    template_name = "learning_material_detail.html"
 
     def get_queryset(self):
             self.learning_material = LearningMaterial.objects.get(isbn=self.kwargs['id'])
@@ -13,7 +13,6 @@ class LearningMaterialDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LearningMaterialDetailView, self).get_context_data(**kwargs)
-        self.learning_material = LearningMaterial.objects.get(isbn=self.kwargs['id'])
         context['book_name'] = self.learning_material.title
         context['book_list'] = self.learning_material.curricula.all()
         return context

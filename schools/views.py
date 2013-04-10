@@ -3,10 +3,10 @@ from schools.models import School
 from django.views.generic import ListView
 
 
-class SchoolDetailView(ListView):
+class SchoolCurriculaMatch(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school.html"
+    template_name = "school_curricula_match.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_id=self.kwargs['id'])
@@ -14,8 +14,8 @@ class SchoolDetailView(ListView):
         return each_book
 
     def get_context_data(self, **kwargs):
-        context = super(SchoolDetailView, self).get_context_data(**kwargs)
-        all_books = self.get_queryset()
+        context = super(SchoolCurriculaMatch, self).get_context_data(**kwargs)
+        all_books = context['book_inventory']
         matched_books = {}
         unmatched_books = {}
         matched_curricula = {}
@@ -43,6 +43,38 @@ class SchoolDetailView(ListView):
         context['unmatched_books'] = unmatched_books
         context['school'] = self.school
         context['matched_curricula'] = matched_curricula
+        return context
+
+
+class SchoolInventory(ListView):
+
+    context_object_name = "book_inventory"
+    template_name = "school_inventory.html"
+
+    def get_queryset(self):
+        self.school = School.objects.get(school_id=self.kwargs['id'])
+        each_book = InventoryRecord.objects.filter(school=self.school)
+        return each_book
+
+    def get_context_data(self, **kwargs):
+        context = super(SchoolInventory, self).get_context_data(**kwargs)
+        context['school'] = self.school
+        return context
+
+
+class SchoolDetailView(ListView):
+
+    context_object_name = "book_inventory"
+    template_name = "school.html"
+
+    def get_queryset(self):
+        self.school = School.objects.get(school_id=self.kwargs['id'])
+        each_book = InventoryRecord.objects.filter(school=self.school)
+        return each_book
+
+    def get_context_data(self, **kwargs):
+        context = super(SchoolDetailView, self).get_context_data(**kwargs)
+        context['school'] = self.school
         return context
 
 
