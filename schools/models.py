@@ -1,4 +1,5 @@
 from django.db import models
+from curricula.models import GradeCurriculum
 
 
 class District(models.Model):
@@ -8,6 +9,7 @@ class District(models.Model):
 class SchoolType(models.Model):
     name = models.CharField(max_length=20)
     district = models.ForeignKey(District)
+    approved_curricula = models.ManyToManyField(GradeCurriculum)
 
     def __unicode__(self):
         return self.name
