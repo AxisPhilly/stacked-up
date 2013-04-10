@@ -28,7 +28,7 @@
 			     			</div>					     			
 		     			</div>	     	
 		     		<hr>
-			     	<h4>Contains Books</h4>
+			     	<h4>Learning Materials</h4>
 			     	<table>
 			     		<tr>
 			     			<th>
@@ -47,7 +47,7 @@
 						{% for book in curriculum_list.materials.all %}
 				     		<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
 								<td>
-									<a href="/book/{{ book.isbn }}/">{{ book.title }}</a>
+									<a href="/learningmaterial/{{ book.isbn }}/">{{ book.title }}</a>
 								</td>
 								<td>
 									{{ book.material_type }}

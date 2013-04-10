@@ -144,7 +144,7 @@ body {
 }
 /* Links */
 a {
-  color: #3eaaaf;
+  color: #928578;
   text-decoration: none;
   -webkit-transition: color .1s linear;
   -moz-transition: color .1s linear;
@@ -153,13 +153,13 @@ a {
   transition: color .1s linear;  
 }
 a:visited {
-  color: #745c83;
+  color: #928578;
 }
 a:hover {
-  color: #2c1938;
+  color: #6f5956;
 }
 a:active {
-  color: #333333;
+  color: #6f5956;
 }
 /* 1.1 Headings - h1, h2, h3, h4, h5, h6 & other (if any)
    ========================================================================== */
@@ -750,4 +750,8 @@ textarea {
   background-color: black; 
   height: 4em; 
   margin-bottom: 2em
+}
+
+.school-header h2 {
+  margin-bottom: 0;
 }
