@@ -15,13 +15,13 @@
 		  </div>
     	<div class="section row">
         <div class="twelve columns mobile-full">               
-			    <span class="h4">Details</span> / <span class="h4"><a href="/school/inventory/{{ school.school_id }}">Inventory</a></span> / <span class="h4"><a href="/school/match/{{ school.school_id }}">Curricula Matcher</a></span>
+			    <span class="h4">Details</span> / <span class="h4"><a href="/school/inventory/{{ school.school_code }}">Inventory</a></span> / <span class="h4"><a href="/school/match/{{ school.school_code }}">Curricula Matcher</a></span>
 			    <hr>
 			  </div>
 		  </div>		  
       <div class="section row">
         <div class="two columns mobile-full">               
-          <h5>ID</h5>{{ school.school_id }}
+          <h5>ID</h5>{{ school.school_code }}
         </div>
         <div class="three columns mobile-full">               
           <h5>Address</h5>{{ school.street_addr.title }}
