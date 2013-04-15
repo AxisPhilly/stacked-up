@@ -10,7 +10,7 @@
 #     template_name = "school.html"
 
 #     def get_queryset(self):
-#         self.school = School.objects.get(school_id=self.kwargs['id'])
+#         self.school = School.objects.get(school_code=self.kwargs['id'])
 #         self.each_book = InventoryRecord.objects.filter(school=self.school).order_by('-qty_onsite', 'material')
 #         return self.each_book
 

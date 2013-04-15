@@ -9,7 +9,7 @@ class SchoolCurriculaMatch(ListView):
     template_name = "school_curricula_match.html"
 
     def get_queryset(self):
-        self.school = School.objects.get(school_id=self.kwargs['id'])
+        self.school = School.objects.get(school_code=self.kwargs['id'])
         each_book = InventoryRecord.objects.filter(school=self.school).prefetch_related('material__publisher__group')
         return each_book
 
@@ -52,7 +52,7 @@ class SchoolInventory(ListView):
     template_name = "school_inventory.html"
 
     def get_queryset(self):
-        self.school = School.objects.get(school_id=self.kwargs['id'])
+        self.school = School.objects.get(school_code=self.kwargs['id'])
         each_book = InventoryRecord.objects.filter(school=self.school).prefetch_related('material__publisher__group').order_by('material')
         return each_book
 
@@ -68,7 +68,7 @@ class SchoolDetailView(ListView):
     template_name = "school.html"
 
     def get_queryset(self):
-        self.school = School.objects.get(school_id=self.kwargs['id'])
+        self.school = School.objects.get(school_code=self.kwargs['id'])
         each_book = InventoryRecord.objects.filter(school=self.school)
         return each_book
 
