@@ -75,7 +75,7 @@ class Curriculum(models.Model):
 class GradeCurriculum(models.Model):
     curriculum = models.ForeignKey(Curriculum)
 
-    materials = models.ManyToManyField(LearningMaterial, related_name='materials')
+    materials = models.ManyToManyField(LearningMaterial, related_name='curricula')
     necessary_materials = models.ManyToManyField(LearningMaterial, related_name='required_in', blank=True)  # comprised of members of materials
 
     grade_level_start = models.IntegerField(null=True)
