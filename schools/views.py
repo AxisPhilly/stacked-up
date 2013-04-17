@@ -20,7 +20,7 @@ class SchoolCurriculaMatch(ListView):
         unmatched_books = {}
         matched_curricula = {}
         for book in all_books:
-            match_list = book.material.materials.all()
+            match_list = book.material.curricula.all()
             title = book.material.title
             isbn = book.material.isbn
             teacher_edition = book.material.isTeacherEdition
