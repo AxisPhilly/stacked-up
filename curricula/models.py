@@ -21,8 +21,8 @@ class LearningMaterial(models.Model):
     """ Learning material has an ISBN and/or an order code.
         this allows us to store data on things without ISBNs, and to
         also keep track of ordering information"""
-    isbn = models.CharField(max_length=13, null=True)
-    ordering_code = models.CharField(max_length=30, null=True)
+    isbn = models.CharField(max_length=13, null=True, blank=True)
+    ordering_code = models.CharField(max_length=30, null=True, blank=True)
 
     title = models.CharField(max_length=300)
 
