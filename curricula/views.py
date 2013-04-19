@@ -1,4 +1,4 @@
-from curricula.models import GradeCurriculum, LearningMaterial
+from .models import GradeCurriculum, LearningMaterial
 from django.views.generic import ListView
 
 

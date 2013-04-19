@@ -30,4 +30,5 @@ urlpatterns = patterns('',
         GradeCurriculumDetailView.as_view()),
     url(r'^learningmaterial/(?P<id>(.+))/$',
         LearningMaterialDetailView.as_view()),
+    url(r'^api/', include('api.urls')),
 )
