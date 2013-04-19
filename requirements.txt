@@ -11,4 +11,4 @@ django-devserver==0.3.2
 psycopg2==2.4.5
 six==1.2.0
 wsgiref==0.1.2
-tastypie==0.9.14
+django-tastypie==0.9.14
