@@ -45,7 +45,7 @@
 							</thead>
 							<tbody>													
 							{% for key, value in matched_curricula.items %}
-								<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+								<tr>
 									<td><div class="h4">{{ value }}</div></td>
 									<td><a href="/gradecurriculum/{{ key.4 }}/">{{ key.0 }}</a></td>
 									<td>{{ key.2 }}</td>	
@@ -102,7 +102,7 @@
 								</thead>
 								<tbody>
 								{% for key, book in unmatched_books.items %}
-						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+						    	<tr>
 						    		<td>
 								    	<a href="/learningmaterial/{{ key }}/">{{ book.title }}</a>
 										</td>	
@@ -184,7 +184,7 @@
 								</thead>
 								<tbody>
 								{% for key, book in matched_books.items %}
-						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+						    	<tr>
 						    		<td>
 								    	<a href="/learningmaterial/{{ key }}/">{{ book.title }}</a>
 									</td>	

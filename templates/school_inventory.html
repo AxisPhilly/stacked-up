@@ -59,7 +59,7 @@
 								</thead>
 								<tbody>							
 								{% for book in book_inventory %}
-						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+						    	<tr>
 						    		<td>
 								    	<a href="/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
 									</td>	
