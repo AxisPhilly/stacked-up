@@ -23,7 +23,7 @@
 				<div class="twelve columns mobile-full">     			     			
 					<h4>Matched Grade Curricula</h4>
 					{% if matched_curricula %}
-						<table class="tablesorter">
+						<table id="matched-grade-curricula" class="tablesorter">
 							<thead>
 							<tr>
 								<th>
@@ -181,8 +181,8 @@
 										ISBN
 									</th>			
 								</tr>
-								</thead>
-								<tbody>
+							</thead>
+							<tbody>
 								{% for key, book in matched_books.items %}
 						    	<tr>
 						    		<td>

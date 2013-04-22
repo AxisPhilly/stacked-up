@@ -11,9 +11,13 @@
     <script>
       $(document).ready(function() 
         { 
+          $("#matched-grade-curricula").tablesorter({ 
+            widgets: ['zebra'],
+            sortList: [[2,0],[1,0],[4,0]]        
+          });
           $(".tablesorter").tablesorter({ 
-            widgets: ['zebra'] 
-          }); 
+            widgets: ['zebra'],
+          })          
         } 
       );    
     </script>
