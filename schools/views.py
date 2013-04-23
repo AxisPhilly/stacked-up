@@ -1,5 +1,5 @@
+from .models import School
 from vendors.models import InventoryRecord
-from schools.models import School
 from django.views.generic import ListView
 
 
