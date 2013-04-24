@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 from schools.models import School
+from curricula.models import GradeCurriculum
+
 
 class Grade(models.Model):
     school = models.ForeignKey(School)
@@ -35,3 +37,7 @@ class Cohort(models.Model):
 
     # Number of students in the grade for that year
     number_of_students = models.PositiveIntegerField(blank=True, null=True)
+
+    # Associated grade curriculum for the cohort
+    associated_reading_curriculum = models.ForeignKey(GradeCurriculum, related_name="reading_cohort", null=True)
+    associated_math_curriculum = models.ForeignKey(GradeCurriculum, related_name="math_cohort", null=True)
