@@ -23,7 +23,8 @@
 				<div class="twelve columns mobile-full">     			     			
 					<h4>Matched Grade Curricula</h4>
 					{% if matched_curricula %}
-						<table>
+						<table id="matched-grade-curricula" class="tablesorter">
+							<thead>
 							<tr>
 								<th>
 									Total
@@ -40,9 +41,11 @@
 								<th>
 									Grade
 								</th>	
-							</tr>														
+							</tr>	
+							</thead>
+							<tbody>													
 							{% for key, value in matched_curricula.items %}
-								<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+								<tr>
 									<td><div class="h4">{{ value }}</div></td>
 									<td><a href="/gradecurriculum/{{ key.4 }}/">{{ key.0 }}</a></td>
 									<td>{{ key.2 }}</td>	
@@ -50,55 +53,62 @@
 									<td>{{ key.1 }}</td>
 								</tr>
 							{% endfor %}
+						</tbody>
 						</table>  
 					{% else %}
 					<p>No matches</p>
 					{% endif %}
 					<hr>
-
+				</div>
+			</div>
+			<div class="section row"> 			   	
+				<div class="twelve columns mobile-full">    
 					<h4>Unmatched Learning Materials</h4>
 					{% if unmatched_books %}		     		
-				     	<table>
+				     	<table class="tablesorter">
+				     		<thead>
 				     		<tr>			
-								<th>
-									Title
-								</th>			     			
-								<th>
-									Publisher
-								</th>
-								<th>
-									On Site
-								</th>								
-								<th>
-									Student Home
-								</th>	
-								<th>
-									Student Class
-								</th>	 	
-								<th>
-									Stolen
-								</th>	 
-								<th>
-									Unusable
-								</th>	 											     							     			
-								<th>
-									Teacher
-								</th>
-								<th>
-									Material Type
-								</th>
-								<th>
-									ISBN
-								</th>			
-							</tr>
-							{% for key, book in unmatched_books.items %}
-						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+									<th>
+										Title
+									</th>			     			
+									<th>
+										Publisher
+									</th>
+									<th>
+										On Site
+									</th>								
+									<th>
+										Student Home
+									</th>	
+									<th>
+										Student Class
+									</th>	 	
+									<th>
+										Stolen
+									</th>	 
+									<th>
+										Unusable
+									</th>	 											     							     			
+									<th>
+										Teacher
+									</th>
+									<th>
+										Material Type
+									</th>
+									<th>
+										ISBN
+									</th>			
+								</tr>
+								</thead>
+								<tbody>
+								{% for key, book in unmatched_books.items %}
+						    	<tr>
 						    		<td>
 								    	<a href="/learningmaterial/{{ key }}/">{{ book.title }}</a>
-									</td>	
-									<td>
-										{{ book.publisher }}
-									</td>			    		
+										</td>	
+										<td>
+											{{ book.publisher }}
+										</td>			    		
 						    		<td>
 						    			{{ book.book_count.0 }}
 						    		</td>		
@@ -124,49 +134,57 @@
 						    			{{ key }}
 						    		</td>
 						    	</tr>
-						{% endfor %}
-						</table>
+								{% endfor %}
+								</tbody>
+							</table>
 					{% else %}
 						<p>No matched learning materials</p>
 					{% endif %}
-					<hr>					
-		     		<h4>Matched Learning Materials</h4>
+				</div>
+			</div>
+					<hr>								
+			<div class="section row"> 			   	
+				<div class="twelve columns mobile-full">    			
+	     		<h4>Matched Learning Materials</h4>
 					{% if matched_books %}		     		
-				     	<table>
-				     		<tr>			
-								<th>
-									Title
-								</th>			     			
-								<th>
-									Publisher
-								</th>
-								<th>
-									On Site
-								</th>								
-								<th>
-									Student Home
-								</th>	
-								<th>
-									Student Class
-								</th>	 	
-								<th>
-									Stolen
-								</th>	 
-								<th>
-									Unusable
-								</th>	 											     							     			
-								<th>
-									Teacher
-								</th>
-								<th>
-									Material Type
-								</th>
-								<th>
-									ISBN
-								</th>			
-							</tr>
-							{% for key, book in matched_books.items %}
-						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+				     	<table class="tablesorter">
+				     		<thead>
+					     		<tr>			
+									<th>
+										Title
+									</th>			     			
+									<th>
+										Publisher
+									</th>
+									<th>
+										On Site
+									</th>								
+									<th>
+										Student Home
+									</th>	
+									<th>
+										Student Class
+									</th>	 	
+									<th>
+										Stolen
+									</th>	 
+									<th>
+										Unusable
+									</th>	 											     							     			
+									<th>
+										Teacher
+									</th>
+									<th>
+										Material Type
+									</th>
+									<th>
+										ISBN
+									</th>			
+								</tr>
+							</thead>
+							<tbody>
+								{% for key, book in matched_books.items %}
+						    	<tr>
 						    		<td>
 								    	<a href="/learningmaterial/{{ key }}/">{{ book.title }}</a>
 									</td>	
@@ -198,13 +216,13 @@
 						    			{{ key }}
 						    		</td>
 						    	</tr>
-						{% endfor %}
+							{% endfor %}
+							</tbody>
 						</table>
 					{% else %}
 						<p>No matched learning materials</p>
 					{% endif %}
 				</div>
 			</div>
-			</div>
-		</div>					
+		</div>
 {% include "footer.html" %}

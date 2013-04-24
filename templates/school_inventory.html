@@ -22,41 +22,44 @@
       <div class="section row">		  
 		     		<h4>Inventory of Learning Material</h4>
 					{% if book_inventory %}		     		
-				     	<table>
+				     	<table class="tablesorter">
+				     		<thead>
 				     		<tr>			
-								<th>
-									Title
-								</th>			     			
-								<th>
-									Publisher
-								</th>
-								<th>
-									On Site
-								</th>								
-								<th>
-									Student Home
-								</th>	
-								<th>
-									Student Class
-								</th>	 	
-								<th>
-									Stolen
-								</th>	 
-								<th>
-									Unusable
-								</th>	 											     							     			
-								<th>
-									Teacher
-								</th>
-								<th>
-									Material Type
-								</th>
-								<th>
-									ISBN
-								</th>			
-							</tr> 							
-							{% for book in book_inventory %}
-						    	<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+									<th>
+										Title
+									</th>			     			
+									<th>
+										Publisher
+									</th>
+									<th>
+										On Site
+									</th>								
+									<th>
+										Student Home
+									</th>	
+									<th>
+										Student Class
+									</th>	 	
+									<th>
+										Stolen
+									</th>	 
+									<th>
+										Unusable
+									</th>	 											     							     			
+									<th>
+										Teacher
+									</th>
+									<th>
+										Material Type
+									</th>
+									<th>
+										ISBN
+									</th>			
+								</tr> 
+								</thead>
+								<tbody>							
+								{% for book in book_inventory %}
+						    	<tr>
 						    		<td>
 								    	<a href="/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
 									</td>	
@@ -88,13 +91,14 @@
 						    			{{ book.material.isbn }}
 						    		</td>
 						    	</tr>
-						{% endfor %}
-						</table>
-					{% else %}
-						<p>No inventory</p>
-					{% endif %}
+								{% endfor %}
+								</tbody>
+							</table>
+						{% else %}
+							<p>No inventory</p>
+						{% endif %}
+					</div>
 				</div>
-			</div>
 			</div>
 		</div>					
 {% include "footer.html" %}

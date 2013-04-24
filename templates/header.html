@@ -3,9 +3,24 @@
     <head>
         <meta charset="utf-8">
         <title>School Data</title>
-  		<link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/base.css">		
-		<style type="text/css">
-		</style>	
+      <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/base.css">    
+        <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>        
+    <style type="text/css">
+    </style>  
+    <script>
+      $(document).ready(function() 
+        { 
+          $("#matched-grade-curricula").tablesorter({ 
+            widgets: ['zebra'],
+            sortList: [[2,0],[1,0],[4,0]]        
+          });
+          $(".tablesorter").tablesorter({ 
+            widgets: ['zebra'],
+          })          
+        } 
+      );    
+    </script>
     </head>
     <body>    
-    	<div id="header"></div>
+      <div id="header"></div>

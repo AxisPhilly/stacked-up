@@ -38,3 +38,6 @@ class School(models.Model):
 
     class Meta:
         ordering = ["school_level", "name"]
+
+    def has_curricula_defined(self):
+        return self.curricula_in_use.count() > 0

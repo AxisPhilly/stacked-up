@@ -52,12 +52,10 @@ def is_default(info):
 
 def add_school_types(info, g, default, empowerment):
     if is_default(info):
-        g.approved_for_type.add(default)
-        g.save()
+        default.approved_curricula.add(g)
         print 'Approved for default'
     if is_empowerment(info):
-        g.approved_for_type.add(empowerment)
-        g.save()
+        empowerment.approved_curricula.add(g)
         print 'Approved for empowerment'
 
 
@@ -76,9 +74,7 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                     print 'Empty ISBN'
                 else:
                     material = LearningMaterial.objects.get(isbn=isbn)
-                    material.title = title
-                    material.save()
-                    print 'Material title updated to ' + title
+                    print 'Material title is ' + material.title
                 print 'Found material ' + material.title
                 if row[4] == 'TRUE':
                     material.isTeacherEdition = True
@@ -178,7 +174,7 @@ if __name__ == "__main__":
         print 'Using the csv ' + csv_filepathname
     except IndexError:
         print 'Not enough arguments: vendor name and csv path expected'
-    data = csv.reader(open(csv_filepathname, 'rU'), delimiter=';', quotechar='"')
+    data = csv.reader(open(csv_filepathname, 'rU'), delimiter=',', quotechar='"')
     data.next()
     info = data.next()
     print info
