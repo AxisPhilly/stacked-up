@@ -1,0 +1,21 @@
+    <div class="container content-inner">
+      <div class="section row">
+        <div class="twelve columns mobile-full" id="breadcrumbs">
+          <div><a href="/analysis">Home</a> > <a href="/analysis/schools/">Schools</a></div>
+        </div>
+      </div>
+    </div>  
+    <div class="container content-inner">
+        <div class="section row school-header">
+        <div class="twelve columns mobile-full">               
+                <h2>{{ school.name.title }}</h2>
+              </div>
+          </div>
+<div class="section row">
+    <div class="twelve columns mobile-full">               
+        <span class="h4"><a href="/analysis/school/{{ school.school_code }}">Details</a></span> / 
+        <span class="h4"><a href="/analysis/school/inventory/{{ school.school_code }}">Inventory</a></span> / 
+        <span class="h4"><a href="/analysis/school/match/{{ school.school_code }}">Curricula Matcher</a></span>
+        <hr>
+    </div>
+</div>

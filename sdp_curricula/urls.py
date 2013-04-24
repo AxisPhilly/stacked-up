@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, IndexListView
+from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, AnalysisIndexListView
 from schools.views import SchoolDetailView, SchoolsListView, SchoolCurriculaMatch, SchoolInventory, SchoolTest
 from django.contrib import admin
 admin.autodiscover()
@@ -14,23 +14,28 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^$',
-        IndexListView.as_view()),
+        AnalysisIndexListView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^schools/$',
-        SchoolsListView.as_view()),
-    url(r'^school/match/(?P<id>(.+))/$',
-        SchoolCurriculaMatch.as_view()),
-    url(r'^school/test/(?P<id>(.+))/$',
-        SchoolTest.as_view()),
-    url(r'^school/inventory/(?P<id>(.+))/$',
-        SchoolInventory.as_view()),
-    url(r'^school/(?P<id>(.+))/$',
-        SchoolDetailView.as_view()),
-    url(r'^curricula/$',
-        CurriculumListView.as_view()),
-    url(r'^gradecurriculum/(?P<id>(.+))/$',
-        GradeCurriculumDetailView.as_view()),
-    url(r'^learningmaterial/(?P<id>(.+))/$',
-        LearningMaterialDetailView.as_view()),
     url(r'^api/', include('api.urls')),
+    url(r'^school/$', include('schools.urls')),
+
+    # Analysis views
+    url(r'^analysis/$',
+        AnalysisIndexListView.as_view()),
+    url(r'^analysis/schools/$',
+        SchoolsListView.as_view()),
+    url(r'^analysis/school/match/(?P<id>(.+))/$',
+        SchoolCurriculaMatch.as_view()),
+    url(r'^analysis/school/test/(?P<id>(.+))/$',
+        SchoolTest.as_view()),
+    url(r'^analysis/school/inventory/(?P<id>(.+))/$',
+        SchoolInventory.as_view()),
+    url(r'^analysis/school/(?P<id>(.+))/$',
+        SchoolDetailView.as_view()),
+    url(r'^analysis/curricula/$',
+        CurriculumListView.as_view()),
+    url(r'^analysis/gradecurriculum/(?P<id>(.+))/$',
+        GradeCurriculumDetailView.as_view()),
+    url(r'^analysis/learningmaterial/(?P<id>(.+))/$',
+        LearningMaterialDetailView.as_view()),
 )
