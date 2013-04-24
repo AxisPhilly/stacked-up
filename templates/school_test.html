@@ -1,0 +1,62 @@
+{% include "header.html" %}
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full" id="breadcrumbs">
+					<div><a href="/">Home</a> > <a href="/schools/">Schools</a></div>
+				</div>
+			</div>
+		</div>	
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full">
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+					<script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+					<script type="text/javascript" src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+					<script type="text/javascript" src="https://raw.github.com/PaulUithol/backbone-tastypie/master/backbone_tastypie/static/js/backbone-tastypie.js"></script>
+
+					<script type="text/javascript">
+						var school_id = 6;
+
+						var curriculum = Backbone.Model.extend({
+						});
+
+						var CurriculumCollection = Backbone.Collection.extend({
+						  model: curriculum,
+						  url: '/api/v1/inventory_record/?format=json&limit=0&school=' + school_id
+						});
+
+						var Curricula = new CurriculumCollection();
+
+			      Curricula.fetch({
+			        success: function(coll, resp) {
+								console.log(Curricula);
+								Curricula.forEach(function(model){
+									console.log(model.get('material').title);
+								});
+								console.log(Curricula.at(1));
+
+							}
+			      });
+
+						var school = Backbone.Model.extend({
+						});
+
+						var SchoolCollection = Backbone.Collection.extend({
+						  model: curriculum,
+						  url: '/api/v1/schools/?id=' + school_id
+						});
+
+						var School = new SchoolCollection();
+
+			      School.fetch({
+			        success: function(coll, resp) {
+								console.log(School);
+								console.log(School.at(0).get('city'));
+							}
+			      });			      
+
+					</script>			     	
+				</div>
+			</div>
+		</div>
+{% include "footer.html" %}
