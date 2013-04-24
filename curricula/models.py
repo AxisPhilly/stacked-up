@@ -46,9 +46,6 @@ class LearningMaterial(models.Model):
     def __unicode__(self):
         return "%s, %s" % (self.isbn, self.title)
 
-    class Meta:
-        ordering = ["title"]
-
 
 class Curriculum(models.Model):
     """
@@ -87,9 +84,3 @@ class GradeCurriculum(models.Model):
 
     def __unicode__(self):
         return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))
-
-    def has_necessary_materials_defined(self):
-        return self.necessary_materials.count() > 0
-
-    def materials_count(self):
-        return self.materials.count()
