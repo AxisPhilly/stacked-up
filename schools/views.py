@@ -83,3 +83,10 @@ class SchoolsListView(ListView):
     context_object_name = "schools"
     template_name = "schools_list.html"
     model = School
+
+
+class SchoolTest(ListView):
+
+    context_object_name = "curricula"
+    template_name = "school_test.html"
+    model = School
