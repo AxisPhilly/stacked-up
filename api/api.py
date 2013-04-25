@@ -1,5 +1,6 @@
 from tastypie.resources import ModelResource
 from curricula import models as curricula
+from schools import models as schools
 
 
 class CurriculaResource(ModelResource):
@@ -17,4 +18,25 @@ class GradeCurriculaResource(ModelResource):
         resource_name = 'grade_curricula'
 
     def determine_format(self, request):
+            return 'application/json'
+
+
+class SchoolResource(ModelResource):
+    class Meta:
+        queryset = schools.School.objects.all()
+        resource_name = 'schools'
+        limit = 300
+        excludes = [
+            'city',
+            'grade_end',
+            'grade_start',
+            'phone',
+            'school_level',
+            'state',
+            'street_addr',
+            'website',
+            'zipcode'
+        ]
+
+    def determind_format(self, request):
             return 'application/json'

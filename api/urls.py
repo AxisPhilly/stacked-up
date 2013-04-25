@@ -5,6 +5,7 @@ from .api import *
 v1_api = Api(api_name='')
 v1_api.register(CurriculaResource())
 v1_api.register(GradeCurriculaResource())
+v1_api.register(SchoolResource())
 
 urlpatterns = patterns('',
     (r'^v1', include(v1_api.urls))
