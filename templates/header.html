@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>School Data</title>
-      <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/base.css">    
-        <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
-        <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>        
+        <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/base.css">    
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />        
     <style type="text/css">
     </style>  
     <script>
@@ -19,7 +21,7 @@
             widgets: ['zebra'],
           })          
         } 
-      );    
+      );
     </script>
     </head>
     <body>    
