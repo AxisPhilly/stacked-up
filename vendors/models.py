@@ -40,3 +40,6 @@ class InventoryRecord(models.Model):
 
     def __unicode__(self):
         return "%s, %s" % (self.school.name, self.material.title)
+
+    def get_inventory_total(self):
+        return (self.qty_onsite + self.qty_to_student_class + self.qty_to_student_home)

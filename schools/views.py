@@ -1,7 +1,8 @@
 from .models import School
 from vendors.models import InventoryRecord
+from curricula.models import GradeCurriculum
 from django.views.generic import ListView
-
+import simplejson as json
 
 class SchoolCurriculaMatch(ListView):
 
@@ -89,4 +90,38 @@ class SchoolTest(ListView):
 
     context_object_name = "curricula"
     template_name = "school_test.html"
-    model = School
+
+    def get_queryset(self):
+        self.school = School.objects.get(school_code=self.kwargs['id'])
+        all_books = InventoryRecord.objects.select_related('material').filter(school=self.school)
+        return all_books
+
+    def get_materials_for_grade_curriculum(self, grade_curriculum, array_name):
+        self.book_list[array_name] = []
+        for material in grade_curriculum.all():
+            self.book_list[array_name].append(
+                {
+                    'title': material.title,
+                    'isbn': material.isbn,
+                })
+
+    def get_context_data(self, **kwargs):
+        context = super(SchoolTest, self).get_context_data(**kwargs)
+        context['school'] = self.school.name
+        context['grade_start'] = self.school.grade_start
+        context['grade_end'] = self.school.grade_end
+        context['curricula_in_use'] = self.school.curricula_in_use
+        self.book_list = {}
+        self.book_list['all_books'] = []
+        gc = GradeCurriculum.objects.filter(id=86)[0].necessary_materials
+        self.get_materials_for_grade_curriculum(gc, 'reading_books')
+        self.get_materials_for_grade_curriculum(gc, 'mathematics_books')
+        for material in context['curricula']:
+            self.book_list['all_books'].append(
+                {
+                    'title': material.material.title,
+                    'isbn': material.material.isbn,
+                    'quantity': material.get_inventory_total(),
+                })
+        context['book_list'] = json.dumps(self.book_list)
+        return context

@@ -21,6 +21,10 @@ class GradeCurriculaResource(ModelResource):
         queryset = curricula.GradeCurriculum.objects.all()
         resource_name = 'grade_curricula'
         always_return_data = True
+        filtering = {
+            'name': ('exact'),
+            'id': ('exact')
+        }
 
     def determine_format(self, request):
             return 'application/json'
