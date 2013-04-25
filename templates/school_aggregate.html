@@ -1,0 +1,69 @@
+{% include "header.html" %}
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full" id="breadcrumbs">
+					<div><a href="/">Home</a> > <a href="/schools/">Schools</a></div>
+				</div>
+			</div>
+		</div>	
+		<div class="container content-inner">
+			<div class="section row">
+				<div class="twelve columns mobile-full">
+					<h5>{{ school }} / {{ grade_start }} / {{ grade_end }} / {{ curricula_in_use }} / {{ grade_curriculum }}</h5>				
+					<p>{{ book_list|safe }}</p>	
+        	<script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
+        	<script src="{{ STATIC_URL }}js/underscore-min.js"></script>
+        	<script src="{{ STATIC_URL }}js/backbone-min.js"></script>  
+        	<script src="{{ STATIC_URL }}js/backbone-tastypie.js"></script>           	      
+					<script type="text/javascript">
+						var school_id = 93;
+
+						var booktime = {{ book_list|safe }}
+
+						var curriculum = Backbone.Model.extend({
+						});
+
+						var CurriculumCollection = Backbone.Collection.extend({
+						  model: curriculum,
+						  url: '/api/v1/inventory_record/?format=json&limit=0&school=' + school_id
+						});
+
+						var Curricula = new CurriculumCollection();
+
+			      Curricula.fetch({
+			        success: function(coll, resp) {
+								console.log(Curricula);
+								Curricula.forEach(function(model){
+									console.log(model.get('material').title);
+								});
+								console.log(Curricula.at(1));
+
+							}
+			      });
+
+						var school = Backbone.Model.extend({
+						});
+
+						var SchoolCollection = Backbone.Collection.extend({
+						  model: curriculum,
+						  url: '/api/v1/schools/?id=' + school_id
+						});
+
+						var School = new SchoolCollection();
+
+			      School.fetch({
+			        success: function(coll, resp) {
+								console.log(School);
+								var all_curricula = School.at(0).get('curricula_in_use');
+								// iterate over school's curricula, gets curriculum name and curriculum subject area
+								all_curricula.forEach(function(curriculum){
+									console.log(curriculum.name + curriculum.subject_area);
+								});								
+							}
+			      });			      
+
+					</script>			     	
+				</div>
+			</div>
+		</div>
+{% include "footer.html" %}
