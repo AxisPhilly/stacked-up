@@ -1,0 +1,48 @@
+ <script>
+  $(document).ready(function() {
+    var schoolObjects;
+
+    $.ajax({
+      url: 'http://localhost:8111/api/v1/schools/?format=json',
+      success: function(resp) {
+        setupAutoComplete(resp);
+      },
+      select: function(event, ui) {
+        console.log('hello');
+      }
+    });
+
+    function setupAutoComplete(resp) {
+      schoolObjects = resp.objects;
+      var sourceList = [];
+
+      for(var i=0; i<schoolObjects.length; i++) {
+        sourceList.push(schoolObjects[i].name);
+      }
+
+      $("#search").autocomplete({
+        source: sourceList
+      });
+    };
+
+    $("#search").on("autocompleteselect", function(event, ui) {
+      var school;
+
+      for(var i=0; i<schoolObjects.length; i++) {
+        console.log(schoolObjects[i].name, ui.item.value);
+        if(schoolObjects[i].name === ui.item.value) {
+          school = schoolObjects[i];
+          break;
+        }
+      }
+
+      window.location = 'http://localhost:8111/school/' + school.school_code;
+    });
+
+  });
+  </script>
+
+<div class="ui-widget">
+  <label for="search">Search for a school: </label>
+  <input id="search"/>
+</div>
