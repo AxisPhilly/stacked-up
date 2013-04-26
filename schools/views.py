@@ -112,7 +112,7 @@ class SchoolAggregateView(ListView):
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
             else:
                 number_of_books = 0
-            enough_books = self.enough_books(number_of_books, number_of_books)
+            enough_books = self.enough_books(number_of_books, students_in_grade)
             cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
             self.book_list[array_name].append(
                 {
