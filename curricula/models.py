@@ -16,6 +16,9 @@ class Publisher(models.Model):
     def __unicode__(self):
         return "%s, part of %s" % (self.name, self.group.name)
 
+    class Meta:
+        ordering = ["name"]
+
 
 class LearningMaterial(models.Model):
     """ Learning material has an ISBN and/or an order code.

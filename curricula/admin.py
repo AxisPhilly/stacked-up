@@ -8,8 +8,10 @@ admin.site.register(Publisher)
 
 
 class LearningMaterialAdmin(admin.ModelAdmin):
-    readonly_fields = ('publisher',)
     search_fields = ['title', 'isbn']
+
+    def queryset(self, request):
+        return LearningMaterial.objects.all().prefetch_related('publisher')
 
 admin.site.register(LearningMaterial, LearningMaterialAdmin)
 
