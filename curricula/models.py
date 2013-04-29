@@ -44,6 +44,10 @@ class LearningMaterial(models.Model):
                 ('VHS', 'VHS'),
                 ('Testing', 'Testing')]
     material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
+    """
+        This quantity is the quantity a material is per student, only changed
+        when we find a package of materials and can deduce such a thing.
+    """
     quantity = models.IntegerField(default=1)
     isTeacherEdition = models.BooleanField(default=False)
 
