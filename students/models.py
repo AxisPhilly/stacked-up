@@ -39,5 +39,5 @@ class Cohort(models.Model):
     number_of_students = models.PositiveIntegerField(blank=True, null=True)
 
     # Associated grade curriculum for the cohort
-    associated_reading_curriculum = models.ForeignKey(GradeCurriculum, related_name="reading_cohort", null=True)
-    associated_math_curriculum = models.ForeignKey(GradeCurriculum, related_name="math_cohort", null=True)
+    associated_reading_curriculum = models.ManyToManyField(GradeCurriculum, related_name="reading_cohort", null=True)
+    associated_math_curriculum = models.ManyToManyField(GradeCurriculum, related_name="math_cohort", null=True)
