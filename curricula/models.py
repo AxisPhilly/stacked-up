@@ -94,7 +94,10 @@ class GradeCurriculum(models.Model):
         ordering = ["curriculum", "grade_level_start"]
 
     def __unicode__(self):
-        return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))
+        if self.grade_level_start < self.grade_level_end:
+            return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))
+        else:
+            return "%s, grade %s" % (self.curriculum.name, str(self.grade_level_start))
 
     def has_necessary_materials_defined(self):
         return self.necessary_materials.count() > 0
