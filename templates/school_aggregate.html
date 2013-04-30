@@ -9,9 +9,62 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full" id="graph-sidebar">
-					<p>{{ outone }} / {{ outtwo|safe }}</p>				
-					<h5>{{ school }} / {{ grade_start }} / {{ grade_end }} / {{ curricula_in_use }} / {{ grade_curriculum }}</h5>				
-					<p>{{ book_list|safe }}</p>
+<!-- 					<p>{{ outone }} / {{ outtwo|safe }}</p>				
+					<h5>{{ school }} / {{ grade_start }} / {{ grade_end }} / {{ curricula_in_use }} / {{ grade_curriculum }}</h5>						
+					<p>{{ book_list|safe }}</p>		 -->			
+					<div>
+						{% if book_list %}		     		
+							{% for subject, value in book_list.items %}
+							Subject: {{ subject.title }}; Book Shortfall: {{ value.book_shortfall }}; Cost Shortfall: {{ value.cost_shortfall }}
+								{% for title, grade_curriculum in value.books.items %}				
+						     	<table class="tablesorter">
+						     		<thead>
+							     		<tr>			
+												<th>
+													Material
+												</th>			     			
+												<th>
+													Inventory
+												</th>
+												<th>
+													Needed
+												</th>								
+												<th>
+													Difference
+												</th>	
+												<th>
+													Enough
+												</th>								
+											</tr> 
+										</thead>
+										<tbody>															
+										{% for material in grade_curriculum %}										
+								    	<tr>
+								    		<td>
+										    	{{ material.title }}
+												</td>
+								    		<td>
+										    	{{ material.total_copies }}
+												</td>		
+								    		<td>
+										    	{{ material.needed }}
+												</td>		
+								    		<td>
+										    	{{ material.difference }}
+												</td>		
+								    		<td>
+										    	{{ material.enough }}
+												</td>															
+								    	</tr>
+										{% endfor %}		
+										</tbody>
+									</table>																				    									    										    	
+								{% endfor %}										    									    	
+							{% endfor %}										    	
+						{% else %}
+							<p>No inventory</p>
+						{% endif %}						
+					</div>
 				</div>
 			</div>
 		</div>
