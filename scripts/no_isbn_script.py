@@ -27,14 +27,14 @@ def define_curriculum(info, c_name, c_pub):
 
 
 def define_grade_curriculum(info, c):
-    # try:
-    #     g = GradeCurriculum.objects.get(curriculum=c, grade_level_start=info[6], grade_level_end=info[7])
-    #     print 'Found the curriculum set/grade curriculum for this file'
-    #     print g
-    # except GradeCurriculum.DoesNotExist:
-    g = GradeCurriculum(curriculum=c, grade_level_start=info[6], grade_level_end=info[7])
-    g.save()
-    print 'Created the curriculum set/grade curriculum'
+    try:
+        g = GradeCurriculum.objects.get(curriculum=c, grade_level_start=info[6], grade_level_end=info[7])
+        print 'Found the curriculum set/grade curriculum for this file'
+        print g
+    except GradeCurriculum.DoesNotExist:
+        g = GradeCurriculum(curriculum=c, grade_level_start=info[6], grade_level_end=info[7])
+        g.save()
+        print 'Created the curriculum set/grade curriculum'
     return g
 
 
