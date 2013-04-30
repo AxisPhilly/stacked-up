@@ -19,10 +19,7 @@ urlpatterns = patterns('',
         AnalysisIndexListView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('api.urls')),
-    url(r'^school/$', include('schools.urls')),
-
-    url(r'^school/test/(?P<id>(.+))/$',
-        SchoolAggregateView.as_view()),
+    url(r'^school/', include('schools.urls')),
 
     # Analysis views
     url(r'^analysis/$',
