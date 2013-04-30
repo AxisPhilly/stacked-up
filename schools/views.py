@@ -133,18 +133,14 @@ class SchoolAggregateView(ListView):
                 self.book_list[subject]['book_shortfall'] += 0
 
     def get_grade_curricula_by_subject(self, students_in_grade, subject, all_books, cohort):
+        self.book_list[subject] = {}
+        self.book_list[subject]['books'] = {}
+        self.book_list[subject]['cost_shortfall'] = 0
+        self.book_list[subject]['book_shortfall'] = 0
         if subject == "math":
-            self.book_list['math'] = {}
-            self.book_list['math']['books'] = {}
-            self.book_list['math']['cost_shortfall'] = 0
-            self.book_list['math']['book_shortfall'] = 0
             for grade_curriculum in cohort.get(year_end=2013).associated_math_curriculum.all():
                 self.get_materials_for_grade_curriculum(students_in_grade, 'math', all_books, cohort, grade_curriculum.id)
         if subject == "reading":
-            self.book_list['reading'] = {}
-            self.book_list['reading']['books'] = {}
-            self.book_list['reading']['cost_shortfall'] = 0
-            self.book_list['reading']['book_shortfall'] = 0
             for grade_curriculum in cohort.get(year_end=2013).associated_reading_curriculum.all():
                 self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id)
 
