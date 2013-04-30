@@ -2,7 +2,7 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full" id="breadcrumbs">
-					<div><a href="/">Home</a> > <a href="/curricula/">Curricula</a></div>
+					<div><a href="/analysis">Home</a> > <a href="/curricula/">Curricula</a></div>
 				</div>
 			</div>
 		</div>	
@@ -47,7 +47,7 @@
 						{% for book in curriculum_list.materials.all %}
 				     		<tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
 								<td>
-									<a href="/learningmaterial/{{ book.isbn }}/">{{ book.title }}</a>
+									<a href="/analysis/learningmaterial/{{ book.isbn }}/">{{ book.title }}</a>
 								</td>
 								<td>
 									{{ book.material_type }}

@@ -5,11 +5,10 @@ from students.models import Grade, Cohort
 from django.views.generic import ListView
 import simplejson as json
 
-
 class SchoolCurriculaMatch(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school_curricula_match.html"
+    template_name = "analysis/school_curricula_match.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_code=self.kwargs['id'])
@@ -52,7 +51,7 @@ class SchoolCurriculaMatch(ListView):
 class SchoolInventory(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school_inventory.html"
+    template_name = "analysis/school_inventory.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_code=self.kwargs['id'])
@@ -68,7 +67,7 @@ class SchoolInventory(ListView):
 class SchoolDetailView(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school.html"
+    template_name = "analysis/school.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_code=self.kwargs['id'])
@@ -84,7 +83,7 @@ class SchoolDetailView(ListView):
 class SchoolsListView(ListView):
 
     context_object_name = "schools"
-    template_name = "schools_list.html"
+    template_name = "analysis/schools_list.html"
     model = School
 
 

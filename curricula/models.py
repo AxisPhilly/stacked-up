@@ -54,9 +54,6 @@ class LearningMaterial(models.Model):
     def __unicode__(self):
         return "%s, %s" % (self.isbn, self.title)
 
-    class Meta:
-        ordering = ["title"]
-
 
 class Curriculum(models.Model):
     """
