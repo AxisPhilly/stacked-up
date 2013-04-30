@@ -146,11 +146,16 @@ class SchoolAggregateView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SchoolAggregateView, self).get_context_data(**kwargs)
-        cohort = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=5))
+        try:
+            grade = self.kwargs['grade']
+        except KeyError:
+            grade = self.school.grade_start
+        cohort = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
         students_in_grade = cohort.get(year_end=2013).number_of_students
         self.book_list = {}
         self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], cohort)
         self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], cohort)
+        context['grade'] = grade
         context['book_list'] = self.book_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort.values()])
         context['school'] = self.school

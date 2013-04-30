@@ -21,6 +21,8 @@ urlpatterns = patterns('',
     url(r'^api/', include('api.urls')),
     url(r'^school/$', include('schools.urls')),
 
+    url(r'^school/test/(?P<id>(.+))/(?P<grade>(.+))/$',
+        SchoolAggregateView.as_view()),
     url(r'^school/test/(?P<id>(.+))/$',
         SchoolAggregateView.as_view()),
 

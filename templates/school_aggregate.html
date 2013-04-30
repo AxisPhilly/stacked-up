@@ -9,9 +9,8 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full" id="graph-sidebar">
-<!-- 					<p>{{ outone }} / {{ outtwo|safe }}</p>				
-					<h5>{{ school }} / {{ grade_start }} / {{ grade_end }} / {{ curricula_in_use }} / {{ grade_curriculum }}</h5>						
-					<p>{{ book_list|safe }}</p>		 -->			
+					<h1>{{ school.name.title }}</h1>
+					<h2>Grade {{ grade }}</h2>
 					<div>
 						{% if book_list %}		     		
 							{% for subject, value in book_list.items %}
