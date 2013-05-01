@@ -104,9 +104,9 @@ class SchoolAggregateView(ListView):
             return('False')
 
     def get_materials_for_grade_curriculum(self, students_in_grade, subject,
-        all_books, cohort, grade_curriculum_id):
+                                           all_books, cohort, grade_curriculum_id, grade_curriculum_name):
         grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
-        self.book_list[subject]['books'][grade_curriculum_id] = []
+        self.book_list[subject]['books'][grade_curriculum_name] = []
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
@@ -114,7 +114,7 @@ class SchoolAggregateView(ListView):
                 number_of_books = 0
             enough_books = self.is_enough_books(number_of_books, students_in_grade)
             cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
-            self.book_list[subject]['books'][grade_curriculum_id].append(
+            self.book_list[subject]['books'][grade_curriculum_name].append(
                 {
                     'title': material.title,
                     'total_copies': number_of_books,
@@ -140,10 +140,10 @@ class SchoolAggregateView(ListView):
         }
         if subject == "math":
             for grade_curriculum in cohort.associated_math_curriculum.all():
-                self.get_materials_for_grade_curriculum(students_in_grade, 'math', all_books, cohort, grade_curriculum.id)
+                self.get_materials_for_grade_curriculum(students_in_grade, 'math', all_books, cohort, grade_curriculum.id, grade_curriculum.curriculum.name)
         if subject == "reading":
             for grade_curriculum in cohort.associated_reading_curriculum.all():
-                self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id)
+                self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id, grade_curriculum.curriculum.name)
 
     def get_context_data(self, **kwargs):
         context = super(SchoolAggregateView, self).get_context_data(**kwargs)
