@@ -5,6 +5,7 @@ from students.models import Grade, Cohort
 from django.views.generic import ListView
 import simplejson as json
 
+
 class SchoolCurriculaMatch(ListView):
 
     context_object_name = "book_inventory"
@@ -170,3 +171,9 @@ class SchoolAggregateView(ListView):
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
         return context
+
+
+class IndexListView(ListView):
+    context_object_name = "schools"
+    template_name = "index.html"
+    model = School
