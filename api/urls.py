@@ -8,5 +8,6 @@ v1_api.register(InventoryRecordResource())
 v1_api.register(SchoolResource())
 v1_api.register(LearningMaterialResource())
 v1_api.register(GradeCurriculaResource())
+v1_api.register(SchoolResource())
 
 urlpatterns = patterns('', (r'^v1', include(v1_api.urls)))

@@ -4,7 +4,6 @@ from vendors import models as inventory
 from schools.models import School
 from curricula.models import LearningMaterial
 from tastypie import fields
-from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 
 class CurriculaResource(ModelResource):
@@ -31,7 +30,6 @@ class GradeCurriculaResource(ModelResource):
 
 
 class SchoolResource(ModelResource):
-
     curricula_in_use = fields.ManyToManyField(CurriculaResource, 'curricula_in_use', full=True)
 
     class Meta:
