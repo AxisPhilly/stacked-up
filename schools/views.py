@@ -1,12 +1,15 @@
 from .models import School
-from vendors.models import InventoryRecord
+from vendors.models import InventoryRecord, NegotiatedPrice
+from curricula.models import GradeCurriculum
+from students.models import Grade, Cohort
 from django.views.generic import ListView
+import simplejson as json
 
 
 class SchoolCurriculaMatch(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school_curricula_match.html"
+    template_name = "analysis/school_curricula_match.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_code=self.kwargs['id'])
@@ -41,15 +44,15 @@ class SchoolCurriculaMatch(ListView):
                 unmatched_books[isbn] = {'title': title, 'teacher_edition': teacher_edition, 'material_type': material_type, 'publisher': publisher, 'book_count': book_count_list}
         context['matched_books'] = matched_books
         context['unmatched_books'] = unmatched_books
-        context['school'] = self.school
         context['matched_curricula'] = matched_curricula
+        context['school'] = self.school
         return context
 
 
 class SchoolInventory(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school_inventory.html"
+    template_name = "analysis/school_inventory.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_code=self.kwargs['id'])
@@ -65,7 +68,7 @@ class SchoolInventory(ListView):
 class SchoolDetailView(ListView):
 
     context_object_name = "book_inventory"
-    template_name = "school.html"
+    template_name = "analysis/school.html"
 
     def get_queryset(self):
         self.school = School.objects.get(school_code=self.kwargs['id'])
@@ -81,5 +84,97 @@ class SchoolDetailView(ListView):
 class SchoolsListView(ListView):
 
     context_object_name = "schools"
-    template_name = "schools_list.html"
+    template_name = "analysis/schools_list.html"
+    model = School
+
+
+class SchoolAggregateView(ListView):
+
+    context_object_name = "curricula"
+    template_name = "school_aggregate.html"
+
+    def get_queryset(self):
+        self.school = School.objects.get(school_code=self.kwargs['id'])
+        all_books = InventoryRecord.objects.select_related('material').filter(school=self.school)
+        return all_books
+
+    def is_enough_books(self, number_of_books, students_in_grade):
+        if number_of_books >= students_in_grade:
+            return('True')
+        else:
+            return('False')
+
+    def get_materials_for_grade_curriculum(self, students_in_grade, subject,
+                                           all_books, cohort, grade_curriculum_id, grade_curriculum_name):
+        self.curriculum_list[subject]['curricula'][grade_curriculum_name] = {
+            'necessary_material': {},
+            'cost_shortfall': 0,
+            'book_shortfall': 0
+        }
+        grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
+        self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
+        for material in grade_curriculum.necessary_materials.all():
+            if all_books.filter(material=material).exists():
+                number_of_books = all_books.filter(material=material)[0].get_inventory_total()
+                enough_books = self.is_enough_books(number_of_books, students_in_grade)
+                cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
+                difference = number_of_books - students_in_grade
+                if (students_in_grade - number_of_books) >= 0:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
+                else:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
+                if (students_in_grade - number_of_books) >= 0:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
+                else:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
+            else:
+                number_of_books = "N/A"
+                difference = "N/A"
+                cost_of_book = "N/A"
+                enough_books = "N/A"
+
+            self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
+                {
+                    'title': material.title,
+                    'total_copies': number_of_books,
+                    'needed': students_in_grade,
+                    'cost': cost_of_book,
+                    'enough': enough_books,
+                    'difference': difference,
+                })
+
+    def get_grade_curricula_by_subject(self, students_in_grade, subject, all_books, cohort):
+        self.curriculum_list[subject] = {
+            'curricula': {}
+        }
+        if subject == "math":
+            for grade_curriculum in cohort.associated_math_curriculum.all():
+                self.get_materials_for_grade_curriculum(students_in_grade, 'math', all_books, cohort, grade_curriculum.id, grade_curriculum.curriculum.name)
+        if subject == "reading":
+            for grade_curriculum in cohort.associated_reading_curriculum.all():
+                self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id, grade_curriculum.curriculum.name)
+
+    def get_context_data(self, **kwargs):
+        context = super(SchoolAggregateView, self).get_context_data(**kwargs)
+        try:
+            grade = self.kwargs['grade']
+        except KeyError:
+            grade = self.school.grade_start
+        cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
+        current = cohort_set.get(year_end=2013)
+        students_in_grade = current.number_of_students
+        self.curriculum_list = {}
+        self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current)
+        self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current)
+        context['this_grade'] = Grade.objects.get(school=self.school, grade_level=grade)
+        context['grades'] = Grade.objects.filter(school=self.school)
+        context['curriculum_list'] = self.curriculum_list
+        context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
+        context['school'] = self.school
+        return context
+
+
+class IndexListView(ListView):
+    context_object_name = "schools"
+    template_name = "index.html"
     model = School

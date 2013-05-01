@@ -14,7 +14,9 @@ class CohortAdmin(admin.ModelAdmin):
     def queryset(self, request):
         return Cohort.objects.all().prefetch_related('grade')
 
-    readonly_fields = ('grade',)
+    readonly_fields = ('grade',
+        'associated_reading_curriculum',
+        'associated_math_curriculum')
     list_display = ('grade', 'year_start', 'year_end',
                     'math_advanced_percent', 'math_proficient_percent',
                     'math_basic_percent', 'math_below_basic_percent',

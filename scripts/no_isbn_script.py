@@ -30,6 +30,7 @@ def define_grade_curriculum(info, c):
     try:
         g = GradeCurriculum.objects.get(curriculum=c, grade_level_start=info[6], grade_level_end=info[7])
         print 'Found the curriculum set/grade curriculum for this file'
+        print g
     except GradeCurriculum.DoesNotExist:
         g = GradeCurriculum(curriculum=c, grade_level_start=info[6], grade_level_end=info[7])
         g.save()
@@ -52,12 +53,10 @@ def is_default(info):
 
 def add_school_types(info, g, default, empowerment):
     if is_default(info):
-        g.approved_for_type.add(default)
-        g.save()
+        default.approved_curricula.add(g)
         print 'Approved for default'
     if is_empowerment(info):
-        g.approved_for_type.add(empowerment)
-        g.save()
+        empowerment.approved_curricula.add(g)
         print 'Approved for empowerment'
 
 
@@ -82,6 +81,10 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                     material.isTeacherEdition = True
                     material.save()
                     print 'Updated as Teacher\'s edition'
+                if row[5] != '':
+                    material.quantity = int(row[5])
+                    material.save()
+                    print material.quantity
             except LearningMaterial.DoesNotExist:
                 print 'Creating material'
                 m_type = row[3]
@@ -90,9 +93,14 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                     print 'This is a teacher\'s edition'
                 else:
                     teachers = False
+                if row[5] != '':
+                    q = row[5]
+                else:
+                    q = 1
                 material = LearningMaterial(ordering_code=ordering_code,
                     title=title, publisher=publisher,
-                    material_type=m_type, isTeacherEdition=teachers)
+                    material_type=m_type, isTeacherEdition=teachers,
+                    quantity=q)
                 material.save()
                 print 'Material created: ' + material.title
             try:

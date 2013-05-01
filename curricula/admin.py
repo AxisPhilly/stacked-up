@@ -8,8 +8,10 @@ admin.site.register(Publisher)
 
 
 class LearningMaterialAdmin(admin.ModelAdmin):
-    readonly_fields = ('publisher',)
     search_fields = ['title', 'isbn']
+
+    def queryset(self, request):
+        return LearningMaterial.objects.all().prefetch_related('publisher')
 
 admin.site.register(LearningMaterial, LearningMaterialAdmin)
 
@@ -30,9 +32,7 @@ class GradeCurriculumAdmin(admin.ModelAdmin):
     form = GradeCurriculumAdminForm
     readonly_fields = ('materials',)
     filter_horizontal = ['necessary_materials']
-    list_display = ('grade_level_start', 'grade_level_end',
-        'curriculum', 'has_necessary_materials_defined',
-        'materials_count')
     search_fields = ['grade_level_start', 'grade_level_end']
+    list_display = ('get_parent_name','grade_level_start', 'grade_level_end', 'has_necessary_materials_defined')
 
 admin.site.register(GradeCurriculum, GradeCurriculumAdmin)

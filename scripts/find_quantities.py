@@ -11,8 +11,14 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "sdp_curricula.settings"
 from curricula.models import LearningMaterial
 
 for material in LearningMaterial.objects.all():
-    if re.search('Package of [0-999] copies each of [0-999]', material.title):
+    mysearch = '(?<=package of )[0-9]* students'
+    if re.search(mysearch, material.title):
         print 'we have multiples!'
-        g = re.search('Package of [0-9]* copies each of [0-9]*', material.title)
-        print g.group(0)
+        g = re.search(mysearch, material.title)
+        value = g.group(0).split(' ')
+        # material.quantity = int(value[0])
+        # material.save()
         print material.title
+        print material.quantity
+
+# (?<=W/ )

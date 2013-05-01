@@ -11,6 +11,14 @@ class Grade(models.Model):
     def __unicode__(self):
         return "%s, Grade %s" % (self.school.name, self.grade_level)
 
+    def human_grade(self):
+        if self.grade_level == 0:
+            return 'K'
+        elif self.grade_level == -1:
+            return 'Pre-K'
+        else:
+            return self.grade_level
+
 
 class Cohort(models.Model):
     YEARS = []
@@ -39,5 +47,5 @@ class Cohort(models.Model):
     number_of_students = models.PositiveIntegerField(blank=True, null=True)
 
     # Associated grade curriculum for the cohort
-    associated_reading_curriculum = models.ForeignKey(GradeCurriculum, related_name="reading_cohort", null=True)
-    associated_math_curriculum = models.ForeignKey(GradeCurriculum, related_name="math_cohort", null=True)
+    associated_reading_curriculum = models.ManyToManyField(GradeCurriculum, related_name="reading_cohort", null=True)
+    associated_math_curriculum = models.ManyToManyField(GradeCurriculum, related_name="math_cohort", null=True)

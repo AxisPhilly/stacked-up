@@ -80,6 +80,10 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                     material.isTeacherEdition = True
                     material.save()
                     print 'Updated as Teacher\'s edition'
+                if row[5] != '':
+                    material.quantity = int(row[5])
+                    material.save()
+                    print material.quantity
             except LearningMaterial.DoesNotExist:
                 print 'Creating material'
                 m_type = row[3]
@@ -88,9 +92,14 @@ def iterate_through_data(data, publisher, grade_curriculum, vendor, default,
                     print 'This is a teacher\'s edition'
                 else:
                     teachers = False
+                if row[5] != '':
+                    q = row[5]
+                else:
+                    q = 1
                 material = LearningMaterial(isbn=isbn,
                     title=title, publisher=publisher,
-                    material_type=m_type, isTeacherEdition=teachers)
+                    material_type=m_type, isTeacherEdition=teachers,
+                    quantity=q)
                 material.save()
                 print 'Material created: ' + material.title
             try:

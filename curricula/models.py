@@ -16,6 +16,9 @@ class Publisher(models.Model):
     def __unicode__(self):
         return "%s, part of %s" % (self.name, self.group.name)
 
+    class Meta:
+        ordering = ["name"]
+
 
 class LearningMaterial(models.Model):
     """ Learning material has an ISBN and/or an order code.
@@ -41,14 +44,15 @@ class LearningMaterial(models.Model):
                 ('VHS', 'VHS'),
                 ('Testing', 'Testing')]
     material_type = models.CharField(max_length=20, default='Book', choices=MATERIALS)
+    """
+        This quantity is the quantity a material is per student, only changed
+        when we find a package of materials and can deduce such a thing.
+    """
     quantity = models.IntegerField(default=1)
     isTeacherEdition = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s, %s" % (self.isbn, self.title)
-
-    class Meta:
-        ordering = ["title"]
 
 
 class Curriculum(models.Model):
@@ -87,10 +91,17 @@ class GradeCurriculum(models.Model):
         ordering = ["curriculum", "grade_level_start"]
 
     def __unicode__(self):
-        return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))
+        if self.grade_level_start < self.grade_level_end:
+            return "%s, grades %s-%s" % (self.curriculum.name, str(self.grade_level_start), str(self.grade_level_end))
+        else:
+            return "%s, grade %s" % (self.curriculum.name, str(self.grade_level_start))
 
     def has_necessary_materials_defined(self):
         return self.necessary_materials.count() > 0
 
     def materials_count(self):
         return self.materials.count()
+
+    def get_parent_name(self):
+        return self.curriculum.name
+

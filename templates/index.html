@@ -1,20 +1,19 @@
-{% include "header.html" %}
+{% include "header.html" %} 
     <div class="container content-inner">
       <div class="section row">
-        <div class="twelve columns mobile-full" id="breadcrumbs">
-          <div>Home</div>
+        <div class="twelve columns mobile-full">
+            <h2>Schools in Philadelphia</h2>
+            {% regroup schools by school_level as school_list %}
+            {% for school in school_list %}
+                <h3>{{ school.grouper.title }}</h3>
+                <ul>
+                    {% for item in school.list %}
+                      <li><a href="/school/{{ item.school_code }}">{{ item.name.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <hr>
+            {% endfor %}
         </div>
-      </div>
-    </div>  
-    <div class="container content-inner">
-      <h2>School District of Philadelphia Curricula</h2>
-      <div class="section row">
-        <div class="three columns mobile-full">
-          <div class="h4"><a href="/schools/">Schools</a></div>
-           </div>
-        <div class="three columns mobile-full">
-          <div class="h4"><a href="/curricula/">Curricula</a></div>
-           </div>                            
       </div>
       {% include "_search.html" %}
     </div>          

@@ -1,8 +1,8 @@
-{% include "header.html" %}
+{% include "analysis/_header.html" %}
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full" id="breadcrumbs">
-					<div><a href="/">Home</a> > <a href="/schools/">Schools</a></div>
+					<div><a href="/analysis">Home</a> > <a href="analysis/schools/">Schools</a></div>
 				</div>
 			</div>
 		</div>	
@@ -15,7 +15,7 @@
 						    <h3>{{ school.grouper.title }}</h3>
 						    <ul>
 						        {% for item in school.list %}
-						          <li><a href="/school/{{ item.school_code }}">{{ item.name.title }}</a></li>
+						          <li><a href="/analysis/school/{{ item.school_code }}">{{ item.name.title }}</a></li>
 						        {% endfor %}
 						    </ul>
 						    <hr>

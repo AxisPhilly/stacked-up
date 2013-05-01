@@ -1,0 +1,19 @@
+#header {
+  background-color: black; 
+  height: 4em; 
+  margin-bottom: 2em
+}
+
+/* Tables */
+.odd {
+  background-color: #f8f7f9;
+}
+
+.number {
+  width: 80px;
+  float: left;
+}
+
+.tablesorter th {
+    cursor: pointer;
+}

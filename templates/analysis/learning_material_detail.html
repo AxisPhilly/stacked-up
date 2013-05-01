@@ -1,8 +1,8 @@
-{% include "header.html" %}
+{% include "analysis/_header.html" %}
     <div class="container content-inner">
       <div class="section row">
         <div class="twelve columns mobile-full" id="breadcrumbs">
-          <div><a href="/">Home</a> > Learning Materials</div>
+          <div><a href="/analysis">Home</a> > Learning Materials</div>
         </div>
       </div>
     </div>  
@@ -30,7 +30,7 @@
             <h4>In Curricula</h4>
             {% if book_list %}
 		          {% for book in book_list %}
-		          	<li><a href="/gradecurriculum/{{ book.pk }}">{{ book.curriculum }}, Grade {{ book.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ book.grade_level_end }} {% endif %}</a></li>
+		          	<li><a href="/analysis/gradecurriculum/{{ book.pk }}">{{ book.curriculum }}, Grade {{ book.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ book.grade_level_end }} {% endif %}</a></li>
 		          {% endfor %}
           	{% else %}
             	<li>No matches</li>

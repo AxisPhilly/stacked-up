@@ -1,24 +1,7 @@
-{% include "header.html" %}
+{% include "analysis/_header.html" %}
 {{ output_test }}
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="twelve columns mobile-full" id="breadcrumbs">
-					<div><a href="/">Home</a> > <a href="/schools/">Schools</a></div>
-				</div>
-			</div>
-		</div>	
-		<div class="container content-inner">
-    	<div class="section row school-header">
-        <div class="twelve columns mobile-full">               
-			    <h2>{{ school.name.title }}</h2>
-			  </div>
-		  </div>
-    	<div class="section row">
-        <div class="twelve columns mobile-full">               
-			    <span class="h4"><a href="/school/{{ school.school_code }}">Details</a></span> / <span class="h4">Inventory</a></span> / <span class="h4"><a href="/school/match/{{ school.school_code }}">Curricula Matcher</a></span>
-			    <hr>
-			  </div>
-		  </div>		       
+      {% include 'analysis/_school_header.html' %}		  
+	       
       <div class="section row">		  
 		     		<h4>Inventory of Learning Material</h4>
 					{% if book_inventory %}		     		
@@ -61,7 +44,7 @@
 								{% for book in book_inventory %}
 						    	<tr>
 						    		<td>
-								    	<a href="/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
+								    	<a href="/analysis/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
 									</td>	
 									<td>
 										{{ book.material.publisher }}
