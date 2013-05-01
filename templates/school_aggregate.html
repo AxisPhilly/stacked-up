@@ -7,16 +7,19 @@
 			</div>
 		</div>	
 		<div class="container content-inner">
+			<h1>{{ school.name.title }}</h1>
 			<div class="section row">
-				<div class="twelve columns mobile-full" id="graph-sidebar">
-					<h1>{{ school.name.title }}</h1>
+				<div class="column eight mobile-full" id="graph-sidebar">
 					<h2>Grade {{ grade }}</h2>
 					<div>
 						{% if curriculum_list %}		     		
 							{% for subject, value in curriculum_list.items %}
+							<!-- {{value}} -->
 								<h2 class="subject-area">{{ subject.title }}</h2>
+						<!-- 	Book Shortfall: {{ value.book_shortfall }}; Cost Shortfall: ${{ value.cost_shortfall }}	 -->
 								{% for title, grade_curriculum in value.curricula.items %}
-									<h3>{{ title }}</h3>
+								<span class="note">This school may use the approved curriculum</span>
+								<h3>{{ title }}</h3>
 						     	<table class="tablesorter">
 						     		<thead>
 							     		<tr>			
@@ -65,6 +68,34 @@
 						{% else %}
 							<p>No inventory</p>
 						{% endif %}
+					</div>
+				</div>
+				<div class="column four mobile-full">
+					{% if school.school_level %}
+					<p>School type: {{ school.school_level.title }}</p>
+					{% endif %}
+					<p>Grades: {{ school.get_grade_range }}</p>
+
+					<div class="section row">
+						<h4>Project articles</h4>
+						<ul>
+							<li>
+								<a href="#">Article title</a>
+								<span class="meta">Jane Smith, 5/15/13</span>
+							</li>
+							<li>
+								<a href="#">Article title</a>
+								<span class="meta">Jane Smith, 5/15/13</span>
+							</li>
+							<li>
+								<a href="#">Article title</a>
+								<span class="meta">Jane Smith, 5/15/13</span>
+							</li>
+					</div>
+					<div class="section row">
+						<h4>Get Involved</h4>
+						<p>Contact your local parent organization at:</p>
+						<p>Parent Orgs R Us</p>
 					</div>
 				</div>
 			</div>

@@ -41,3 +41,9 @@ class School(models.Model):
 
     def has_curricula_defined(self):
         return self.curricula_in_use.count() > 0
+
+    def get_grade_range(self):
+        grade_range = str(self.grade_start) + '-' + str(self.grade_end)
+        grade_range = grade_range.replace('0', 'K')
+        grade_range = grade_range.replace('-1', 'Pre-K')
+        return grade_range
