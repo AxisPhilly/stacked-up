@@ -105,8 +105,13 @@ class SchoolAggregateView(ListView):
 
     def get_materials_for_grade_curriculum(self, students_in_grade, subject,
                                            all_books, cohort, grade_curriculum_id, grade_curriculum_name):
+        self.curriculum_list[subject]['curricula'][grade_curriculum_name] = {
+            'necessary_material': {},
+            'cost_shortfall': 0,
+            'book_shortfall': 0
+        }
         grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
-        self.book_list[subject]['books'][grade_curriculum_name] = []
+        self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
@@ -114,7 +119,7 @@ class SchoolAggregateView(ListView):
                 number_of_books = 0
             enough_books = self.is_enough_books(number_of_books, students_in_grade)
             cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
-            self.book_list[subject]['books'][grade_curriculum_name].append(
+            self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {
                     'title': material.title,
                     'total_copies': number_of_books,
@@ -124,19 +129,17 @@ class SchoolAggregateView(ListView):
                     'difference': abs(students_in_grade - number_of_books),
                 })
             if (students_in_grade - number_of_books) >= 0:
-                self.book_list[subject]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
             else:
-                self.book_list[subject]['cost_shortfall'] += 0
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
             if (students_in_grade - number_of_books) >= 0:
-                self.book_list[subject]['book_shortfall'] += (students_in_grade - number_of_books)
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
             else:
-                self.book_list[subject]['book_shortfall'] += 0
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
 
     def get_grade_curricula_by_subject(self, students_in_grade, subject, all_books, cohort):
-        self.book_list[subject] = {
-            'books': {},
-            'cost_shortfall': 0,
-            'book_shortfall': 0
+        self.curriculum_list[subject] = {
+            'curricula': {}
         }
         if subject == "math":
             for grade_curriculum in cohort.associated_math_curriculum.all():
@@ -154,11 +157,11 @@ class SchoolAggregateView(ListView):
         cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
         current = cohort_set.get(year_end=2013)
         students_in_grade = current.number_of_students
-        self.book_list = {}
+        self.curriculum_list = {}
         self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current)
         self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current)
         context['grade'] = grade
-        context['book_list'] = self.book_list
+        context['curriculum_list'] = self.curriculum_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
         return context
