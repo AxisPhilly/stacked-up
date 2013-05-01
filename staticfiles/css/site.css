@@ -1,3 +1,10 @@
+#header {
+  background-color: black; 
+  height: 4em; 
+  margin-bottom: 2em
+}
+
+/* Tables */
 .odd {
   background-color: #f8f7f9;
 }
@@ -7,16 +14,6 @@
   float: left;
 }
 
-#breadcrumbs {
-
-}
-
-#header {
-  background-color: black; 
-  height: 4em; 
-  margin-bottom: 2em
-}
-
-.school-header h2 {
-  margin-bottom: 0;
+.tablesorter th {
+    cursor: pointer;
 }
