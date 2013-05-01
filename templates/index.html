@@ -1,10 +1,15 @@
 {% include "header.html" %} 
     <div class="container content-inner">
       <div class="section row">
+        <div class="ui-widget">
+          <label for="search">Search for a school: </label>
+          <input id="search"/>
+        </div>
         <div class="twelve columns mobile-full">
             <h2>Schools in Philadelphia</h2>
             {% regroup schools by school_level as school_list %}
             {% for school in school_list %}
+              {% if school.grouper.title %}
                 <h3>{{ school.grouper.title }}</h3>
                 <ul>
                     {% for item in school.list %}
@@ -12,9 +17,9 @@
                     {% endfor %}
                 </ul>
                 <hr>
+              {% endif %}
             {% endfor %}
         </div>
       </div>
-      {% include "_search.html" %}
     </div>          
 {% include "footer.html" %}
