@@ -14,56 +14,58 @@
 					<div>
 						{% if curriculum_list %}		     		
 							{% for subject, value in curriculum_list.items %}
-							<!-- {{value}} -->
 								<h2 class="subject-area">{{ subject.title }}</h2>
-						<!-- 	Book Shortfall: {{ value.book_shortfall }}; Cost Shortfall: ${{ value.cost_shortfall }}	 -->
-								{% for title, grade_curriculum in value.curricula.items %}
-								<span class="note">This school may use the approved curriculum</span>
-								<h3>{{ title }}</h3>
-						     	<table class="tablesorter">
-						     		<thead>
-							     		<tr>			
-												<th>
-													Material
-												</th>			     			
-												<th>
-													Recorded Inventory
-												</th>
-												<th>
-													Students in Grade
-												</th>
-												<th>
-													Difference
-												</th>
-												<th>
-													Enough
-												</th>
-											</tr> 
-										</thead>
-										<tbody>
-										{% for material in grade_curriculum.necessary_material %}
-								    	<tr>
-								    		<td>
-										    	{{ material.title }}
-												</td>
-								    		<td>
-										    	{{ material.total_copies }}
-												</td>		
-								    		<td>
-										    	{{ material.needed }}
-												</td>		
-								    		<td>
-										    	{{ material.difference }}
-												</td>		
-								    		<td>
-										    	{{ material.enough }}
-												</td>
-								    	</tr>
-										{% endfor %}
-										</tbody>
-									</table>
-									<p>Book Shortfall: {{ grade_curriculum.book_shortfall }}; Cost Shortfall: ${{ grade_curriculum.cost_shortfall }}</p>
-								{% endfor %}
+								{% if value.curricula.items %}
+									{% for title, grade_curriculum in value.curricula.items %}
+									<span class="note">This school may use the approved curriculum</span>
+									<h3>{{ title }}</h3>
+							     	<table class="tablesorter">
+							     		<thead>
+								     		<tr>			
+													<th>
+														Material
+													</th>			     			
+													<th>
+														Recorded Inventory
+													</th>
+													<th>
+														Students in Grade
+													</th>
+													<th>
+														Difference
+													</th>
+													<th>
+														Enough
+													</th>
+												</tr> 
+											</thead>
+											<tbody>
+											{% for material in grade_curriculum.necessary_material %}
+										    	<tr>
+										    		<td>
+												    	{{ material.title }}
+														</td>
+										    		<td>
+												    	{{ material.total_copies }}
+														</td>		
+										    		<td>
+												    	{{ material.needed }}
+														</td>		
+										    		<td>
+												    	{{ material.difference }}
+														</td>		
+										    		<td>
+												    	{{ material.enough }}
+														</td>
+										    	</tr>
+											{% endfor %}
+											</tbody>
+										</table>
+										<p>Book Shortfall: {{ grade_curriculum.book_shortfall }}; Cost Shortfall: ${{ grade_curriculum.cost_shortfall }}</p>
+									{% endfor %}
+								{% else %}
+									<p>No curriculum matched any records at this school.</p>
+								{% endif %}
 							{% endfor %}
 						{% else %}
 							<p>No inventory</p>
