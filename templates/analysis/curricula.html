@@ -9,9 +9,9 @@
     <div class="container content-inner">
       <div class="section row">
         <div class="twelve columns mobile-full">
-          	<h2>Curricula</h2>
-	          {% regroup curricula by curriculum as curricula_list %}
-	          {% for curriculum in curricula_list %}
+            <h2>Curricula</h2>
+            {% regroup curricula by curriculum as curricula_list %}
+            {% for curriculum in curricula_list %}
               <h3>{{ curriculum.grouper }}</h3>
               <ul>
                   {% for item in curriculum.list %}

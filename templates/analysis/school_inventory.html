@@ -1,87 +1,87 @@
 {% include "analysis/_header.html" %}
 {{ output_test }}
-      {% include 'analysis/_school_header.html' %}		  
-	       
-      <div class="section row">		  
-		     		<h4>Inventory of Learning Material</h4>
-					{% if book_inventory %}		     		
-				     	<table class="tablesorter">
-				     		<thead>
-				     		<tr>			
-									<th>
-										Title
-									</th>			     			
-									<th>
-										Publisher
-									</th>
-									<th>
-										On Site
-									</th>								
-									<th>
-										Student Home
-									</th>	
-									<th>
-										Student Class
-									</th>	 	
-									<th>
-										Stolen
-									</th>	 
-									<th>
-										Unusable
-									</th>	 											     							     			
-									<th>
-										Teacher
-									</th>
-									<th>
-										Material Type
-									</th>
-									<th>
-										ISBN
-									</th>			
-								</tr> 
-								</thead>
-								<tbody>							
-								{% for book in book_inventory %}
-						    	<tr>
-						    		<td>
-								    	<a href="/analysis/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
-									</td>	
-									<td>
-										{{ book.material.publisher }}
-									</td>			    		
-						    		<td>
-						    			{{ book.qty_onsite }}
-						    		</td>		
-						    		<td>
-						    			{{ book.qty_to_student_home }}
-						    		</td>
-						    		<td>
-						    			{{ book.qty_to_student_class }}
-						    		</td>		 
-						    		<td>
-						    			{{ book.qty_lost_stolen }}
-						    		</td>		  		   
-						    		<td>
-						    			{{ book.qty_unusable }}
-						    		</td>		  		   		    				    		 		    		
-						    		<td>
-						    			{{ book.material.isTeacherEdition }}
-						    		</td>
-						    		<td>
-						    			{{ book.material.material_type }}
-						    		</td>
-						    		<td>
-						    			{{ book.material.isbn }}
-						    		</td>
-						    	</tr>
-								{% endfor %}
-								</tbody>
-							</table>
-						{% else %}
-							<p>No inventory</p>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		</div>					
+      {% include 'analysis/_school_header.html' %}        
+           
+      <div class="section row">       
+                    <h4>Inventory of Learning Material</h4>
+                    {% if book_inventory %}                 
+                        <table class="tablesorter">
+                            <thead>
+                            <tr>            
+                                    <th>
+                                        Title
+                                    </th>                           
+                                    <th>
+                                        Publisher
+                                    </th>
+                                    <th>
+                                        On Site
+                                    </th>                               
+                                    <th>
+                                        Student Home
+                                    </th>   
+                                    <th>
+                                        Student Class
+                                    </th>       
+                                    <th>
+                                        Stolen
+                                    </th>    
+                                    <th>
+                                        Unusable
+                                    </th>                                                                                               
+                                    <th>
+                                        Teacher
+                                    </th>
+                                    <th>
+                                        Material Type
+                                    </th>
+                                    <th>
+                                        ISBN
+                                    </th>           
+                                </tr> 
+                                </thead>
+                                <tbody>                         
+                                {% for book in book_inventory %}
+                                <tr>
+                                    <td>
+                                        <a href="/analysis/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
+                                    </td>   
+                                    <td>
+                                        {{ book.material.publisher }}
+                                    </td>                       
+                                    <td>
+                                        {{ book.qty_onsite }}
+                                    </td>       
+                                    <td>
+                                        {{ book.qty_to_student_home }}
+                                    </td>
+                                    <td>
+                                        {{ book.qty_to_student_class }}
+                                    </td>        
+                                    <td>
+                                        {{ book.qty_lost_stolen }}
+                                    </td>                  
+                                    <td>
+                                        {{ book.qty_unusable }}
+                                    </td>                                                                           
+                                    <td>
+                                        {{ book.material.isTeacherEdition }}
+                                    </td>
+                                    <td>
+                                        {{ book.material.material_type }}
+                                    </td>
+                                    <td>
+                                        {{ book.material.isbn }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>No inventory</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>                  
 {% include "footer.html" %}

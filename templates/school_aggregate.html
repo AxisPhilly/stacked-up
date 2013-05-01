@@ -1,108 +1,108 @@
 {% include "header.html" %}
-		<div class="container content-inner">
-			<div class="section row">
-				<div class="twelve col mobile-full" id="breadcrumbs">
-					<div><a href="/">Home</a>
-				</div>
-			</div>
-		</div>	
-		<div class="container content-inner">
-			<h1>{{ school.name.title }}</h1>
-			<div class="section row">
-				<div class="col eight mobile-full" id="graph-sidebar">
-					<h3>Showing Grade {{ this_grade.human_grade }}</h3>
-					{% for grade in grades %}
-						<a href="/school/{{school.school_code}}/{{grade.human_grade}}">Grade {{ grade.human_grade }}</a>
-					{% endfor %}
-					<div>
-						{% if curriculum_list %}		     		
-							{% for subject, value in curriculum_list.items %}
-								<h2 class="subject-area">{{ subject.title }}</h2>
-								{% if value.curricula.items %}
-									{% for title, grade_curriculum in value.curricula.items %}
-									<span class="note">This school may use the approved curriculum</span>
-									<h3>{{ title }}</h3>
-							     	<table class="tablesorter">
-							     		<thead>
-								     		<tr>			
-													<th>
-														Material
-													</th>			     			
-													<th>
-														Recorded Inventory
-													</th>
-													<th>
-														Students in Grade
-													</th>
-													<th>
-														Difference
-													</th>
-													<th>
-														Enough
-													</th>
-												</tr> 
-											</thead>
-											<tbody>
-											{% for material in grade_curriculum.necessary_material %}
-										    	<tr>
-										    		<td>
-												    	{{ material.title }}
-														</td>
-										    		<td>
-												    	{{ material.total_copies }}
-														</td>		
-										    		<td>
-												    	{{ material.needed }}
-														</td>		
-										    		<td>
-												    	{{ material.difference }}
-														</td>		
-										    		<td>
-												    	{{ material.enough }}
-														</td>
-										    	</tr>
-											{% endfor %}
-											</tbody>
-										</table>
-										<p>Book Shortfall: {{ grade_curriculum.book_shortfall }}; Cost Shortfall: ${{ grade_curriculum.cost_shortfall }}</p>
-									{% endfor %}
-								{% else %}
-									<p>No curriculum matched any records at this school.</p>
-								{% endif %}
-							{% endfor %}
-						{% else %}
-							<p>No inventory</p>
-						{% endif %}
-					</div>
-				</div>
-				<div class="col four mobile-full">
-					{% if school.school_level %}
-					<p>School type: {{ school.school_level.title }}</p>
-					{% endif %}
-					<p>Grades: {{ school.get_grade_range }}</p>
+        <div class="container content-inner">
+            <div class="section row">
+                <div class="twelve col mobile-full" id="breadcrumbs">
+                    <div><a href="/">Home</a>
+                </div>
+            </div>
+        </div>  
+        <div class="container content-inner">
+            <h1>{{ school.name.title }}</h1>
+            <div class="section row">
+                <div class="col eight mobile-full" id="graph-sidebar">
+                    <h3>Showing Grade {{ this_grade.human_grade }}</h3>
+                    {% for grade in grades %}
+                        <a href="/school/{{school.school_code}}/{{grade.human_grade}}">Grade {{ grade.human_grade }}</a>
+                    {% endfor %}
+                    <div>
+                        {% if curriculum_list %}                    
+                            {% for subject, value in curriculum_list.items %}
+                                <h2 class="subject-area">{{ subject.title }}</h2>
+                                {% if value.curricula.items %}
+                                    {% for title, grade_curriculum in value.curricula.items %}
+                                    <span class="note">This school may use the approved curriculum</span>
+                                    <h3>{{ title }}</h3>
+                                    <table class="tablesorter">
+                                        <thead>
+                                            <tr>            
+                                                    <th>
+                                                        Material
+                                                    </th>                           
+                                                    <th>
+                                                        Recorded Inventory
+                                                    </th>
+                                                    <th>
+                                                        Students in Grade
+                                                    </th>
+                                                    <th>
+                                                        Difference
+                                                    </th>
+                                                    <th>
+                                                        Enough
+                                                    </th>
+                                                </tr> 
+                                            </thead>
+                                            <tbody>
+                                            {% for material in grade_curriculum.necessary_material %}
+                                                <tr>
+                                                    <td>
+                                                        {{ material.title }}
+                                                        </td>
+                                                    <td>
+                                                        {{ material.total_copies }}
+                                                        </td>       
+                                                    <td>
+                                                        {{ material.needed }}
+                                                        </td>       
+                                                    <td>
+                                                        {{ material.difference }}
+                                                        </td>       
+                                                    <td>
+                                                        {{ material.enough }}
+                                                        </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <p>Book Shortfall: {{ grade_curriculum.book_shortfall }}; Cost Shortfall: ${{ grade_curriculum.cost_shortfall }}</p>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No curriculum matched any records at this school.</p>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p>No inventory</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col four mobile-full">
+                    {% if school.school_level %}
+                    <p>School type: {{ school.school_level.title }}</p>
+                    {% endif %}
+                    <p>Grades: {{ school.get_grade_range }}</p>
 
-					<div class="section row">
-						<h4>Project articles</h4>
-						<ul>
-							<li>
-								<a href="#">Article title</a>
-								<span class="meta">Jane Smith, 5/15/13</span>
-							</li>
-							<li>
-								<a href="#">Article title</a>
-								<span class="meta">Jane Smith, 5/15/13</span>
-							</li>
-							<li>
-								<a href="#">Article title</a>
-								<span class="meta">Jane Smith, 5/15/13</span>
-							</li>
-					</div>
-					<div class="section row">
-						<h4>Get Involved</h4>
-						<p>Contact your local parent organization at:</p>
-						<p>Parent Orgs R Us</p>
-					</div>
-				</div>
-			</div>
-		</div>
+                    <div class="section row">
+                        <h4>Project articles</h4>
+                        <ul>
+                            <li>
+                                <a href="#">Article title</a>
+                                <span class="meta">Jane Smith, 5/15/13</span>
+                            </li>
+                            <li>
+                                <a href="#">Article title</a>
+                                <span class="meta">Jane Smith, 5/15/13</span>
+                            </li>
+                            <li>
+                                <a href="#">Article title</a>
+                                <span class="meta">Jane Smith, 5/15/13</span>
+                            </li>
+                    </div>
+                    <div class="section row">
+                        <h4>Get Involved</h4>
+                        <p>Contact your local parent organization at:</p>
+                        <p>Parent Orgs R Us</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% include "footer.html" %}
