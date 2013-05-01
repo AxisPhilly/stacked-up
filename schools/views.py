@@ -107,8 +107,6 @@ class SchoolAggregateView(ListView):
         all_books, cohort, grade_curriculum_id):
         grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
         self.book_list[subject]['books'][grade_curriculum_id] = []
-        # TODO is the comment irrelevant?
-        # replace .materials with .necessary_materials to get only necessary material when this data has been added
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
