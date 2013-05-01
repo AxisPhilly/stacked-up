@@ -101,3 +101,7 @@ class GradeCurriculum(models.Model):
 
     def materials_count(self):
         return self.materials.count()
+
+    def get_parent_name(self):
+        return self.curriculum.name
+
