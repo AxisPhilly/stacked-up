@@ -115,10 +115,23 @@ class SchoolAggregateView(ListView):
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
+                enough_books = self.is_enough_books(number_of_books, students_in_grade)
+                cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
+                difference = abs(students_in_grade - number_of_books)
+                if (students_in_grade - number_of_books) >= 0:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
+                else:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
+                if (students_in_grade - number_of_books) >= 0:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
+                else:
+                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             else:
-                number_of_books = 0
-            enough_books = self.is_enough_books(number_of_books, students_in_grade)
-            cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
+                number_of_books = "N/A"
+                difference = "N/A"
+                cost_of_book = "N/A"
+                enough_books = "N/A"
+
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {
                     'title': material.title,
@@ -126,16 +139,8 @@ class SchoolAggregateView(ListView):
                     'needed': students_in_grade,
                     'cost': cost_of_book,
                     'enough': enough_books,
-                    'difference': abs(students_in_grade - number_of_books),
+                    'difference': difference,
                 })
-            if (students_in_grade - number_of_books) >= 0:
-                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
-            else:
-                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
-            if (students_in_grade - number_of_books) >= 0:
-                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
-            else:
-                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
 
     def get_grade_curricula_by_subject(self, students_in_grade, subject, all_books, cohort):
         self.curriculum_list[subject] = {
