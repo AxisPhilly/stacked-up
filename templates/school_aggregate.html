@@ -2,7 +2,7 @@
 		<div class="container content-inner">
 			<div class="section row">
 				<div class="twelve columns mobile-full" id="breadcrumbs">
-					<div><a href="/">Home</a> > <a href="/schools/">Schools</a></div>
+					<div><a href="/">Home</a> > <a href="/school/">Schools</a></div>
 				</div>
 			</div>
 		</div>	
@@ -14,8 +14,9 @@
 					<div>
 						{% if book_list %}		     		
 							{% for subject, value in book_list.items %}
-							Subject: {{ subject.title }}; Book Shortfall: {{ value.book_shortfall }}; Cost Shortfall: ${{ value.cost_shortfall }}
-								{% for title, grade_curriculum in value.books.items %}				
+								<h2 class="subject-area">{{ subject.title }}</h2>
+						<!-- 	Book Shortfall: {{ value.book_shortfall }}; Cost Shortfall: ${{ value.cost_shortfall }}	 -->
+								{% for title, grade_curriculum in value.books.items %}
 						     	<table class="tablesorter">
 						     		<thead>
 							     		<tr>			

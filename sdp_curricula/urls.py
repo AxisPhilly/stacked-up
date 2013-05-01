@@ -19,7 +19,7 @@ urlpatterns = patterns('',
         AnalysisIndexListView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('api.urls')),
-    url(r'^school/', include('schools.urls')),
+    url(r'^school/', include('schools.urls'), name='school_listing'),
 
     # Analysis views
     url(r'^analysis/$',

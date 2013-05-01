@@ -103,7 +103,8 @@ class SchoolAggregateView(ListView):
         else:
             return('False')
 
-    def get_materials_for_grade_curriculum(self, students_in_grade, subject, all_books, cohort, grade_curriculum_name):
+    def get_materials_for_grade_curriculum(self, students_in_grade, subject,
+        all_books, cohort, grade_curriculum_name):
         self.book_list[subject]['books'][grade_curriculum_name] = []
         required_books = GradeCurriculum.objects.get(id=grade_curriculum_name).necessary_materials  # place .materials with .necessary_materials to get only necessary material when this data has been added
         for material in required_books.all():
@@ -138,10 +139,10 @@ class SchoolAggregateView(ListView):
             'book_shortfall': 0
         }
         if subject == "math":
-            for grade_curriculum in cohort.get(year_end=2013).associated_math_curriculum.all():
+            for grade_curriculum in cohort.associated_math_curriculum.all():
                 self.get_materials_for_grade_curriculum(students_in_grade, 'math', all_books, cohort, grade_curriculum.id)
         if subject == "reading":
-            for grade_curriculum in cohort.get(year_end=2013).associated_reading_curriculum.all():
+            for grade_curriculum in cohort.associated_reading_curriculum.all():
                 self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id)
 
     def get_context_data(self, **kwargs):
@@ -150,13 +151,14 @@ class SchoolAggregateView(ListView):
             grade = self.kwargs['grade']
         except KeyError:
             grade = self.school.grade_start
-        cohort = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
-        students_in_grade = cohort.get(year_end=2013).number_of_students
+        cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
+        current = cohort_set.get(year_end=2013)
+        students_in_grade = current.number_of_students
         self.book_list = {}
-        self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], cohort)
-        self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], cohort)
+        self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current)
+        self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current)
         context['grade'] = grade
         context['book_list'] = self.book_list
-        context['pssa_test_scores'] = json.dumps([obj for obj in cohort.values()])
+        context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
         return context
