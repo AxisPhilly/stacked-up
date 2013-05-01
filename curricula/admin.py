@@ -33,5 +33,6 @@ class GradeCurriculumAdmin(admin.ModelAdmin):
     readonly_fields = ('materials',)
     filter_horizontal = ['necessary_materials']
     search_fields = ['grade_level_start', 'grade_level_end']
+    # list_display = ('name', 'school_level', 'has_curricula_defined')
 
 admin.site.register(GradeCurriculum, GradeCurriculumAdmin)

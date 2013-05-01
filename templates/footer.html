@@ -1,2 +1,17 @@
+    <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script> 
+    <script>
+      $(document).ready(function() 
+        { 
+          $("#matched-grade-curricula").tablesorter({ 
+            widgets: ['zebra'],
+            sortList: [[2,0],[1,0],[4,0]]        
+          });
+          $(".tablesorter").tablesorter({ 
+            widgets: ['zebra'],
+          })          
+        } 
+      );    
+    </script>
     </body>
 </html>

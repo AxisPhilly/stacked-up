@@ -1,0 +1,22 @@
+.odd {
+  background-color: #f8f7f9;
+}
+
+.number {
+  width: 80px;
+  float: left;
+}
+
+#breadcrumbs {
+
+}
+
+#header {
+  background-color: black; 
+  height: 4em; 
+  margin-bottom: 2em
+}
+
+.school-header h2 {
+  margin-bottom: 0;
+}
