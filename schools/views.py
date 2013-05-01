@@ -166,7 +166,8 @@ class SchoolAggregateView(ListView):
         self.curriculum_list = {}
         self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current)
         self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current)
-        context['grade'] = grade
+        context['this_grade'] = Grade.objects.get(school=self.school, grade_level=grade)
+        context['grades'] = Grade.objects.filter(school=self.school)
         context['curriculum_list'] = self.curriculum_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
