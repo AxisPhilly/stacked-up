@@ -104,17 +104,19 @@ class SchoolAggregateView(ListView):
             return('False')
 
     def get_materials_for_grade_curriculum(self, students_in_grade, subject,
-        all_books, cohort, grade_curriculum_name):
-        self.book_list[subject]['books'][grade_curriculum_name] = []
-        required_books = GradeCurriculum.objects.get(id=grade_curriculum_name).necessary_materials  # place .materials with .necessary_materials to get only necessary material when this data has been added
-        for material in required_books.all():
+        all_books, cohort, grade_curriculum_id):
+        grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
+        self.book_list[subject]['books'][grade_curriculum_id] = []
+        # TODO is the comment irrelevant?
+        # replace .materials with .necessary_materials to get only necessary material when this data has been added
+        for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
             else:
                 number_of_books = 0
             enough_books = self.is_enough_books(number_of_books, students_in_grade)
             cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
-            self.book_list[subject]['books'][grade_curriculum_name].append(
+            self.book_list[subject]['books'][grade_curriculum_id].append(
                 {
                     'title': material.title,
                     'total_copies': number_of_books,
