@@ -7,6 +7,18 @@ from curricula.models import GradeCurriculum
 class Grade(models.Model):
     school = models.ForeignKey(School)
     grade_level = models.IntegerField()
+    likely_math_curriculum = models.ForeignKey(GradeCurriculum, blank=True, null=True, related_name='school_math')
+    likely_reading_curriculum = models.ForeignKey(GradeCurriculum, blank=True, null=True, related_name='school_reading')
+
+    """
+        Define shortfalls as dynamic methods so they update
+        when inventory is updated
+    """
+    def math_shortfall(self):
+        pass
+
+    def reading_shortfall(self):
+        pass
 
     def __unicode__(self):
         return "%s, Grade %s" % (self.school.name, self.grade_level)
