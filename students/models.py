@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from schools.models import School
 from curricula.models import GradeCurriculum
+from vendors.models import InventoryRecord
 
 
 class Grade(models.Model):
@@ -9,16 +10,6 @@ class Grade(models.Model):
     grade_level = models.IntegerField()
     likely_math_curriculum = models.ForeignKey(GradeCurriculum, blank=True, null=True, related_name='school_math')
     likely_reading_curriculum = models.ForeignKey(GradeCurriculum, blank=True, null=True, related_name='school_reading')
-
-    """
-        Define shortfalls as dynamic methods so they update
-        when inventory is updated
-    """
-    def math_shortfall(self):
-        pass
-
-    def reading_shortfall(self):
-        pass
 
     def __unicode__(self):
         return "%s, Grade %s" % (self.school.name, self.grade_level)
@@ -30,6 +21,28 @@ class Grade(models.Model):
             return 'Pre-K'
         else:
             return self.grade_level
+
+    """
+        Define shortfalls as dynamic methods so they update
+        when inventory is updated
+    """
+    def math_material_count(self):
+        count = 0
+        for m in self.likely_math_curriculum.necessary_materials.all():
+            try:
+                r = InventoryRecord.objects.get(material=m, school=self.school)
+                count += r.get_inventory_total()
+            except InventoryRecord.DoesNotExist:
+                pass
+
+    def reading_material_count(self):
+        count = 0
+        for m in self.likely_reading_curriculum.necessary_materials.all():
+            try:
+                r = InventoryRecord.objects.get(material=m, school=self.school)
+                count += r.get_inventory_total()
+            except InventoryRecord.DoesNotExist:
+                pass
 
 
 class Cohort(models.Model):
@@ -61,3 +74,9 @@ class Cohort(models.Model):
     # Associated grade curriculum for the cohort
     associated_reading_curriculum = models.ManyToManyField(GradeCurriculum, related_name="reading_cohort", null=True)
     associated_math_curriculum = models.ManyToManyField(GradeCurriculum, related_name="math_cohort", null=True)
+
+    def math_shortfall(self):
+        return self.grade.math_material_count() - self.number_of_students
+
+    def reading_shortfall(self):
+        return self.grade.reading_material_count() - self.number_of_students
