@@ -1,3 +1,7 @@
+body {
+  font-family: "proxima-nova", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+}
+
 #header {
   background-color: black; 
   height: 4em; 
@@ -16,4 +20,95 @@
 
 .tablesorter th {
     cursor: pointer;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: #222222;
+  line-height: 1.2em;
+  margin-bottom: 1em;  
+  font-weight: normal;
+}
+h1,
+.h1 {
+  font-size: 51px;
+}
+h2,
+.h2 {
+  font-size: 38px;
+}
+h3,
+.h3 {
+  font-size: 28px;
+}
+h4,
+.h4 {
+  font-size: 21px;
+}
+h5,
+.h5 {
+  font-size: 16px;
+}
+h6,
+.h6 {
+  font-size: 12px;
+}
+
+#headline {
+	font-family: "calluna", "minion pro", "Times New Roman", times, serif;
+}
+
+.curriculum-title {
+	font-weight: bold;
+}
+
+.subject-title {
+  width: 100%;
+  background-color: #eee;
+  padding: .5em;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/* Columns */
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Links */
+a {
+  color: #0c51c6;
+  text-decoration: none;
+}
+a:visited {
+  color: #0c51c6;
+}
+a:hover {
+  color: #1b1b67;	
+  text-decoration: none;
+}
+a:active {
+  color: #333333;
+}
+
+/* Table */
+
+table th, table td {
+  padding: 20px 14px;
+  line-height: 18px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #eeeeee;
 }

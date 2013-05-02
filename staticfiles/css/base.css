@@ -148,11 +148,17 @@ body {
 a {
   color: #ff3300;
   text-decoration: underline;
+  -webkit-transition: color .1s linear;
+  -moz-transition: color .1s linear;
+  -o-transition: color .1s linear;
+  -ms-transition: color .1s linear;
+  transition: color .1s linear;    
 }
 a:visited {
   color: #ff3300;
 }
 a:hover {
+  color: #032e79;
   text-decoration: none;
 }
 a:active {
