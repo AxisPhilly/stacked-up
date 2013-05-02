@@ -14,18 +14,20 @@ for n in NegotiatedPrice.objects.all():
         search = NegotiatedPrice.objects.filter(value=n.value, material=n.material, negotiated_for_school_type=m)
         if len(search) > 1:
             print len(search)
-            keeper = search[0], search[0].negotiated_for_school_type.all()
+            keeper = search[0]
             print keeper
             for o in search:
                 # print o, o.negotiated_for_school_type.all()
                 if len(o.negotiated_for_school_type.all()) == 2:
                     keeper = o
             for o in search:
+                if o == keeper:
+                    print 'keeping', o, o.negotiated_for_school_type.all()
                 if o != keeper:
                     o.delete()
-                    print 'deleted', o
-        print len(search)
-        print n, n.material.isbn
+                    print 'deleting', o
+        # print len(search)
+        # print n, n.material.isbn
             #     for r in InventoryRecord.objects.filter(material=o):
             #         r.material = keeper
             #         r.save()
