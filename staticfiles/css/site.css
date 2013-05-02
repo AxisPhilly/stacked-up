@@ -1,3 +1,8 @@
+.enough-circle {
+  width: 16px;
+  height: 16px;
+}
+
 .block {
 }
 
@@ -88,7 +93,7 @@ h6,
 .subject-title {
   width: 100%;
   background-color: #eee;
-  padding: 18px;
+  padding: 14px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
