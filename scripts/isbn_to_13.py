@@ -41,7 +41,9 @@ def convert_10_to_13(isbn):
     return prefix + check
 
 for material in LearningMaterial.objects.all():
-    if len(material.isbn) == 10:
-        m = convert_10_to_13(material.isbn)
-        material.isbn=m
-        material.save()
+    if material.isbn != None:
+        if len(material.isbn) == 10:
+            m = convert_10_to_13(material.isbn)
+            material.isbn=m
+            material.save()
+            print material
