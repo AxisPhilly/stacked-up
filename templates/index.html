@@ -1,10 +1,20 @@
 {% include "header.html" %} 
     <div class="container content-inner">
       <div class="section row">
-        <div class="ui-widget">
+        <div class="ui-widget left">
           <label for="search">Search for a school: </label>
           <input id="search"/>
         </div>
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style right">
+          <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+          <a class="addthis_button_tweet"></a>
+          <a class="addthis_button_pinterest_pinit"></a>
+          <a class="addthis_counter addthis_pill_style"></a>
+        </div>
+        <!-- AddThis Button END -->
+      </div>
+      <div class="section row">
         <div class="twelve columns mobile-full">
             <h2>Schools in Philadelphia</h2>
             {% regroup schools by school_level as school_list %}
