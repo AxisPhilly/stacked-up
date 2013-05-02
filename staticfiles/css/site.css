@@ -1,5 +1,19 @@
+.block {
+}
+
+.note {
+  color: #aaa;
+}
+
+p {
+  font-family: "minion-pro", georgia, serif;
+  font-size: 18px;
+  color: #555;
+}
+
 body {
   font-family: "proxima-nova", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  font-size: 16px;
 }
 
 #header {
@@ -10,7 +24,7 @@ body {
 
 /* Tables */
 .odd {
-  background-color: #f8f7f9;
+  background-color: #fff;
 }
 
 .number {
@@ -38,27 +52,27 @@ h6 {
 }
 h1,
 .h1 {
-  font-size: 51px;
+  font-size: 49px;
 }
 h2,
 .h2 {
-  font-size: 38px;
+  font-size: 39px;
 }
 h3,
 .h3 {
-  font-size: 28px;
+  font-size: 31px;
 }
 h4,
 .h4 {
-  font-size: 21px;
+  font-size: 25px;
 }
 h5,
 .h5 {
-  font-size: 16px;
+  font-size: 20px;
 }
 h6,
 .h6 {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 #headline {
@@ -67,12 +81,14 @@ h6,
 
 .curriculum-title {
 	font-weight: bold;
+  margin-top: 4px;
+  margin-bottom: .5em;
 }
 
 .subject-title {
   width: 100%;
   background-color: #eee;
-  padding: .5em;
+  padding: 18px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -106,9 +122,18 @@ a:active {
 /* Table */
 
 table th, table td {
-  padding: 20px 14px;
+  padding: 14px 0;
   line-height: 18px;
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px dotted #ddd;
+}
+
+table th {
+  border-top: 0px dotted #ddd;
+}
+
+table thead th {
+  color: #00b5f9;
+  font-weight: normal;
 }

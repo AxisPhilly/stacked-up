@@ -7,10 +7,10 @@
             </div>
         </div>  
         <div class="container content-inner">
-            <p>{{ output }}</p>
             <h1 id="headline">{{ school.name.title }}</h1>
             <div class="section row">
                 <div class="col eight mobile-full" id="graph-sidebar">
+                <p>{{ school.name.title }} is a {{ school.school_level.title }} located at {{ school.street_addr.title }} It is {% if school.school_type == "Empowerment" %}{% else %}not{% endif %} an Empowerment School.</p>                    
                     <h3>Showing Grade {{ this_grade.human_grade }}</h3>
                     {% for grade in grades %}
                         <a href="/school/{{school.school_code}}/{{grade.grade_level}}">Grade {{ grade.human_grade }}</a>
@@ -18,11 +18,13 @@
                     <div>
                         {% if curriculum_list %}                    
                             {% for subject, value in curriculum_list.items %}
-                                <h3 class="subject-title">{{ subject.title }}</h2>
+                                <h4 class="subject-title">{{ subject.title }}</h4>
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
-                                    <span class="note">This school may use the approved curriculum</span>
-                                    <h2 class="curriculum-title">{{ title }}</h2>
+                                    <div class="block">
+                                        <span class="note">This school may use the approved curriculum</span>
+                                        <h2 class="curriculum-title">{{ title }}</h2>
+                                    </div>
                                     <table class="tablesorter">
                                         <thead>
                                             <tr>
@@ -65,7 +67,10 @@
                                             {% endfor %}
                                             </tbody>
                                         </table>
-                                        <p>Book Shortfall: {{ grade_curriculum.book_shortfall }}; Cost Shortfall: ${{ grade_curriculum.cost_shortfall }}</p>
+                                        <div class="block">
+                                            <p>It would cost ${{ grade_curriculum.cost_shortfall }} to provide each student in grade {{ grade.human_grade }} at Benjamin B. Comegys School with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
+                                            <hr>
+                                        </div>
                                     {% endfor %}
                                 {% else %}
                                     <p>No curriculum matched any records at this school.</p>
