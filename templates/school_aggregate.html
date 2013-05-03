@@ -30,7 +30,7 @@
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
                                     <div class="block">
-                                        <span class="note">This school may use the approved curriculum</span>
+                                        <span class="note">This school may use the approved curriculum:</span>
                                         <h2 class="curriculum-title">{{ title }}</h2>
                                     </div>
                                     <table class="tablesorter">
@@ -69,7 +69,7 @@
                                                         {{ material.difference }}
                                                         </td>       
                                                     <td>
-                                                        {{ material.enough }}
+                                                        <img class="enough-circle" src="{{ STATIC_URL }}images/circle{{ material.enough }}.png" alt="{{ material.enough }}">
                                                         </td>
                                                 </tr>
                                             {% endfor %}
