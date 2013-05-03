@@ -34,6 +34,7 @@ class Grade(models.Model):
                 count += r.get_inventory_total()
             except InventoryRecord.DoesNotExist:
                 pass
+        return count
 
     def reading_material_count(self):
         count = 0
@@ -43,6 +44,7 @@ class Grade(models.Model):
                 count += r.get_inventory_total()
             except InventoryRecord.DoesNotExist:
                 pass
+        return count
 
 
 class Cohort(models.Model):
@@ -75,8 +77,8 @@ class Cohort(models.Model):
     associated_reading_curriculum = models.ManyToManyField(GradeCurriculum, related_name="reading_cohort", null=True)
     associated_math_curriculum = models.ManyToManyField(GradeCurriculum, related_name="math_cohort", null=True)
 
-    def math_shortfall(self):
+    def math_difference(self):
         return self.grade.math_material_count() - self.number_of_students
 
-    def reading_shortfall(self):
+    def reading_difference(self):
         return self.grade.reading_material_count() - self.number_of_students
