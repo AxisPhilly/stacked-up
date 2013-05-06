@@ -36,14 +36,14 @@ p {
 
   .top-bar > .container > li > a {
     color: white;
-    padding: 0 15px;
+    padding: 0 8px;
   }
 
   .top-bar .container > .menu-item a:after {
     content: '/';
     float: right;
     font-weight: normal;
-    padding-left: 10px;
+    padding-left: 8px;
   }
 
 .explainer-wrap {
