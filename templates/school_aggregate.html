@@ -1,3 +1,4 @@
+{% load humanize %}
 {% include "header.html" %}
         <div class="container content-inner">
             <div class="section row">
@@ -75,7 +76,7 @@
                                             </tbody>
                                         </table>
                                         <div class="block">
-                                            <p>It would cost ${{ grade_curriculum.cost_shortfall }} to provide each student in grade {{ grade.human_grade }} at Benjamin B. Comegys School with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
+                                            <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ grade.human_grade }} at Benjamin B. Comegys School with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
                                             <hr>
                                         </div>
                                     {% endfor %}
