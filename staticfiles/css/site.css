@@ -54,6 +54,13 @@ p {
   color: #aaa;
 }
 
+.number {
+  margin: .2em 0 .5em 0;
+  font-size: 31px;
+  font-weight: 100;
+  color: #00b5f9;
+}
+
 /* Headings */
 
 h1,
@@ -270,4 +277,3 @@ table thead th {
 .mlm,.mhm,.mam{margin-left:10px !important}
 .mlt,.mht,.mat{margin-left:15px !important}
 .mll,.mhl,.mal{margin-left:20px !important}
-
