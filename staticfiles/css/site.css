@@ -93,7 +93,7 @@ p {
 .number {
   margin: .2em 0 .5em 0;
   font-size: 31px;
-  font-weight: 100;
+  font-weight: normal;
   color: #00b5f9;
 }
 
@@ -211,8 +211,8 @@ table th {
 }
 
 table thead th {
-  color: #555;
-  font-weight: normal;
+  color: #222;
+  font-weight: bold;
 }
 
 .odd {
