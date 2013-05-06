@@ -23,23 +23,23 @@
       <div class="section row">
         <div class="col one-third mobile-full">
           <h3>Schools with largest gap between common books and students</h3>
-          <ul>
+          <ol>
             {% for item in bottom_schools %}
               <li>
                 <a href="school/{{ item.school.school_code }}">{{ item.school.name}}</a>
               </li>
             {% endfor %}
-          </ul>
+          </ol>
         </div>
         <div class="col one-third mobile-full">
           <h3>Schools with smallest gap between common books and students</h3>
-          <ul>
+          <ol>
             {% for item in top_schools %}
               <li>
                 <a href="school/{{ item.school.school_code }}">{{ item.school.name}}</a>
               </li>
             {% endfor %}
-          </ul>
+          </ol>
         </div>
         <div class="col one-third mobile-full">
           <h3>Search for a school</h3>
