@@ -302,3 +302,25 @@ table thead th {
 .mlm,.mhm,.mam{margin-left:10px !important}
 .mlt,.mht,.mat{margin-left:15px !important}
 .mll,.mhl,.mal{margin-left:20px !important}
+
+@media only screen and (max-width: 761px) {
+  .menu-item, .social {
+    display: none;
+  }
+  .explainer-wrap, .caption {
+    position: relative;
+  }
+  .explainer-wrap {
+    background: transparent;
+  }
+  .explainer {
+    margin: 0;
+    color: #1e1e1e;
+  }
+  .caption {
+    float: right;
+    color: #000 !important;
+    margin-top: 0;
+  }
+}
+
