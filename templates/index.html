@@ -26,7 +26,7 @@
           <ol>
             {% for item in bottom_schools %}
               <li>
-                <a href="school/{{ item.school.school_code }}">{{ item.school.name}}</a>
+                <a href="school/{{ item.school.school_code }}">{{ item.school.name.title }}</a>
               </li>
             {% endfor %}
           </ol>
@@ -36,7 +36,7 @@
           <ol>
             {% for item in top_schools %}
               <li>
-                <a href="school/{{ item.school.school_code }}">{{ item.school.name}}</a>
+                <a href="school/{{ item.school.school_code }}">{{ item.school.name.title }}</a>
               </li>
             {% endfor %}
           </ol>
