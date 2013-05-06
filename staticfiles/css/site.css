@@ -194,11 +194,6 @@ table thead th {
   background-color: #fff;
 }
 
-.number {
-  width: 80px;
-  float: left;
-}
-
 .tablesorter th {
     cursor: pointer;
 }
