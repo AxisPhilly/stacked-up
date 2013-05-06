@@ -180,7 +180,7 @@ class SchoolAggregateView(ListView):
                 if each_grade.likely_reading_curriculum:
                     aggregate['materials']['reading'] += each_grade.reading_material_count()
         aggregate['material_count'] = (aggregate['materials']['math'] + aggregate['materials']['reading'])
-        aggregate['difference'] = aggregate['material_count'] - aggregate['students'] * 2 # times two subjects
+        aggregate['difference'] = aggregate['material_count'] - aggregate['students'] * 2  # times two subjects
         return aggregate
 
     def get_context_data(self, **kwargs):
@@ -203,30 +203,4 @@ class SchoolAggregateView(ListView):
         context['curriculum_list'] = self.curriculum_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
-        return context
-
-
-class IndexListView(ListView):
-    context_object_name = "schools"
-    template_name = "index.html"
-    queryset = School.objects.filter(~Q(school_level=''))
-
-    def aggregate_school(self, school):
-        data = {}
-        data['students'] = 0
-        data['materials'] = 0
-        for grade in Grade.objects.filter(school=school):
-            try:
-                data['students'] += Cohort.objects.get(grade=grade, year_start=2012).number_of_students
-            except Cohort.DoesNotExist:
-                pass
-            data['materials'] = grade.math_material_count() + grade.reading_material_count()
-        data['difference'] = data['materials'] - data['students']
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexListView, self).get_context_data(**kwargs)
-        # context['aggregate'] = {}
-        # for school in self.queryset:
-        #     context['aggregate'][school.id] = self.aggregate_school(school)
-
         return context

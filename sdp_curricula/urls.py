@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, AnalysisIndexListView, GradeCurriculumUse
-from schools.views import IndexListView, SchoolDetailView, SchoolsListView, SchoolCurriculaMatch, SchoolInventory, SchoolAggregateView
+from schools.views import SchoolDetailView, SchoolsListView, SchoolCurriculaMatch, SchoolInventory
+from core.views import IndexListView
 
 from django.contrib import admin
 admin.autodiscover()
