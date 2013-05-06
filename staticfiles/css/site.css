@@ -25,7 +25,7 @@ p {
 
 #header {
   background-color: black; 
-  margin-bottom: 1em
+  margin-bottom: 3em
 }
   .top-bar > .container > li {
     float: left;
@@ -69,6 +69,10 @@ p {
   font-size: 10px;
 }
 
+.bar-top {
+  margin: 0;
+}
+
 .caption, .caption a {
   color: #e1e1e1 !important;
 }
@@ -102,7 +106,7 @@ h4,
 h5,
 h6 {
   margin: 0;
-  color: #222222;
+  color: #333333;
   line-height: 1.2em;
   margin-bottom: 1em;  
   font-weight: normal;
