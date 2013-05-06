@@ -35,6 +35,10 @@
                                     <div class="block">
                                         <span class="note">This school may use the approved curriculum:</span>
                                         <h2 class="curriculum-title">{{ title }}</h2>
+                                        {% if grade_curriculum.likely_curriculum %}
+                                            <h3 class="curriculum-use">
+                                                <img class="left mrm" src="{{ STATIC_URL }}images/circleTrue.png" height="20"> Curriculum with greatest likelihood of use based on inventory records</h3>
+                                        {% endif %}
                                     </div>
                                     <table class="tablesorter">
                                         <thead>

@@ -3,7 +3,6 @@ from vendors.models import InventoryRecord, NegotiatedPrice
 from curricula.models import GradeCurriculum
 from students.models import Grade, Cohort
 from django.views.generic import ListView
-from django.db.models import Q
 import simplejson as json
 
 
@@ -106,9 +105,12 @@ class SchoolAggregateView(ListView):
         self.curriculum_list[subject]['curricula'][grade_curriculum_name] = {
             'necessary_material': {},
             'cost_shortfall': 0,
-            'book_shortfall': 0
+            'book_shortfall': 0,
+            'likely_curriculum': False
         }
         grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
+        if (grade_curriculum == cohort.grade.likely_math_curriculum) or (grade_curriculum == cohort.grade.likely_reading_curriculum):
+            self.curriculum_list[subject]['curricula'][grade_curriculum_name]['likely_curriculum'] = True
         self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
