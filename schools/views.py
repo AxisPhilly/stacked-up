@@ -180,7 +180,7 @@ class SchoolAggregateView(ListView):
                 if each_grade.likely_reading_curriculum:
                     aggregate['materials']['reading'] += each_grade.reading_material_count()
         aggregate['material_count'] = (aggregate['materials']['math'] + aggregate['materials']['reading'])
-        aggregate['difference'] = aggregate['material_count'] - aggregate['students']
+        aggregate['difference'] = aggregate['material_count'] - aggregate['students'] * 2 # times two subjects
         return aggregate
 
     def get_context_data(self, **kwargs):

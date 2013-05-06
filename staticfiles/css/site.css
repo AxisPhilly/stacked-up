@@ -137,10 +137,14 @@ table th, table td {
 }
 
 table th {
-  border-top: 0px dotted #ddd;
+  border-top: 0 dotted #ddd;
 }
 
 table thead th {
   color: #00b5f9;
   font-weight: normal;
+}
+
+img {
+  max-width: 100%;
 }

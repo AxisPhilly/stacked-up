@@ -1,10 +1,6 @@
 {% include "header.html" %} 
     <div class="container content-inner">
       <div class="section row">
-        <div class="ui-widget left">
-          <label for="search">Search for a school: </label>
-          <input id="search"/>
-        </div>
         <!-- AddThis Button BEGIN -->
         <div class="addthis_toolbox addthis_default_style right">
           <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -14,15 +10,32 @@
         </div>
         <!-- AddThis Button END -->
       </div>
+      <h1>Project Title</h1>
+
+      <div class="row">
+        <img src="http://placehold.it/1160x200">
+      </div>
       <div class="section row">
-        <div class="twelve columns mobile-full">
-            <h2>Schools in Philadelphia</h2>
-            {% for school in schools %}
-                <ul>
-                      <li><a href="/school/{{ school.school_code }}">{{ school.name.title }}</a></li>
-                </ul>
-                <hr>
-            {% endfor %}
+        <div class="col one-third">
+          <h3>Schools with largest gap between common books and students</h3>
+          <ul>
+            <li>Item</li>
+          </ul>
+        </div>
+        <div class="col one-third">
+          <h3>Schools with smallest gap between common books and students</h3>
+          <ul>
+            <li>Item</li>
+          </ul>
+        </div>
+        <div class="col one-third">
+          <h3>Search for a school</h3>
+          <div class="ui-widget">
+            <label for="search">Search for a school: </label>
+            <input id="search"/>
+          </div>
+          <p>Start typing the name of a school and choose from the filtered options 
+            to find what you're looking for</p>
         </div>
       </div>
     </div>          
