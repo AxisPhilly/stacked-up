@@ -13,6 +13,10 @@ p {
   color: #555;
 }
 
+.cf {
+  padding: 4px 0 8px 0;
+}
+
 .cf:after {
   content: "";
   display: table;
@@ -103,6 +107,7 @@ h6 {
 h1,
 .h1 {
   font-size: 49px;
+  margin-bottom: 0;
 }
 h2,
 .h2 {
@@ -195,7 +200,7 @@ table th {
 }
 
 table thead th {
-  color: #00b5f9;
+  color: #555;
   font-weight: normal;
 }
 
