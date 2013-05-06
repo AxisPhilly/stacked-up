@@ -128,10 +128,10 @@ class SchoolAggregateView(ListView):
                 else:
                     self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             else:
-                number_of_books = "N/A"
-                difference = "N/A"
-                cost_of_book = "N/A"
-                enough_books = "N/A"
+                number_of_books = 'None'
+                difference = 'N/A'
+                cost_of_book = 'N/A'
+                enough_books = 'N/A'
 
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {

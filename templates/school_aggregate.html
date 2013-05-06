@@ -69,7 +69,7 @@
                                                         {{ material.difference }}
                                                         </td>       
                                                     <td>
-                                                        <img class="enough-circle" src="{{ STATIC_URL }}images/circle{{ material.enough }}.png" alt="{{ material.enough }}">
+                                                        <img class="enough-circle" src="{{ STATIC_URL }}{% if material.enough == 'True' %}images/circleTrue.png{% elif material.enough == 'False' %}images/circleFalse.png{% else %}images/circleNA.png{% endif %}" alt="{{ material.enough }}">
                                                         </td>
                                                 </tr>
                                             {% endfor %}
