@@ -141,9 +141,18 @@ h6,
   width: 100%;
   background-color: #eee;
   padding: 14px;
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.grade-listing a:before {
+    content: ' |';
+    font-weight: normal;
+    padding: 5px;
+  }
+.grade-listing h6 + a:before{
+  content:none;
 }
 
 /* Columns */
