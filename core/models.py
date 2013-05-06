@@ -7,5 +7,8 @@ class SchoolAggregate(models.Model):
     number_of_common_materials = models.IntegerField()
     number_of_students = models.IntegerField()
 
+    def __unicode__(self):
+        return self.school.name
+
     def books_for_students(self):
         return self.number_of_common_materials - (self.number_of_students * 2)
