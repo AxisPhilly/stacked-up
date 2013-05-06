@@ -175,7 +175,7 @@ class SchoolAggregateView(ListView):
         current_cohort = cohort_set.get(year_end=2013)
         current_grade = Grade.objects.get(school=self.school, grade_level=grade)
         students_in_grade = current_cohort.number_of_students
-        grades = Grade.objects.filter(school=self.school)
+        grades = Grade.objects.filter(school=self.school).order_by('grade_level')
         self.curriculum_list = {}
         self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current_cohort)
         self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current_cohort)
