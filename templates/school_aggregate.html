@@ -3,7 +3,7 @@
         <div class="container content-inner">
             <div class="section row">
                 <div class="three col mobile-full" id="breadcrumbs">
-                    <a href="/">&laquo; Back to Homepage</a>
+                    <a href="/">&#8592; Back to Homepage</a>
                 </div>
                 <!-- AddThis Button BEGIN -->
                 <div class="addthis_toolbox addthis_default_style right">
@@ -18,7 +18,8 @@
         <div class="container content-inner">
             <h1 id="headline">{{ school.name.title }}</h1>
             <div class="section row">
-                <div class="col eight mobile-full" id="graph-sidebar">                
+                <div class="col eight mobile-full" id="graph-sidebar">        
+                    <p>{{ school.name.title }} is a {{ school.school_level.title }}, located at {{ school.street_addr.title }}, with grades {{ school.get_grade_range }}. It is {% if school.school_type == "Empowerment" %}{% else %}not{% endif %} an Empowerment School.</p>    
                     <h4>Showing Grade {{ current_grade }}</h4>
                     <div class="grade-listing mbm">
                         <h6>View more grades at this school:</h6>
@@ -29,12 +30,12 @@
                     <div>
                         {% if curriculum_list %}                    
                             {% for subject, value in curriculum_list.items %}
-                                <h4 class="subject-title">{{ subject.title }}</h4>
+                                <h3 class="subject-title">{{ subject.title }}</h3>
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
                                     <div class="block">
                                         <span class="note">This school may use the approved curriculum:</span>
-                                        <h2 class="curriculum-title">{{ title }}</h2>
+                                        <h4 class="curriculum-title">{{ title }}</h4>
                                     </div>
                                     <table class="tablesorter">
                                         <thead>
@@ -92,25 +93,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col four mobile-full">  
-                    <div class="section row">
-                        <table>
-                            <tr>
-                                <td>Address</td>
-                                <td>{{ school.street_addr.title }}</td>
-                            </tr>    
-                            {% if school.school_level %}
-                                <tr>
-                                    <td>School type</td>
-                                    <td>{{ school.school_level.title }}</td>
-                                </tr>      
-                            {% endif %}
-                            <tr>
-                                <td>Grades</td>
-                                <td>{{ school.get_grade_range }}</td>
-                            </tr>                 
-                        </table>
-                    </div>                    
+                <div class="col four mobile-full">            
                     <div>Number of students:</div>
                     <div class="number">{{ school_aggregate.students }}</div>
                     <div>Number of common books in likely curriculum (reading and math):</div>
