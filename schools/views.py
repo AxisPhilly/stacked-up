@@ -112,6 +112,10 @@ class SchoolAggregateView(ListView):
         self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
+                """
+                TODO: change all_books.filter(material=material)[0].get_inventory_total() to
+                number_of_books = all_books.get(material=material).get_inventory_total()
+                """
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
                 enough_books = self.is_enough_books(number_of_books, students_in_grade)
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
@@ -125,10 +129,10 @@ class SchoolAggregateView(ListView):
                 else:
                     self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             else:
-                number_of_books = "N/A"
-                difference = "N/A"
-                cost_of_book = "N/A"
-                enough_books = "N/A"
+                number_of_books = 'None'
+                difference = 'N/A'
+                cost_of_book = 'N/A'
+                enough_books = 'N/A'
 
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {

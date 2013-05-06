@@ -69,7 +69,7 @@
                                                         {{ material.difference }}
                                                         </td>       
                                                     <td>
-                                                        <img class="enough-circle" src="{{ STATIC_URL }}images/circle{{ material.enough }}.png" alt="{{ material.enough }}">
+                                                        <img class="enough-circle" src="{{ STATIC_URL }}{% if material.enough == 'True' %}images/circleTrue.png{% elif material.enough == 'False' %}images/circleFalse.png{% else %}images/circleNA.png{% endif %}" alt="{{ material.enough }}">
                                                         </td>
                                                 </tr>
                                             {% endfor %}
@@ -109,9 +109,9 @@
                         <p>School type: {{ school.school_level.title }}</p>
                     {% endif %}
                     <p>Grades: {{ school.get_grade_range }}</p>
-
+                    <hr>
                     <div class="section row">
-                        <h4>Project articles</h4>
+                        <h6>Project articles</h6>
                         <ul>
                             <li>
                                 <a href="#">Article title</a>
@@ -126,8 +126,9 @@
                                 <span class="meta">Jane Smith, 5/15/13</span>
                             </li>
                     </div>
+                    <hr>
                     <div class="section row">
-                        <h4>Get Involved</h4>
+                        <h6>Get Involved</h6>
                         <p><a href="#">Link to our interesting blog post</a></p>
                     </div>
                 </div>
