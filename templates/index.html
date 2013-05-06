@@ -19,7 +19,7 @@
             <h2>Schools in Philadelphia</h2>
             {% for school in schools %}
                 <ul>
-                      <li><a href="/school/{{ item.school_code }}">{{ school.name.title }}</a></li>
+                      <li><a href="/school/{{ school.school_code }}">{{ school.name.title }}</a></li>
                 </ul>
                 <hr>
             {% endfor %}

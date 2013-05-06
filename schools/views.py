@@ -169,7 +169,7 @@ class SchoolAggregateView(ListView):
         if grade.likely_reading_curriculum:
             aggregate['materials']['reading'] = grade.reading_material_count()
         else:
-            aggregate['materials']['math'] = 0
+            aggregate['materials']['reading'] = 0
         for each_grade in grades:
             if each_grade == grade:
                 pass
