@@ -89,26 +89,25 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col four mobile-full">
+                <div class="col four mobile-full">      
                     <table>
+                        {% if school.school_level %}
+                            <tr>
+                                <td>School type:</td>
+                                <td>{{ school.school_level.title }}</td>
+                            </tr>      
+                        {% endif %}
                         <tr>
-                            <td>Number of students:</td>
-                            <td>{{ school_aggregate.students }}</td>
-                        </tr>
-                        <tr>
-                            <td>Number of common books in likely curriculum</td>
-                            <td>{{ school_aggregate.material_count }}</td>
-                        </tr>
-                        <tr>
-                            <td>Difference</td>
-                            <td>{{ school_aggregate.difference }}</td>
-                        </tr>
+                            <td>Grades:</td>
+                            <td>{{ school.get_grade_range }}</td>
+                        </tr>                        
                     </table>
-                    
-                    {% if school.school_level %}
-                        <p>School type: {{ school.school_level.title }}</p>
-                    {% endif %}
-                    <p>Grades: {{ school.get_grade_range }}</p>
+                    <div>Number of students:</div>
+                    <div class="number">{{ school_aggregate.students }}</div>
+                    <div>Number of common books in likely curriculum:</div>
+                    <div class="number">{{ school_aggregate.material_count }}</div>
+                    <div>Difference:</div>
+                    <div class="number">{{ school_aggregate.difference }}</div>
                     <hr>
                     <div class="section row">
                         <h6>Project articles</h6>

@@ -32,13 +32,15 @@ body {
   background-color: #fff;
 }
 
-.number {
-  width: 80px;
-  float: left;
-}
-
 .tablesorter th {
     cursor: pointer;
+}
+
+.number {
+  margin: .2em 0 .5em 0;
+  font-size: 31px;
+  font-weight: 100;
+  color: #00b5f9;
 }
 
 /* Headings */
@@ -148,3 +150,4 @@ table thead th {
 img {
   max-width: 100%;
 }
+
