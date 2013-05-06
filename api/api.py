@@ -35,12 +35,19 @@ class SchoolResource(ModelResource):
     class Meta:
         queryset = School.objects.all()
         resource_name = 'schools'
-        always_return_data = True
         allowed_methods = ['get']
-        filtering = {
-            'name': ('exact'),
-            'id': ('exact')
-        }
+        limit = 300
+        excludes = [
+            'city',
+            'grade_end',
+            'grade_start',
+            'phone',
+            'school_level',
+            'state',
+            'street_addr',
+            'website',
+            'zipcode'
+        ]
 
     def determine_format(self, request):
             return 'application/json'

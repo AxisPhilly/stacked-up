@@ -8,7 +8,7 @@
         setupAutoComplete(resp);
       },
       select: function(event, ui) {
-        console.log('hello');
+
       }
     });
 
@@ -21,7 +21,9 @@
       }
 
       $("#search").autocomplete({
-        source: sourceList
+        source: sourceList,
+        minLength: 2,
+        delay: 0
       });
     };
 
