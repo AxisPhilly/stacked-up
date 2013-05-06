@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, AnalysisIndexListView
+from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, AnalysisIndexListView, GradeCurriculumUse
 from schools.views import IndexListView, SchoolDetailView, SchoolsListView, SchoolCurriculaMatch, SchoolInventory, SchoolAggregateView
 
 from django.contrib import admin
@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('api.urls')),
     url(r'^school/', include('schools.urls'), name='school_listing'),
+    url(r'^gradecurriculum/(?P<id>(.+))/$',
+        GradeCurriculumUse.as_view()),
 
     # Analysis views
     url(r'^analysis/$',
