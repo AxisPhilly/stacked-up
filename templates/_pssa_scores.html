@@ -33,9 +33,10 @@
 </style>
 <script type="text/javascript">
   var app = {};
+  var K;
 
   app.grade = {{ current_grade }};
-  if(app.grade === 'K') { app.grade = 0 };
+  if(app.grade === K) { app.grade = 0 };
 
   $.ajax({
     url: '/api/v1/school_curricula/{{ school.pk }}/?format=json&grade=' + app.grade,
