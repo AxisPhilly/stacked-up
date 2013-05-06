@@ -154,6 +154,19 @@ class SchoolAggregateView(ListView):
             for grade_curriculum in cohort.associated_reading_curriculum.all():
                 self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id, grade_curriculum.curriculum.name)
 
+    def get_school_aggregate(self, school, students_in_grade, grade):
+        """
+            In this grade, we have x students, x books of the common materials, and x shortfall
+        """
+        aggregate = {}
+        aggregate['students'] = students_in_grade
+        aggregate['materials'] = {}
+        aggregate['materials']['math'] = grade.math_material_count()
+        aggregate['materials']['reading'] = grade.reading_material_count()
+        aggregate['material_count'] = (aggregate['materials']['math'] + aggregate['materials']['reading'])
+        aggregate['difference'] = aggregate['material_count'] - aggregate['students']
+        return aggregate
+
     def get_context_data(self, **kwargs):
         context = super(SchoolAggregateView, self).get_context_data(**kwargs)
         try:
@@ -161,13 +174,15 @@ class SchoolAggregateView(ListView):
         except KeyError:
             grade = self.school.grade_start
         cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
-        current = cohort_set.get(year_end=2013)
-        students_in_grade = current.number_of_students
+        current_cohort = cohort_set.get(year_end=2013)
+        current_grade = Grade.objects.get(school=self.school, grade_level=grade)
+        students_in_grade = current_cohort.number_of_students
         self.curriculum_list = {}
-        self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current)
-        self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current)
-        context['this_grade'] = Grade.objects.get(school=self.school, grade_level=grade)
+        self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current_cohort)
+        self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current_cohort)
+        context['current_grade'] = current_grade.human_grade
         context['grades'] = Grade.objects.filter(school=self.school)
+        context['school_aggregate'] = self.get_school_aggregate(self.school, students_in_grade, current_grade)
         context['curriculum_list'] = self.curriculum_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
