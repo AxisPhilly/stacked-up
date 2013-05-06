@@ -27,6 +27,7 @@ p {
     float: left;
     list-style: none;
     margin-top: 15px;
+    color: white;
   }
 
   .top-bar > .container > li + li {
