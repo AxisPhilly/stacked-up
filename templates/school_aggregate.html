@@ -93,13 +93,21 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col four mobile-full">            
-                    <div>Number of students:</div>
-                    <div class="number">{{ school_aggregate.students }}</div>
-                    <div>Number of common books in likely curriculum (reading and math):</div>
-                    <div class="number">{{ school_aggregate.material_count }}</div>
-                    <div>Difference (one book for every student in reading and math):</div>
-                    <div class="number">{{ school_aggregate.difference }}</div>
+                <div class="col four mobile-full">  
+                    <div class="school-totals mbm">
+                        <span class="tooltip" title="Total number of students in all grades at this school">
+                            Total Students at this school:
+                            <br>
+                            <b class="number">{{ school_aggregate.students }}</b>
+                        </span>
+                    </div>
+                    <div class="school-totals">
+                        <span class="tooltip" title="Total count of common learning material, in the most likely curriculum (for reading and math), for each grade at the school">
+                            Total approved book count:
+                            <br>
+                            <b class="number">{{ school_aggregate.material_count }}</b>
+                        </span>
+                    </div>
                     <hr>
                     <div class="section row">
                         <h6>Project articles</h6>
