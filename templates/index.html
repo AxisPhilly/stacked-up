@@ -21,8 +21,14 @@
       </div>
 
       <div class="section row">
-        <div class="col one-third mobile-full">
-          <h3>Schools with largest gap between common books and students</h3>
+        <div class="col three mobile-full">
+          <h3>Project articles</h3>
+          <a href="#">Article</a><br>
+          <a href="#">Article</a><br>
+          <a href="#">Article</a>
+        </div>
+        <div class="col three mobile-full">
+          <h3 class="tooltip" title="Schools with largest gap between common books and students">Schools with largest gaps</h3>
           <ol>
             {% for item in bottom_schools %}
               <li>
@@ -31,8 +37,8 @@
             {% endfor %}
           </ol>
         </div>
-        <div class="col one-third mobile-full">
-          <h3>Schools with smallest gap between common books and students</h3>
+        <div class="col three mobile-full">
+          <h3 class="tooltip" title="Schools with smallest gap between common books and students">Schools with smallest gaps</h3>
           <ol>
             {% for item in top_schools %}
               <li>
@@ -41,7 +47,7 @@
             {% endfor %}
           </ol>
         </div>
-        <div class="col one-third mobile-full">
+        <div class="col three mobile-full">
           <h3>Search for a school</h3>
           <div class="ui-widget">
             <label for="search">Search for a school: </label>
