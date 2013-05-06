@@ -5,6 +5,7 @@
     <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
     <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script> 
+    <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script> 
     <script>
       $(document).ready(function() 
         { 
@@ -14,7 +15,10 @@
           });
           $(".tablesorter").tablesorter({ 
             widgets: ['zebra'],
-          })          
+          });
+          $('.tooltip').tooltipster({
+            maxWidth: 250
+          });
         } 
       );    
     </script>
