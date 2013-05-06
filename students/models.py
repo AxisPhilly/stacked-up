@@ -28,22 +28,24 @@ class Grade(models.Model):
     """
     def math_material_count(self):
         count = 0
-        for m in self.likely_math_curriculum.necessary_materials.all():
-            try:
-                r = InventoryRecord.objects.get(material=m, school=self.school)
-                count += r.get_inventory_total()
-            except InventoryRecord.DoesNotExist:
-                pass
+        if self.likely_math_curriculum:
+            for m in self.likely_math_curriculum.necessary_materials.all():
+                try:
+                    r = InventoryRecord.objects.get(material=m, school=self.school)
+                    count += r.get_inventory_total()
+                except InventoryRecord.DoesNotExist:
+                    pass
         return count
 
     def reading_material_count(self):
         count = 0
-        for m in self.likely_reading_curriculum.necessary_materials.all():
-            try:
-                r = InventoryRecord.objects.get(material=m, school=self.school)
-                count += r.get_inventory_total()
-            except InventoryRecord.DoesNotExist:
-                pass
+        if self.likely_reading_curriculum:
+            for m in self.likely_reading_curriculum.necessary_materials.all():
+                try:
+                    r = InventoryRecord.objects.get(material=m, school=self.school)
+                    count += r.get_inventory_total()
+                except InventoryRecord.DoesNotExist:
+                    pass
         return count
 
 
@@ -78,7 +80,10 @@ class Cohort(models.Model):
     associated_math_curriculum = models.ManyToManyField(GradeCurriculum, related_name="math_cohort", null=True)
 
     def math_difference(self):
-        return self.grade.math_material_count() - self.number_of_students
+        return self.grade.math_material_count() / self.number_of_students
 
     def reading_difference(self):
-        return self.grade.reading_material_count() - self.number_of_students
+        return self.grade.reading_material_count() / self.number_of_students
+
+    def total_difference(self):
+        return (self.grade.reading_material_count() + self.grade.math_material_count()) / self.number_of_students

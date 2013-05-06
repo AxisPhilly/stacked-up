@@ -1,8 +1,8 @@
 {% include "header.html" %}
         <div class="container content-inner">
             <div class="section row">
-                <div class="twelve col mobile-full" id="breadcrumbs">
-                    <div><a href="/">Home</a>
+                <div class="three col mobile-full" id="breadcrumbs">
+                    <a href="/">&laquo; Back to Homepage</a>
                 </div>
                 <!-- AddThis Button BEGIN -->
                 <div class="addthis_toolbox addthis_default_style right">
@@ -69,7 +69,7 @@
                                                         {{ material.difference }}
                                                         </td>       
                                                     <td>
-                                                        <img class="enough-circle" src="{{ STATIC_URL }}images/circle{{ material.enough }}.png" alt="{{ material.enough }}">
+                                                        <img class="enough-circle" src="{{ STATIC_URL }}{% if material.enough == 'True' %}images/circleTrue.png{% elif material.enough == 'False' %}images/circleFalse.png{% else %}images/circleNA.png{% endif %}" alt="{{ material.enough }}">
                                                         </td>
                                                 </tr>
                                             {% endfor %}
@@ -89,29 +89,28 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col four mobile-full">
+                <div class="col four mobile-full">      
                     <table>
+                        {% if school.school_level %}
+                            <tr>
+                                <td>School type:</td>
+                                <td>{{ school.school_level.title }}</td>
+                            </tr>      
+                        {% endif %}
                         <tr>
-                            <td>Number of students:</td>
-                            <td>{{ school_aggregate.students }}</td>
-                        </tr>
-                        <tr>
-                            <td>Number of common books in likely curriculum</td>
-                            <td>{{ school_aggregate.material_count }}</td>
-                        </tr>
-                        <tr>
-                            <td>Difference</td>
-                            <td>{{ school_aggregate.difference }}</td>
-                        </tr>
+                            <td>Grades:</td>
+                            <td>{{ school.get_grade_range }}</td>
+                        </tr>                        
                     </table>
-                    
-                    {% if school.school_level %}
-                        <p>School type: {{ school.school_level.title }}</p>
-                    {% endif %}
-                    <p>Grades: {{ school.get_grade_range }}</p>
-
+                    <div>Number of students:</div>
+                    <div class="number">{{ school_aggregate.students }}</div>
+                    <div>Number of common books in likely curriculum (reading and math):</div>
+                    <div class="number">{{ school_aggregate.material_count }}</div>
+                    <div>Difference (one book for every student in reading and math):</div>
+                    <div class="number">{{ school_aggregate.difference }}</div>
+                    <hr>
                     <div class="section row">
-                        <h4>Project articles</h4>
+                        <h6>Project articles</h6>
                         <ul>
                             <li>
                                 <a href="#">Article title</a>
@@ -126,8 +125,9 @@
                                 <span class="meta">Jane Smith, 5/15/13</span>
                             </li>
                     </div>
+                    <hr>
                     <div class="section row">
-                        <h4>Get Involved</h4>
+                        <h6>Get Involved</h6>
                         <p><a href="#">Link to our interesting blog post</a></p>
                     </div>
                 </div>

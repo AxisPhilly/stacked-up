@@ -3,6 +3,7 @@ from vendors.models import InventoryRecord, NegotiatedPrice
 from curricula.models import GradeCurriculum
 from students.models import Grade, Cohort
 from django.views.generic import ListView
+from django.db.models import Q
 import simplejson as json
 
 
@@ -53,11 +54,7 @@ class SchoolInventory(ListView):
 
     context_object_name = "book_inventory"
     template_name = "analysis/school_inventory.html"
-
-    def get_queryset(self):
-        self.school = School.objects.get(school_code=self.kwargs['id'])
-        each_book = InventoryRecord.objects.filter(school=self.school).prefetch_related('material__publisher__group').order_by('material')
-        return each_book
+    queryset = School.objects.filter()
 
     def get_context_data(self, **kwargs):
         context = super(SchoolInventory, self).get_context_data(**kwargs)
@@ -115,6 +112,10 @@ class SchoolAggregateView(ListView):
         self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
         for material in grade_curriculum.necessary_materials.all():
             if all_books.filter(material=material).exists():
+                """
+                TODO: change all_books.filter(material=material)[0].get_inventory_total() to
+                number_of_books = all_books.get(material=material).get_inventory_total()
+                """
                 number_of_books = all_books.filter(material=material)[0].get_inventory_total()
                 enough_books = self.is_enough_books(number_of_books, students_in_grade)
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
@@ -128,10 +129,10 @@ class SchoolAggregateView(ListView):
                 else:
                     self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             else:
-                number_of_books = "N/A"
-                difference = "N/A"
-                cost_of_book = "N/A"
-                enough_books = "N/A"
+                number_of_books = 'None'
+                difference = 'N/A'
+                cost_of_book = 'N/A'
+                enough_books = 'N/A'
 
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {
@@ -154,17 +155,32 @@ class SchoolAggregateView(ListView):
             for grade_curriculum in cohort.associated_reading_curriculum.all():
                 self.get_materials_for_grade_curriculum(students_in_grade, 'reading', all_books, cohort, grade_curriculum.id, grade_curriculum.curriculum.name)
 
-    def get_school_aggregate(self, school, students_in_grade, grade):
+    def get_school_aggregate(self, school, students_in_grade, grade, grades):
         """
-            In this grade, we have x students, x books of the common materials, and x shortfall
+            In this school, we have x students, x books of the common materials, and x shortfall
         """
         aggregate = {}
         aggregate['students'] = students_in_grade
         aggregate['materials'] = {}
-        aggregate['materials']['math'] = grade.math_material_count()
-        aggregate['materials']['reading'] = grade.reading_material_count()
+        if grade.likely_math_curriculum:
+            aggregate['materials']['math'] = grade.math_material_count()
+        else:
+            aggregate['materials']['math'] = 0
+        if grade.likely_reading_curriculum:
+            aggregate['materials']['reading'] = grade.reading_material_count()
+        else:
+            aggregate['materials']['reading'] = 0
+        for each_grade in grades:
+            if each_grade == grade:
+                pass
+            else:
+                aggregate['students'] += Cohort.objects.get(grade=each_grade, year_start=2012).number_of_students
+                if each_grade.likely_math_curriculum:
+                    aggregate['materials']['math'] += each_grade.math_material_count()
+                if each_grade.likely_reading_curriculum:
+                    aggregate['materials']['reading'] += each_grade.reading_material_count()
         aggregate['material_count'] = (aggregate['materials']['math'] + aggregate['materials']['reading'])
-        aggregate['difference'] = aggregate['material_count'] - aggregate['students']
+        aggregate['difference'] = aggregate['material_count'] - aggregate['students'] * 2  # times two subjects
         return aggregate
 
     def get_context_data(self, **kwargs):
@@ -177,19 +193,14 @@ class SchoolAggregateView(ListView):
         current_cohort = cohort_set.get(year_end=2013)
         current_grade = Grade.objects.get(school=self.school, grade_level=grade)
         students_in_grade = current_cohort.number_of_students
+        grades = Grade.objects.filter(school=self.school)
         self.curriculum_list = {}
         self.get_grade_curricula_by_subject(students_in_grade, 'reading', context['curricula'], current_cohort)
         self.get_grade_curricula_by_subject(students_in_grade, 'math', context['curricula'], current_cohort)
         context['current_grade'] = current_grade.human_grade
-        context['grades'] = Grade.objects.filter(school=self.school)
-        context['school_aggregate'] = self.get_school_aggregate(self.school, students_in_grade, current_grade)
+        context['grades'] = grades
+        context['school_aggregate'] = self.get_school_aggregate(self.school, students_in_grade, current_grade, grades)
         context['curriculum_list'] = self.curriculum_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
         return context
-
-
-class IndexListView(ListView):
-    context_object_name = "schools"
-    template_name = "index.html"
-    model = School

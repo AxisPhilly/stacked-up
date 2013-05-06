@@ -1,12 +1,9 @@
 {% include "header.html" %} 
     <div class="container content-inner">
       <div class="section row">
-        <div class="ui-widget left">
-          <label for="search">Search for a school: </label>
-          <input id="search"/>
-        </div>
+        <h1 class="left mbn">Project Title</h1>
         <!-- AddThis Button BEGIN -->
-        <div class="addthis_toolbox addthis_default_style right">
+        <div class="addthis_toolbox addthis_default_style right mtl">
           <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
           <a class="addthis_button_tweet"></a>
           <a class="addthis_button_pinterest_pinit"></a>
@@ -14,21 +11,44 @@
         </div>
         <!-- AddThis Button END -->
       </div>
+
+      <div class="row section">
+        <img src="/static/images/school_library_seniwati.jpg">
+        <div class="twelve explainer-wrap">
+          <p class="explainer mobile-full">Explaining the project, lead-in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a metus dolor, non molestie ipsum. Nulla nulla dolor, sagittis non tempor sit amet, placerat sit amet nibh. Morbi consectetur augue sed dui bibendum euismod tempus nisi cursus.</p>
+        </div>
+        <p class="caption">Photo by <a href="http://www.flickr.com/photos/seniwati/">seniwati</a> under Creative Commons license</p>
+      </div>
+
       <div class="section row">
-        <div class="twelve columns mobile-full">
-            <h2>Schools in Philadelphia</h2>
-            {% regroup schools by school_level as school_list %}
-            {% for school in school_list %}
-              {% if school.grouper.title %}
-                <h3>{{ school.grouper.title }}</h3>
-                <ul>
-                    {% for item in school.list %}
-                      <li><a href="/school/{{ item.school_code }}">{{ item.name.title }}</a></li>
-                    {% endfor %}
-                </ul>
-                <hr>
-              {% endif %}
+        <div class="col one-third mobile-full">
+          <h3>Schools with largest gap between common books and students</h3>
+          <ol>
+            {% for item in bottom_schools %}
+              <li>
+                <a href="school/{{ item.school.school_code }}">{{ item.school.name}}</a>
+              </li>
             {% endfor %}
+          </ol>
+        </div>
+        <div class="col one-third mobile-full">
+          <h3>Schools with smallest gap between common books and students</h3>
+          <ol>
+            {% for item in top_schools %}
+              <li>
+                <a href="school/{{ item.school.school_code }}">{{ item.school.name}}</a>
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
+        <div class="col one-third mobile-full">
+          <h3>Search for a school</h3>
+          <div class="ui-widget">
+            <label for="search">Search for a school: </label>
+            <input id="search"/>
+          </div>
+          <p>Start typing the name of a school and choose from the filtered options 
+            to find what you're looking for</p>
         </div>
       </div>
     </div>          

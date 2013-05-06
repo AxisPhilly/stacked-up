@@ -1,13 +1,10 @@
-.enough-circle {
-  width: 16px;
-  height: 16px;
+body {
+  font-family: "proxima-nova", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  font-size: 16px;
 }
 
-.block {
-}
-
-.note {
-  color: #aaa;
+img {
+  max-width: 100%;
 }
 
 p {
@@ -16,29 +13,77 @@ p {
   color: #555;
 }
 
-body {
-  font-family: "proxima-nova", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
-  font-size: 16px;
+.cf:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 #header {
   background-color: black; 
-  height: 4em; 
-  margin-bottom: 2em
+  margin-bottom: 1em
+}
+  .top-bar > .container > li {
+    float: left;
+    list-style: none;
+    margin-top: 15px;
+    color: white;
+  }
+
+  .top-bar > .container > li + li {
+    margin-left: 10px;
+  }
+
+  .top-bar > .container > li > a {
+    color: white;
+    padding: 0 8px;
+  }
+
+  .top-bar .container > .menu-item a:after {
+    content: '/';
+    float: right;
+    font-weight: normal;
+    padding-left: 8px;
+  }
+
+.explainer-wrap {
+  background: #1e1e1e;
+  background: rgba(0,0,0,.4);
+  position: absolute;
+  bottom: 5px;
+} 
+
+  .explainer {
+    color: #fff;
+    margin: 20px;
+  }
+
+.caption {
+  position: absolute;
+  bottom: -5px;
+  right: 10px;
+  font-size: 10px;
 }
 
-/* Tables */
-.odd {
-  background-color: #fff;
+.caption, .caption a {
+  color: #e1e1e1 !important;
+}
+
+
+.enough-circle {
+  width: 16px;
+  height: 16px;
+}
+
+.note {
+  color: #aaa;
 }
 
 .number {
-  width: 80px;
-  float: left;
-}
-
-.tablesorter th {
-    cursor: pointer;
+  margin: .2em 0 .5em 0;
+  font-size: 31px;
+  font-weight: 100;
+  color: #00b5f9;
 }
 
 /* Headings */
@@ -78,6 +123,8 @@ h5,
 h6,
 .h6 {
   font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;  
 }
 
 #headline {
@@ -135,10 +182,123 @@ table th, table td {
 }
 
 table th {
-  border-top: 0px dotted #ddd;
+  border-top: 0 dotted #ddd;
 }
 
 table thead th {
   color: #00b5f9;
   font-weight: normal;
 }
+
+.odd {
+  background-color: #fff;
+}
+
+.number {
+  width: 80px;
+  float: left;
+}
+
+.tablesorter th {
+    cursor: pointer;
+}
+
+/* Social icons from Ally theme */
+
+@font-face {
+  font-family: "SocialFoundicons";
+  src: url("/static/fonts/social_foundicons.eot");
+  src: url("/static/fonts/social_foundicons.eot?#iefix") format("embedded-opentype"), url("../fonts/social_foundicons.woff") format("woff"), url("../fonts/social_foundicons.ttf") format("truetype"), url("../fonts/social_foundicons.svg#SocialFoundicons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class*="social-foundicon-"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+/* line 17, ../sass/social_foundicons.scss */
+[class*="social-foundicon-"]:before {
+  font-family: "SocialFoundicons";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+}
+
+.social-foundicon-rss:before {
+  content: "\f002";
+}
+
+/* line 6, ../sass/_social_settings.scss */
+.social-foundicon-facebook:before {
+  content: "\f003";
+}
+
+/* line 6, ../sass/_social_settings.scss */
+.social-foundicon-twitter:before {
+  content: "\f004";
+}
+
+/* Spacing sheet */
+/*
+// Source: Nicole Sullivan, https://github.com/stubbornella/oocss
+// Spacing helpers
+// p,m = padding,margin
+// a,t,r,b,l,h,v = all,top,right,bottom,left,horizontal,vertical
+// s,m,l,t,n = small(5px),medium(10px),tertiary(15px),large(20px),none(0px)
+*/
+
+.ptn,.pvn,.pan{padding-top:0px !important}
+.pts,.pvs,.pas{padding-top:5px !important}
+.ptm,.pvm,.pam{padding-top:10px !important}
+.ptt,.pvt,.pat{padding-top:15px !important}
+.ptl,.pvl,.pal{padding-top:20px !important}
+
+.prn,.phn,.pan{padding-right:0px !important}
+.prs,.phs,.pas{padding-right:5px !important}
+.prm,.phm,.pam{padding-right:10px !important}
+.prt,.pht,.pat{padding-right:15px !important}
+.prl,.phl,.pal{padding-right:20px !important}
+
+.pbn,.pvn,.pan{padding-bottom:0px !important}
+.pbs,.pvs,.pas{padding-bottom:5px !important}
+.pbm,.pvm,.pam{padding-bottom:10px !important}
+.pbt,.pvt,.pat{padding-bottom:15px !important}
+.pbl,.pvl,.pal{padding-bottom:20px !important}
+
+.pln,.phn,.pan{padding-left:0px !important}
+.pls,.phs,.pas{padding-left:5px !important}
+.plm,.phm,.pam{padding-left:10px !important}
+.plt,.pht,.pat{padding-left:15px !important}
+.pll,.phl,.pal{padding-left:20px !important}
+
+.mtn,.mvn,.man{margin-top:0px !important}
+.mts,.mvs,.mas{margin-top:5px !important}
+.mtm,.mvm,.mam{margin-top:10px !important}
+.mtt,.mvt,.mat{margin-top:15px !important}
+.mtl,.mvl,.mal{margin-top:20px !important}
+
+.mrn,.mhn,.man{margin-right:0px !important}
+.mrs,.mhs,.mas{margin-right:5px !important}
+.mrm,.mhm,.mam{margin-right:10px !important}
+.mrt,.mht,.mat{margin-right:15px !important}
+.mrl,.mhl,.mal{margin-right:20px !important}
+
+.mbn,.mvn,.man{margin-bottom:0px !important}
+.mbs,.mvs,.mas{margin-bottom:5px !important}
+.mbm,.mvm,.mam{margin-bottom:10px !important}
+.mbt,.mvt,.mat{margin-bottom:15px !important}
+.mbl,.mvl,.mal{margin-bottom:20px !important}
+
+.mln,.mhn,.man{margin-left:0px !important}
+.mls,.mhs,.mas{margin-left:5px !important}
+.mlm,.mhm,.mam{margin-left:10px !important}
+.mlt,.mht,.mat{margin-left:15px !important}
+.mll,.mhl,.mal{margin-left:20px !important}
