@@ -1,5 +1,10 @@
 {% include "header.html" %}
     <div class="container content-inner">
+      <div class="section row">
+        <div class="three col mobile-full" id="breadcrumbs">
+            <a href="/school/{{ school.school_code }}">&#8592; Back to School</a>
+        </div>
+      </div>
       <div class="section row">       
                     <h4>{{ school.name.title }} | All Recorded Inventory</h4>
                     {% if inventory %}                 

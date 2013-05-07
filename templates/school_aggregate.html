@@ -27,6 +27,7 @@
                         {% for grade in grades %}
                             <a href="/school/{{school.school_code}}/{{grade.grade_level}}">Grade {{ grade.human_grade }}</a>
                         {% endfor %}
+                        <a href="/school/inventory/{{ school.school_code }}">View all inventory</a>
                     </div>
                     <div>
                         {% if curriculum_list %}                    
