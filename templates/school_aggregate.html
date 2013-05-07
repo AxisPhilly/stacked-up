@@ -89,7 +89,7 @@
                                             </tbody>
                                         </table>
                                         <div class="block">
-                                            <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at Benjamin B. Comegys School with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
+                                            <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
                                             <hr>
                                         </div>
                                     {% endfor %}
