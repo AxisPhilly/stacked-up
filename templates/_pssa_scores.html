@@ -1,6 +1,9 @@
-<strong>PSSA Scores</strong>
-<div class="scores-container" id="reading-scores"></div>
-<div class="scores-container" id="math-scores"></div>
+<div class="scores-container" id="reading-scores">
+  <strong>PSSA Reading Scores for Grade {{ current_grade }}</strong>
+</div>
+<div class="scores-container" id="math-scores">
+  <strong>PSSA Math Scores for Grade {{ current_grade }}</strong>
+</div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <style>
   .year {
@@ -37,6 +40,7 @@
 
   app.grade = {{ current_grade }};
   if(app.grade === K) { app.grade = 0 };
+  if(app.grade === Pre-K) { app.grade = -1 };
 
   $.ajax({
     url: '/api/v1/school_curricula/{{ school.pk }}/?format=json&grade=' + app.grade,
