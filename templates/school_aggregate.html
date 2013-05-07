@@ -22,12 +22,12 @@
                     <p>{{ school.name.title }} is a {{ school.school_level.title }}, located at {{ school.street_addr.title }}, with grades {{ school.get_grade_range }}. It is {% if school.school_type == "Empowerment" %}{% else %}not{% endif %} an Empowerment School.</p>    
                     <hr>
                     <h4>Displaying curriculum details for Grade {{ current_grade }}</h4>
-<!--                     <div class="grade-listing mbm">
+                    <div class="grade-listing mbm">
                         <h6>View more grades at this school:</h6>
                         {% for grade in grades %}
                             <a href="/school/{{school.school_code}}/{{grade.grade_level}}">Grade {{ grade.human_grade }}</a>
                         {% endfor %}
-                    </div> -->
+                    </div>
                     <div>
                         {% if curriculum_list %}                    
                             {% for subject, value in curriculum_list.items %}
