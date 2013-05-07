@@ -1,5 +1,5 @@
 {% include "header.html" %}
-    <div class="container content-inner">
+    <div class="container content-inner" id="inventory">
       <div class="section row">
         <div class="three col mobile-full" id="breadcrumbs">
             <a href="/school/{{ school.school_code }}">&#8592; Back to School</a>
@@ -10,60 +10,60 @@
                     {% if inventory %}                 
                         <table class="tablesorter">
                             <thead>
-                                <tr>            
+                                <tr>
+                                    <th class="two">
+                                        ISBN
+                                    </th>
                                     <th class="three">
                                         Title
                                     </th>                           
                                     <th class="two">
                                         Publisher
                                     </th>
-                                    <th>
+                                    <th class="numeric">
                                         On Site
                                     </th>                               
-                                    <th>
+                                    <th class="numeric">
                                         Student Home
                                     </th>   
-                                    <th>
+                                    <th class="numeric">
                                         Student Class
                                     </th>       
-                                    <th>
+                                    <th class="numeric">
                                         Stolen
-                                    </th>    
-                                    <th>
+                                    </th>
+                                    <th class="numeric">
                                         Unusable
-                                    </th>                                                                                    
-                                    <th class="two">
-                                        ISBN
-                                    </th>           
+                                    </th>
                                 </tr> 
                             </thead>
                             <tbody>  
                                 {% for book in inventory %}
                                 <tr>
                                     <td>
-                                        <a href="/analysis/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
+                                        {{ book.material.isbn }}
+                                    </td>
+                                    <td>
+                                        {{ book.material.title }}
                                     </td>   
                                     <td>
                                         {{ book.material.publisher.name }}
                                     </td>                       
-                                    <td>
+                                    <td class="numeric">
                                         {{ book.qty_onsite }}
                                     </td>       
-                                    <td>
+                                    <td class="numeric">
                                         {{ book.qty_to_student_home }}
                                     </td>
-                                    <td>
+                                    <td class="numeric">
                                         {{ book.qty_to_student_class }}
                                     </td>        
-                                    <td>
+                                    <td class="numeric">
                                         {{ book.qty_lost_stolen }}
                                     </td>                  
-                                    <td>
+                                    <td class="numeric">
                                         {{ book.qty_unusable }}
                                     </td>                                                                           
-                                    <td>
-                                        {{ book.material.isbn }}
-                                    </td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
