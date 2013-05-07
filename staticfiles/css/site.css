@@ -253,6 +253,10 @@ table thead th {
     cursor: pointer;
 }
 
+.numeric {
+  text-align: center;
+}
+
 .credits {
   background: #eeeeee;
   margin-top: 5em;
@@ -380,3 +384,16 @@ table thead th {
   }
 }
 
+@media print {
+  #header, #inventory {
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+  #inventory #breadcrumbs {
+    display: none;
+  }
+  #inventory a { 
+    color: #222;
+    text-decoration: none;
+  }
+}

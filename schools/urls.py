@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url
-from .views import SchoolsListView, SchoolAggregateView
+from .views import SchoolAggregateView, SchoolInventory
 
 urlpatterns = patterns('',
-    url(r'^$',
-        SchoolsListView.as_view()),
+    url(r'^inventory/(?P<id>(.+))/$',
+        SchoolInventory.as_view()),
     url(r'^(?P<id>(.+))/(?P<grade>(.+))/$',
         SchoolAggregateView.as_view()),
     url(r'^(?P<id>(.+))/$',

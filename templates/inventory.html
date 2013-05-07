@@ -1,0 +1,79 @@
+{% include "header.html" %}
+    <div class="container content-inner" id="inventory">
+      <div class="section row">
+        <div class="three col mobile-full" id="breadcrumbs">
+            <a href="/school/{{ school.school_code }}">&#8592; Back to School</a>
+        </div>
+      </div>
+      <div class="section row">       
+                    <h4>{{ school.name.title }} | All Recorded Inventory</h4>
+                    {% if inventory %}                 
+                        <table class="tablesorter">
+                            <thead>
+                                <tr>
+                                    <th class="two">
+                                        ISBN
+                                    </th>
+                                    <th class="three">
+                                        Title
+                                    </th>                           
+                                    <th class="two">
+                                        Publisher
+                                    </th>
+                                    <th class="numeric">
+                                        On Site
+                                    </th>                               
+                                    <th class="numeric">
+                                        Student Home
+                                    </th>   
+                                    <th class="numeric">
+                                        Student Class
+                                    </th>       
+                                    <th class="numeric">
+                                        Stolen
+                                    </th>
+                                    <th class="numeric">
+                                        Unusable
+                                    </th>
+                                </tr> 
+                            </thead>
+                            <tbody>  
+                                {% for book in inventory %}
+                                <tr>
+                                    <td>
+                                        {{ book.material.isbn }}
+                                    </td>
+                                    <td>
+                                        {{ book.material.title }}
+                                    </td>   
+                                    <td>
+                                        {{ book.material.publisher.name }}
+                                    </td>                       
+                                    <td class="numeric">
+                                        {{ book.qty_onsite }}
+                                    </td>       
+                                    <td class="numeric">
+                                        {{ book.qty_to_student_home }}
+                                    </td>
+                                    <td class="numeric">
+                                        {{ book.qty_to_student_class }}
+                                    </td>        
+                                    <td class="numeric">
+                                        {{ book.qty_lost_stolen }}
+                                    </td>                  
+                                    <td class="numeric">
+                                        {{ book.qty_unusable }}
+                                    </td>                                                                           
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>No inventory</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>               
+{% include "footer.html" %}
