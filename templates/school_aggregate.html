@@ -32,6 +32,9 @@
                         {% if curriculum_list %}                    
                             {% for subject, value in curriculum_list.items %}
                                 <h3 class="subject-title">{{ subject.title }}</h3>
+                                <div class="subject-intro">
+                                    <div class="scores-container" id="{{ subject }}-scores"></div>
+                                </div>
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
                                     <div class="block">
@@ -100,9 +103,6 @@
                     </div>
                 </div>
                 <div class="col four mobile-full">  
-                    <div>
-                      {% include "_pssa_scores.html" %}
-                    </div>
                     <div class="school-totals mbm">
                         <span class="tooltip" title="Total number of students in all grades at this school">
                             Total Students at this school:
@@ -142,4 +142,4 @@
                 </div>
             </div>
         </div>
-{% include "footer.html" %}
+{% include "_footer_school.html" %}

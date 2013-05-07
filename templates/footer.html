@@ -2,28 +2,14 @@
       A project of <a href="http://axisphilly.org">AxisPhilly</a>. 
       <a href="https://github.com/AxisPhilly/sdp_curricula">View the source on Github</a>.
     </div>
+
     <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
     <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script> 
     <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script> 
-    <script>
-      $(document).ready(function() 
-        { 
-          $("#matched-grade-curricula").tablesorter({ 
-            widgets: ['zebra'],
-            sortList: [[2,0],[1,0],[4,0]]        
-          });
-          $(".tablesorter").tablesorter({ 
-            widgets: ['zebra'],
-          });
-          $('.tooltip').tooltipster({
-            maxWidth: 250
-          });
-        } 
-      );    
-    </script>
-    {% include "_search.html" %}
+    <script src="{{ STATIC_URL }}js/site.js"></script> 
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, "ui_click": true};</script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5182ce4b100f38d0"></script>
+    {% block scripts %}{% endblock %}
     </body>
 </html>
