@@ -34,7 +34,8 @@ app.chartMapping = {
 app.createChart = function(scores, subject) {
   var mapping = app.chartMapping[subject];
   var $container = $('#' + subject + '-scores.scores-container');
-  if (scores.length > 1) {
+  var has_scores = scores.length > 1
+  if (has_scores) {
     $container.append('<strong>PSSA scores in ' + subject + ' for this grade at this school for the past 4 years</strong>');
   }
   for(var i=0; i<scores.length; i++) {
@@ -59,7 +60,9 @@ app.createChart = function(scores, subject) {
       "</div>";
     $container.append(html);
   }
-  $container.append('<hr>')
+  if (has_scores) { 
+    $container.append('<hr>');
+  }
   $('.tooltip').tooltipster({
       maxWidth: 250
     });
