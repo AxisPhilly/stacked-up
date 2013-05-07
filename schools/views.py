@@ -5,6 +5,7 @@ from students.models import Grade, Cohort
 from core.models import SchoolAggregate
 from django.views.generic import ListView
 import simplejson as json
+from django.shortcuts import get_object_or_404
 
 
 class SchoolCurriculaMatch(ListView):
@@ -50,11 +51,31 @@ class SchoolCurriculaMatch(ListView):
         return context
 
 
-class SchoolInventory(ListView):
+class AnalysisSchoolInventory(ListView):
 
     context_object_name = "book_inventory"
     template_name = "analysis/school_inventory.html"
-    queryset = School.objects.filter()
+
+    def get_queryset(self):
+        self.school = School.objects.get(school_code=self.kwargs['id'])
+        inventory = InventoryRecord.objects.filter(school=self.school)
+        return inventory
+
+    def get_context_data(self, **kwargs):
+        context = super(AnalysisSchoolInventory, self).get_context_data(**kwargs)
+        context['school'] = self.school
+        return context
+
+
+class SchoolInventory(ListView):
+
+    context_object_name = "inventory"
+    template_name = "inventory.html"
+
+    def get_queryset(self):
+        self.school = get_object_or_404(School, school_code=self.kwargs['id'])
+        inventory = InventoryRecord.objects.select_related('material').filter(school=self.school)
+        return inventory
 
     def get_context_data(self, **kwargs):
         context = super(SchoolInventory, self).get_context_data(**kwargs)
@@ -91,7 +112,7 @@ class SchoolAggregateView(ListView):
     template_name = "school_aggregate.html"
 
     def get_queryset(self):
-        self.school = School.objects.get(school_code=self.kwargs['id'])
+        self.school = get_object_or_404(School, school_code=self.kwargs['id'])
         all_books = InventoryRecord.objects.select_related('material').filter(school=self.school)
         return all_books
 
@@ -171,7 +192,7 @@ class SchoolAggregateView(ListView):
             grade = self.kwargs['grade']
         except KeyError:
             grade = self.school.grade_start
-        cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=self.school, grade_level=grade))
+        cohort_set = Cohort.objects.filter(grade=get_object_or_404(Grade, school=self.school, grade_level=grade))
         current_cohort = cohort_set.get(year_end=2013)
         current_grade = Grade.objects.get(school=self.school, grade_level=grade)
         students_in_grade = current_cohort.number_of_students

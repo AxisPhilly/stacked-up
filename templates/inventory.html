@@ -1,0 +1,74 @@
+{% include "header.html" %}
+    <div class="container content-inner">
+      <div class="section row">       
+                    <h4>{{ school.name.title }} | All Recorded Inventory</h4>
+                    {% if inventory %}                 
+                        <table class="tablesorter">
+                            <thead>
+                                <tr>            
+                                    <th class="three">
+                                        Title
+                                    </th>                           
+                                    <th class="two">
+                                        Publisher
+                                    </th>
+                                    <th>
+                                        On Site
+                                    </th>                               
+                                    <th>
+                                        Student Home
+                                    </th>   
+                                    <th>
+                                        Student Class
+                                    </th>       
+                                    <th>
+                                        Stolen
+                                    </th>    
+                                    <th>
+                                        Unusable
+                                    </th>                                                                                    
+                                    <th class="two">
+                                        ISBN
+                                    </th>           
+                                </tr> 
+                            </thead>
+                            <tbody>  
+                                {% for book in inventory %}
+                                <tr>
+                                    <td>
+                                        <a href="/analysis/learningmaterial/{{ book.material.isbn }}/">{{ book.material.title }}</a>
+                                    </td>   
+                                    <td>
+                                        {{ book.material.publisher.name }}
+                                    </td>                       
+                                    <td>
+                                        {{ book.qty_onsite }}
+                                    </td>       
+                                    <td>
+                                        {{ book.qty_to_student_home }}
+                                    </td>
+                                    <td>
+                                        {{ book.qty_to_student_class }}
+                                    </td>        
+                                    <td>
+                                        {{ book.qty_lost_stolen }}
+                                    </td>                  
+                                    <td>
+                                        {{ book.qty_unusable }}
+                                    </td>                                                                           
+                                    <td>
+                                        {{ book.material.isbn }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>No inventory</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>               
+{% include "footer.html" %}
