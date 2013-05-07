@@ -39,11 +39,11 @@
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
                                     <div class="block">
-                                        <span class="note">This school may use the approved curriculum:</span>
-                                        <h4 class="curriculum-title">{{ title }}</h4>
+                                        <div class="note">This school may use the approved curriculum:</div>
+                                        <h4 class="curriculum-title left">{{ title }}</h4>
                                         {% if grade_curriculum.likely_curriculum %}
-                                            <h5 class="curriculum-use">
-                                                <img class="left mrm" src="{{ STATIC_URL }}images/book-icon-blue.png" height="20"> Curriculum with greatest likelihood of use based on inventory records
+                                            <h5 class="curriculum-use left">
+                                                <img class="tooltip left mtm mlm" src="{{ STATIC_URL }}images/book-icon-blue.png" height="20" title="Curriculum with greatest likelihood of use based on inventory records">
                                             </h5>
                                         {% endif %}
                                     </div>
