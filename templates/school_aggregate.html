@@ -2,9 +2,6 @@
 {% include "header.html" %}
         <div class="container content-inner">
             <div class="section row bar-top">
-                <div class="three col mobile-full" id="breadcrumbs">
-                    <a href="/">&#8592; Back to Homepage</a>
-                </div>
                 <!-- AddThis Button BEGIN -->
                 <div class="addthis_toolbox addthis_default_style right">
                 <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -19,19 +16,16 @@
             <h1 id="headline">{{ school.name.title }}</h1>
             <div class="section row">
                 <div class="col eight mobile-full" id="graph-sidebar">        
-                    <p>{{ school.name.title }} is a {{ school.school_level.title }}, located at {{ school.street_addr.title }}, with grades {{ school.get_grade_range }}. It is {% if school.school_type == "Empowerment" %}{% else %}not{% endif %} an Empowerment School.</p>    
+                    <p>Below is inventory data about the reading and math programs at {{ school.name.title }}, an {{ school.school_level.title }} located at {{ school.street_addr.title }} Select a grade and compare the school's inventory with the ideal number of books for that curriculum. PSSA test scores will be displayed for grades 4, 6, and 9 [not true]. The inventory data was collected from internal something data. Read more about our <a href="#">methodology</a>.</p>    
                     <hr>
-                    <h4>Displaying curriculum details for Grade {{ current_grade }}</h4>
-                    <div class="grade-listing mbm">
-                        <h6>View more grades at this school:</h6>
-                        {% for grade in grades %}
-                            <a href="/school/{{school.school_code}}/{{grade.grade_level}}">Grade {{ grade.human_grade }}</a>
-                        {% endfor %}
+                    <div class="grade-listing">
+                        <h6 id="inventory-selector">Inventory for Grade: {% for grade in grades %}<a href="/school/{{school.school_code}}/{{grade.grade_level}}">{{ grade.human_grade }}</a>
+                        {% endfor %}</h6>
                     </div>
                     <div>
                         {% if curriculum_list %}                    
                             {% for subject, value in curriculum_list.items %}
-                                <h3 class="subject-title">{{ subject.title }}</h3>
+                                <h2 class="subject-title">{{ subject.title }}</h2>
                                 <div class="subject-intro">
                                     <div class="scores-container" id="{{ subject }}-scores"></div>
                                 </div>
@@ -39,12 +33,7 @@
                                     {% for title, grade_curriculum in value.curricula.items %}
                                     <div class="block">
                                         <span class="note">This school may use the approved curriculum:</span>
-                                        <h4 class="curriculum-title">{{ title }}</h4>
-                                        {% if grade_curriculum.likely_curriculum %}
-                                            <h5 class="curriculum-use">
-                                                <img class="left mrm" src="{{ STATIC_URL }}images/book-icon-blue.png" height="20"> Curriculum with greatest likelihood of use based on inventory records
-                                            </h5>
-                                        {% endif %}
+                                        <h4 class="curriculum-title">{% if grade_curriculum.likely_curriculum %}<img class="left mrm tooltip" src="{{ STATIC_URL }}images/book-icon-blue.png" height="20" style="margin-top: 4px" title="Based on inventory records, this curriculum is most likely in use.">{% endif %}{{ title }}</h4>
                                     </div>
                                     <table class="tablesorter">
                                         <thead>
@@ -89,7 +78,7 @@
                                             </tbody>
                                         </table>
                                         <div class="block">
-                                            <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at Benjamin B. Comegys School with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
+                                            <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
                                             <hr>
                                         </div>
                                     {% endfor %}
@@ -105,16 +94,14 @@
                 <div class="col four mobile-full">  
                     <div class="school-totals mbm">
                         <span class="tooltip" title="Total number of students in all grades at this school">
-                            Total Students at this school:
-                            <br>
                             <div class="number">{{ school_aggregate.students }}</div>
+                            total students at this school
                         </span>
                     </div>
                     <div class="school-totals">
                         <span class="tooltip" title="Total count of common learning material, in the most likely curriculum (for reading and math), for each grade at the school">
-                            Total approved book count:
-                            <br>
-                            <div class="number">{{ school_aggregate.material_count }}</div>
+                            <div class="number">{{ school_aggregate.material_count }}</div>                            
+                            total approved book count
                         </span>
                     </div>
                     <hr>

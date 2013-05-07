@@ -1,6 +1,6 @@
 body {
   font-family: "proxima-nova", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 img {
@@ -10,7 +10,8 @@ img {
 p {
   font-family: "minion-pro", georgia, serif;
   font-size: 18px;
-  color: #555;
+  color: #444;
+  line-height: 1.4em;
 }
 
 .cf {
@@ -24,8 +25,11 @@ p {
 }
 
 #header {
-  background-color: black; 
-  margin-bottom: 3em
+  background-color: #fff; 
+  font-size: 18px;
+  margin-bottom: .1em;
+  border-bottom: 2px solid #eee;
+  padding: 16px 0 12px 0;
 }
   .top-bar > .container > li {
     float: left;
@@ -35,11 +39,11 @@ p {
   }
 
   .top-bar > .container > li + li {
-    margin-left: 10px;
+    margin-left: 8px;
   }
 
   .top-bar > .container > li > a {
-    color: white;
+    color: #7b7a7c;
     padding: 0 8px;
   }
 
@@ -49,6 +53,10 @@ p {
     font-weight: normal;
     padding-left: 8px;
   }
+
+#inventory-selector {
+  margin-bottom: 0;
+}
 
 .explainer-wrap {
   background: #1e1e1e;
@@ -91,7 +99,7 @@ p {
   line-height: 160%;
 }
 .number {
-  margin: .2em 0 .5em 0;
+  margin: .5em 0 .1em 0;
   font-size: 31px;
   font-weight: normal;
   color: #00b5f9;
@@ -106,7 +114,7 @@ h4,
 h5,
 h6 {
   margin: 0;
-  color: #333333;
+  color: #222222;
   line-height: 1.2em;
   margin-bottom: 1em;  
   font-weight: normal;
@@ -115,6 +123,7 @@ h1,
 .h1 {
   font-size: 49px;
   margin-bottom: 0;
+  font-weight: bold;
 }
 h2,
 .h2 {
@@ -134,13 +143,26 @@ h5,
 }
 h6,
 .h6 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  text-transform: uppercase;  
+  text-transform: normal;
+}
+
+#project-header {
+  margin-bottom: 4px;  
+}
+
+#project-sub-header {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+#first-menu-item {
+  margin-left: 60px;
 }
 
 #headline {
-	font-family: "calluna", "minion pro", "Times New Roman", times, serif;
+	font-family: "minion pro", "Times New Roman", times, serif;
 }
 
 .curriculum-title {
@@ -153,10 +175,13 @@ h6,
   font-size: 15px;
 }
 
+.menu-item {
+  margin-top: .2em;
+}
+
 .subject-title {
   width: 100%;
-  background-color: #eee;
-  padding: 14px;
+  margin-bottom: .5em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -169,6 +194,11 @@ h6,
   }
 .grade-listing h6 + a:before{
   content:none;
+}
+
+.grade-listing {
+  background-color: #f3f3f3; padding: 12px 4px 8px 10px;
+  margin-bottom: 2em;
 }
 
 /* Columns */
@@ -193,7 +223,7 @@ a:hover {
   text-decoration: none;
 }
 a:active {
-  color: #333333;
+  color: #222222;
 }
 
 /* Table */
