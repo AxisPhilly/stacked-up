@@ -64,10 +64,10 @@
                                                 <td>
                                                     {{ material.total_copies }}
                                                     </td>       
-                                                <td>
-                                                    {{ material.needed }}
-                                                    </td>       
-                                                <td>
+                                                <td class="needed-material">
+                                                    <input value="{{ material.needed }}" type="number">
+                                                </td>       
+                                                <td class="material-difference">
                                                     {{ material.difference }}
                                                     </td>       
                                                 <td>

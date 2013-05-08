@@ -1,3 +1,11 @@
+if(typeof(String.prototype.trim) === "undefined")
+{
+    String.prototype.trim = function()
+    {
+        return String(this).replace(/^\s+|\s+$/g, '');
+    };
+}
+
 var app = app || {};
 
 app.displayCharts = function(school_pk, grade) {
@@ -128,3 +136,24 @@ $(document).ready(function() {
   });
 
 });
+
+// Create data binding for "change assumptions" feature
+
+$('.needed-material input').on('change', function() {
+  var needed = this;
+  var calc = Number(needed.value - needed.defaultValue);
+  console.log(calc.typeof);
+  var difference = $(needed).parent().next('.material-difference');
+  var originalDifference = difference.html().trim();
+  if(originalDifference === "N/A") {
+    originalDifference = 0;
+    console.log('cats');
+  }
+  var compute = Number(originalDifference) - calc;
+  difference.html(compute);
+  console.log (x=originalDifference);
+});
+// In a row context
+// Get the needed materials
+// When it changes, bind the change to the difference area
+// TODO change the $ number based on that (API needs)
