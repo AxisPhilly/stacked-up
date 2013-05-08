@@ -166,6 +166,12 @@ h6,
 
 .menu-item {
   margin-top: .2em;
+  padding-top: 4px;
+}
+
+.social {
+  margin-top: .2em;
+  padding-top: 4px;
 }
 
 .subject-title {
