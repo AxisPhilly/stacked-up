@@ -192,7 +192,8 @@ h6,
     font-weight: normal;
     padding: 5px;
   }
-.grade-listing h6 + a:before{
+
+.grade-listing h6 a:first-child:before{
   content:none;
 }
 
