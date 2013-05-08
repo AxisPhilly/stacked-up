@@ -15,16 +15,15 @@
         <div class="container content-inner">
             <h1 id="headline">{{ school.name.title }}</h1>
             <div class="section row">
-                <div class="col eight mobile-full" id="graph-sidebar">        
+                <div class="col twelve mobile-full" id="graph-sidebar">        
+                    <p>Below is inventory data about the reading and math programs at {{ school.name.title }}, an {{ school.school_level.title }} located at {{ school.street_addr.title }} Select a grade and compare the school's inventory with the ideal number of books for that curriculum. PSSA test scores will be displayed for grades 4, 6, and 9 [not true]. The inventory data was collected from internal something data. Read more about our <a href="#">methodology</a>.</p>    
+                    <hr>
                     <div class="grade-listing">
-                        <h6 id="inventory-selector">Inventory for Grade: 
-                            {% for grade in grades %}
-                                <a href="/school/{{school.school_code}}/{{grade.grade_level}}" class="{% if current_grade == grade.human_grade %}strong{% endif %}">{{ grade.human_grade }}</a>
-                            {% endfor %}
-                        </h6>
+                        <h6 id="inventory-selector">Inventory for Grade: {% for grade in grades %}<a href="/school/{{school.school_code}}/{{grade.grade_level}}" class="{% if current_grade == grade.human_grade %}strong{% endif %}">{{ grade.human_grade }}</a>
+                        {% endfor %}</h6>
                     </div>
                     <div>
-                        {% if curriculum_list %}                    
+                        {% if curriculum_list %}                         
                             {% for subject, value in curriculum_list.items %}
                                 <h2 class="subject-title">{{ subject.title }}</h2>
                                 <div class="subject-intro">
@@ -90,32 +89,6 @@
                     {% else %}
                         <p>No inventory</p>
                     {% endif %}
-                </div>
-            </div>
-            <div class="col four mobile-full">  
-                    <p class="mtn">We are displaying inventory data about the reading and math programs at {{ school.name.title }}, an {{ school.school_level.title }} located at {{ school.street_addr.title }} with {{ school_aggregate.students }} students. Select a grade and compare the school's inventory with the ideal number of books for that curriculum. PSSA test scores will be displayed for grades 4, 6, and 9 [not true]. The inventory data was collected from internal something data. Read more about our <a href="#">methodology</a>.</p>    
-
-                <hr>
-                <div class="section row">
-                    <h6>Project articles</h6>
-                    <ul>
-                        <li>
-                            <a href="#">Article title</a>
-                            <span class="meta">Jane Smith, 5/15/13</span>
-                        </li>
-                        <li>
-                            <a href="#">Article title</a>
-                            <span class="meta">Jane Smith, 5/15/13</span>
-                        </li>
-                        <li>
-                            <a href="#">Article title</a>
-                            <span class="meta">Jane Smith, 5/15/13</span>
-                        </li>
-                </div>
-                <hr>
-                <div class="section row">
-                    <h6>Get Involved</h6>
-                    <p><a href="#">Link to our interesting blog post</a></p>
                 </div>
             </div>
         </div>
