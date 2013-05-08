@@ -183,13 +183,17 @@ h6,
   box-sizing: border-box;
 }
 
-.grade-listing a:before {
-    content: ' |';
-    font-weight: normal;
-    padding: 5px;
-  }
+.grade-listing .grade:before {
+  content: ' | ';
+  font-weight: normal;
+  padding: 5px;
+}
 
-.grade-listing h6 a:first-child:before{
+.grade-listing .selected {
+  font-weight: bold;
+}
+
+.grade-listing h6 .grade:first-child:before{
   content:none;
 }
 
