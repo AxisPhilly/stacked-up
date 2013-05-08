@@ -19,8 +19,11 @@
                     <p>Below is inventory data about the reading and math programs at {{ school.name.title }}, an {{ school.school_level.title }} located at {{ school.street_addr.title }} Select a grade and compare the school's inventory with the ideal number of books for that curriculum. PSSA test scores will be displayed for grades 4, 6, and 9 [not true]. The inventory data was collected from internal something data. Read more about our <a href="#">methodology</a>.</p>    
                     <hr>
                     <div class="grade-listing">
-                        <h6 id="inventory-selector">Inventory for Grade: {% for grade in grades %}<a href="/school/{{school.school_code}}/{{grade.grade_level}}">{{ grade.human_grade }}</a>
-                        {% endfor %}</h6>
+                        <h6 id="inventory-selector">Inventory for Grade: 
+                            {% for grade in grades %}
+                                <a href="/school/{{school.school_code}}/{{grade.grade_level}}" class="{% if current_grade == grade.human_grade %}strong{% endif %}">{{ grade.human_grade }}</a>
+                            {% endfor %}
+                        </h6>
                     </div>
                     <div>
                         {% if curriculum_list %}                    
