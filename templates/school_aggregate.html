@@ -41,95 +41,95 @@
                                     <table class="tablesorter">
                                         <thead>
                                             <tr>
-                                                    <th>
-                                                        Material
-                                                    </th>
-                                                    <th>
-                                                        Recorded Inventory
-                                                    </th>
-                                                    <th>
-                                                        Students in Grade
-                                                    </th>
-                                                    <th>
-                                                        Difference
-                                                    </th>
-                                                    <th>
-                                                        Enough
-                                                    </th>
-                                                </tr> 
-                                            </thead>
-                                            <tbody>
-                                            {% for material in grade_curriculum.necessary_material %}
-                                                <tr>
-                                                    <td>
-                                                        {{ material.title }}
-                                                        </td>
-                                                    <td>
-                                                        {{ material.total_copies }}
-                                                        </td>       
-                                                    <td>
-                                                        {{ material.needed }}
-                                                        </td>       
-                                                    <td>
-                                                        {{ material.difference }}
-                                                        </td>       
-                                                    <td>
-                                                        <img class="enough-circle" src="{{ STATIC_URL }}{% if material.enough == 'True' %}images/circleTrue.png{% elif material.enough == 'False' %}images/circleFalse.png{% else %}images/circleNA.png{% endif %}" alt="{{ material.enough }}">
-                                                        </td>
-                                                </tr>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                        <div class="block">
-                                            <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
-                                            <hr>
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    <p>No curriculum matched any records at this school.</p>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            <p>No inventory</p>
-                        {% endif %}
-                    </div>
+                                                <th>
+                                                    Material
+                                                </th>
+                                                <th>
+                                                    Recorded Inventory
+                                                </th>
+                                                <th>
+                                                    Students in Grade
+                                                </th>
+                                                <th>
+                                                    Difference
+                                                </th>
+                                                <th>
+                                                    Enough
+                                                </th>
+                                            </tr> 
+                                        </thead>
+                                        <tbody>
+                                        {% for material in grade_curriculum.necessary_material %}
+                                            <tr>
+                                                <td>
+                                                    {{ material.title }}
+                                                    </td>
+                                                <td>
+                                                    {{ material.total_copies }}
+                                                    </td>       
+                                                <td>
+                                                    {{ material.needed }}
+                                                    </td>       
+                                                <td>
+                                                    {{ material.difference }}
+                                                    </td>       
+                                                <td>
+                                                    <img class="enough-circle" src="{{ STATIC_URL }}{% if material.enough == 'True' %}images/circleTrue.png{% elif material.enough == 'False' %}images/circleFalse.png{% else %}images/circleNA.png{% endif %}" alt="{{ material.enough }}">
+                                                    </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="block">
+                                        <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
+                                        <hr>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>No curriculum matched any records at this school.</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No inventory</p>
+                    {% endif %}
                 </div>
-                <div class="col four mobile-full">  
-                    <div class="school-totals mbm">
-                        <span class="tooltip" title="Total number of students in all grades at this school">
-                            <div class="number">{{ school_aggregate.students }}</div>
-                            total students at this school
-                        </span>
-                    </div>
-                    <div class="school-totals">
-                        <span class="tooltip" title="Total count of common learning material, in the most likely curriculum (for reading and math), for each grade at the school">
-                            <div class="number">{{ school_aggregate.material_count }}</div>                            
-                            total approved book count
-                        </span>
-                    </div>
-                    <hr>
-                    <div class="section row">
-                        <h6>Project articles</h6>
-                        <ul>
-                            <li>
-                                <a href="#">Article title</a>
-                                <span class="meta">Jane Smith, 5/15/13</span>
-                            </li>
-                            <li>
-                                <a href="#">Article title</a>
-                                <span class="meta">Jane Smith, 5/15/13</span>
-                            </li>
-                            <li>
-                                <a href="#">Article title</a>
-                                <span class="meta">Jane Smith, 5/15/13</span>
-                            </li>
-                    </div>
-                    <hr>
-                    <div class="section row">
-                        <h6>Get Involved</h6>
-                        <p><a href="#">Link to our interesting blog post</a></p>
-                    </div>
+            </div>
+            <div class="col four mobile-full">  
+                <div class="school-totals mbm">
+                    <span class="tooltip" title="Total number of students in all grades at this school">
+                        <div class="number">{{ school_aggregate.students }}</div>
+                        total students at this school
+                    </span>
+                </div>
+                <div class="school-totals">
+                    <span class="tooltip" title="Total count of common learning material, in the most likely curriculum (for reading and math), for each grade at the school">
+                        <div class="number">{{ school_aggregate.material_count }}</div>                            
+                        total approved book count
+                    </span>
+                </div>
+                <hr>
+                <div class="section row">
+                    <h6>Project articles</h6>
+                    <ul>
+                        <li>
+                            <a href="#">Article title</a>
+                            <span class="meta">Jane Smith, 5/15/13</span>
+                        </li>
+                        <li>
+                            <a href="#">Article title</a>
+                            <span class="meta">Jane Smith, 5/15/13</span>
+                        </li>
+                        <li>
+                            <a href="#">Article title</a>
+                            <span class="meta">Jane Smith, 5/15/13</span>
+                        </li>
+                </div>
+                <hr>
+                <div class="section row">
+                    <h6>Get Involved</h6>
+                    <p><a href="#">Link to our interesting blog post</a></p>
                 </div>
             </div>
         </div>
+    </div>
 {% include "_footer_school.html" %}

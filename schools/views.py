@@ -140,20 +140,23 @@ class SchoolAggregateView(ListView):
                 enough_books = self.is_enough_books(number_of_books, students_in_grade)
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
                 difference = number_of_books - students_in_grade
-                if (students_in_grade - number_of_books) >= 0:
-                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
-                else:
-                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
-                if (students_in_grade - number_of_books) >= 0:
-                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
-                else:
-                    self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             else:
                 number_of_books = 'N/A'
                 difference = 'N/A'
-                cost_of_book = 'N/A'
+                cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
                 enough_books = 'None'
-
+            if number_of_books == 'N/A':
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade * cost_of_book)
+            elif (students_in_grade - number_of_books) >= 0:
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
+            else:
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
+            if number_of_books == 'N/A':
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade)
+            elif (students_in_grade - number_of_books) >= 0:
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
+            else:
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {
                     'title': material.title,
