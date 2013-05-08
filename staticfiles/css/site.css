@@ -1,5 +1,5 @@
 body {
-  font-family: "proxima-nova", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
   font-size: 15px;
 }
 
@@ -39,19 +39,19 @@ p {
   }
 
   .top-bar > .container > li + li {
-    margin-left: 8px;
+    margin-left: 6px;
   }
 
   .top-bar > .container > li > a {
     color: #7b7a7c;
-    padding: 0 8px;
+    padding: 0 6px;
   }
 
   .top-bar .container > .menu-item a:after {
     content: '/';
     float: right;
     font-weight: normal;
-    padding-left: 8px;
+    padding-left: 6px;
   }
 
 #inventory-selector {
@@ -144,7 +144,6 @@ h5,
 h6,
 .h6 {
   font-size: 18px;
-  font-weight: bold;
   text-transform: normal;
 }
 
@@ -180,6 +179,7 @@ h6,
 }
 
 .subject-title {
+  font-weight: bold;
   width: 100%;
   margin-bottom: .5em;
   -webkit-box-sizing: border-box;
