@@ -154,23 +154,23 @@ $('.needed-material input').on('change', function() {
   var materialPk = $difference.attr('data-material-pk');
   var compute = originalDifference - calc;
   $difference.html(compute);
-  // console.log (x=originalDifference);
+  if (compute > 0) {
+    return;
+  }
   var $shortfallDetail = $(needed).parents('.tablesorter').next('.shortfall-detail');
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
-  var shortfallCount = Number($shortfallCount.attr('data-original-count')) + calc;
-  if (shortfallCount < 0) {
-    return;
+  var origShortfallCount = Number($shortfallCount.attr('data-original-count'));
+  if (needed.defaultValue > 0) {
+    calc = calc - needed.defaultValue - origShortfallCount - 1;
   }
-  var shortfallCost = 0;
-  // Find the cost of the material (API!!!!!) * calc
+  $shortfallCount.html(origShortfallCount + calc);
   $.ajax({
     url: '/api/v1/learning_material/' + materialPk,
     success: function(resp){
-      shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (Number(resp.prices[0].value) * calc);
-      console.log(resp.prices[0].value);
+      var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (Number(resp.prices[0].value) * calc);
+      //console.log(resp.prices[0].value);
       $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
     }
   });
-  $shortfallCount.html(shortfallCount);
 });
