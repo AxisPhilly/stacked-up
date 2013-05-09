@@ -1,3 +1,4 @@
+// Utilities
 if(typeof(String.prototype.trim) === "undefined")
 {
     String.prototype.trim = function()
@@ -6,6 +7,11 @@ if(typeof(String.prototype.trim) === "undefined")
     };
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// APP
 var app = app || {};
 
 app.displayCharts = function(school_pk, grade) {
@@ -160,7 +166,7 @@ $('.needed-material input').on('change', function() {
     success: function(resp){
       shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (Number(resp.prices[0].value) * calc);
       console.log(resp.prices[0].value);
-      $shortfallCost.html(shortfallCost);
+      $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
     }
   });
   $shortfallCount.html(shortfallCount);
