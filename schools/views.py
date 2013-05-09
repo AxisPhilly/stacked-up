@@ -140,9 +140,11 @@ class SchoolAggregateView(ListView):
                 enough_books = self.is_enough_books(number_of_books, students_in_grade)
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
                 difference = number_of_books - students_in_grade
+                numerical_difference = difference
             else:
                 number_of_books = 'N/A'
                 difference = 'N/A'
+                numerical_difference = students_in_grade * -1
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
                 enough_books = 'None'
             if number_of_books == 'N/A':
@@ -165,6 +167,7 @@ class SchoolAggregateView(ListView):
                     'cost': cost_of_book,
                     'enough': enough_books,
                     'difference': difference,
+                    'numerical_difference': numerical_difference
                 })
 
     def get_grade_curricula_by_subject(self, students_in_grade, subject, all_books, cohort):

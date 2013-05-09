@@ -67,7 +67,7 @@
                                                 <td class="needed-material">
                                                     <input value="{{ material.needed }}" type="number">
                                                 </td>       
-                                                <td class="material-difference" data-original-difference="{{ material.difference }}">
+                                                <td class="material-difference" data-original-difference="{{ material.numerical_difference }}">
                                                     {{ material.difference }}
                                                     </td>       
                                                 <td>
@@ -77,8 +77,11 @@
                                         {% endfor %}
                                         </tbody>
                                     </table>
-                                    <div class="block">
-                                        <p>It would cost ${{ grade_curriculum.cost_shortfall|intcomma }} to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the {{ grade_curriculum.book_shortfall }} missing materials listed above.</p>
+                                    <div class="block shortfall-detail">
+                                        <p>It would cost 
+                                            $<span class="shortfall-cost">{{ grade_curriculum.cost_shortfall|intcomma }}</span>
+                                            to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the 
+                                            <span class="shortfall-count">{{ grade_curriculum.book_shortfall }}</span> missing materials listed above.</p>
                                         <hr>
                                     </div>
                                 {% endfor %}
