@@ -145,6 +145,7 @@ $('.needed-material input').on('change', function() {
   var $container = $(needed).parents('.tablesorter');
   var calc = Number(needed.value - needed.defaultValue);
   var originalDifference = $difference.attr('data-original-difference');
+  var materialPk = $difference.attr('data-material-pk');
   var compute = originalDifference - calc;
   $difference.html(compute);
   // console.log (x=originalDifference);
@@ -152,9 +153,15 @@ $('.needed-material input').on('change', function() {
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
   var shortfallCount = Number($shortfallCount.attr('data-original-count')) + calc;
+  var shortfallCost = 0;
   // Find the cost of the material (API!!!!!) * calc
-  var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + 15;
+  $.ajax({
+    url: '/api/v1/learning_material/' + materialPk,
+    success: function(resp){
+      shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (Number(resp.prices[0].value) * calc);
+      console.log(resp.prices[0].value);
+      $shortfallCost.html(shortfallCost);
+    }
+  });
   $shortfallCount.html(shortfallCount);
-  $shortfallCost.html(shortfallCost);
 });
-// TODO change the $ number based on that (API needs)

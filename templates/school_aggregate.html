@@ -58,7 +58,7 @@
                                         <tbody>
                                         {% for material in grade_curriculum.necessary_material %}
                                             <tr>
-                                                <td id="isbn-{{ material.isbn }}">
+                                                <td>
                                                     {{ material.title }}
                                                 </td>
                                                 <td>
@@ -67,7 +67,7 @@
                                                 <td class="needed-material">
                                                     <input value="{{ material.needed }}" type="number">
                                                 </td>       
-                                                <td class="material-difference" data-original-difference="{{ material.numerical_difference }}">
+                                                <td class="material-difference" data-original-difference="{{ material.numerical_difference }}" data-material-pk="{{material.pk}}">
                                                     {{ material.difference }}
                                                     </td>       
                                                 <td>

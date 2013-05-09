@@ -2,7 +2,7 @@ from tastypie.resources import ModelResource
 from curricula import models as curricula
 from vendors import models as inventory
 from vendors.models import InventoryRecord, NegotiatedPrice
-from schools.models import School
+from schools.models import School, SchoolType
 from curricula.models import LearningMaterial, GradeCurriculum
 from students.models import Grade, Cohort
 import simplejson as json
@@ -166,16 +166,30 @@ class SchoolResource(ModelResource):
         return 'application/json'
 
 
-class LearningMaterialResource(ModelResource):
-
+class SchoolTypeResource(ModelResource):
     class Meta:
-        queryset = LearningMaterial.objects.all()
+        queryset = SchoolType.objects.all()
+        resource_name = 'school_types'
+
+
+class NegotiatedPriceResource(ModelResource):
+    types = fields.ToManyField(SchoolTypeResource,
+            attribute=lambda bundle: bundle.obj.negotiated_for_school_type, full=True)
+    class Meta:
+        queryset = NegotiatedPrice.objects.all()
+        resource_name = 'prices'
+
+
+class LearningMaterialResource(ModelResource):
+    prices = fields.ToManyField(NegotiatedPriceResource,
+            attribute=lambda bundle: bundle.obj.negotiatedprice_set, full=True)
+    class Meta:
+        queryset = LearningMaterial.objects.select_related('NegotiatedPrice').all()
         resource_name = 'learning_material'
         allowed_methods = ['get']
         fields = ['isbn', 'title']
         always_return_data = True
         filtering = {
-            "school": ('exact'),
             "id": ('exact')
         }
 

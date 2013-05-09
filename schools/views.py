@@ -167,7 +167,8 @@ class SchoolAggregateView(ListView):
                     'cost': cost_of_book,
                     'enough': enough_books,
                     'difference': difference,
-                    'numerical_difference': numerical_difference
+                    'numerical_difference': numerical_difference,
+                    'pk': material.pk
                 })
 
     def get_grade_curricula_by_subject(self, students_in_grade, subject, all_books, cohort):
