@@ -152,6 +152,9 @@ $('.needed-material input').on('change', function() {
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
   var shortfallCount = Number($shortfallCount.attr('data-original-count')) + calc;
+  // Find the cost of the material (API!!!!!) * calc
+  var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + 15;
   $shortfallCount.html(shortfallCount);
+  $shortfallCost.html(shortfallCost);
 });
 // TODO change the $ number based on that (API needs)
