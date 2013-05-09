@@ -144,7 +144,7 @@ $('.needed-material input').on('change', function() {
   var calc = Number(needed.value - needed.defaultValue);
   console.log(calc.typeof);
   var difference = $(needed).parent().next('.material-difference');
-  var originalDifference = difference.html().trim();
+  var originalDifference = difference.attr('data-original-difference');
   if(originalDifference === "N/A") {
     originalDifference = 0;
     console.log('cats');
