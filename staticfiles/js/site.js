@@ -141,26 +141,17 @@ $(document).ready(function() {
 
 $('.needed-material input').on('change', function() {
   var needed = this;
+  var $difference = $(needed).parent().next('.material-difference');
   var $container = $(needed).parents('.tablesorter');
   var calc = Number(needed.value - needed.defaultValue);
-  var difference = $(needed).parent().next('.material-difference');
-  var originalDifference = difference.attr('data-original-difference');
+  var originalDifference = $difference.attr('data-original-difference');
   var compute = originalDifference - calc;
-  difference.html(compute);
+  $difference.html(compute);
   // console.log (x=originalDifference);
   var $shortfallDetail = $(needed).parents('.tablesorter').next('.shortfall-detail');
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
-  var shortfallCount = 0;
-  $container.find('.material-difference').each(function() {
-    var temp = this.innerHTML.trim();
-    if (temp === "N/A") {
-      temp = $(this).attr('data-original-difference');
-    }
-    if (temp < 0) {
-      shortfallCount -= temp;
-    }
-  });
+  var shortfallCount = Number($shortfallCount.attr('data-original-count')) + calc;
   $shortfallCount.html(shortfallCount);
 });
 // TODO change the $ number based on that (API needs)
