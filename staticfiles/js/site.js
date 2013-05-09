@@ -156,15 +156,10 @@ $('.needed-material input').on('change', function() {
     var temp = this.innerHTML.trim();
     if (temp === "N/A") {
       temp = $(this).attr('data-original-difference');
-      console.log(temp);
-      console.log('cats!');
     }
-    temp = Number(temp);
-    console.log(temp + ' cats!');
     if (temp < 0) {
       shortfallCount -= temp;
     }
-    console.log(shortfallCount);
   });
   $shortfallCount.html(shortfallCount);
 });
