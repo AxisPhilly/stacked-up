@@ -18,7 +18,7 @@ app.displayCharts = function(school_pk, grade) {
   $.ajax({
     url: '/api/v1/school_curricula/' + school_pk + '/?format=json&grade=' + grade,
     success: function(resp) {
-      scores = JSON.parse(resp.cirriculum.pssa_test_scores);
+      scores = JSON.parse(resp.curriculum.pssa_test_scores);
 
       var sortedScores = scores.sort(function(a, b){
         return a.year_start - b.year_start;
