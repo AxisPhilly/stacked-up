@@ -122,7 +122,7 @@ class SchoolCurriculaResource(ModelResource):
         except KeyError:
             grade = bundle.obj.grade_start
 
-        cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=bundle.obj.pk, grade_level=grade))
+        cohort_set = Cohort.objects.filter(grade=Grade.objects.get(school=bundle.obj.pk, grade_level=grade)).order_by('year_start')
         current_cohort = cohort_set.get(year_end=2013)
         current_grade = Grade.objects.get(school=bundle.obj.pk, grade_level=grade)
         students_in_grade = current_cohort.number_of_students
