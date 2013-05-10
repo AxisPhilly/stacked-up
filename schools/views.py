@@ -142,22 +142,19 @@ class SchoolAggregateView(ListView):
                 difference = number_of_books - students_in_grade
                 numerical_difference = difference
             else:
-                number_of_books = 'N/A'
+                number_of_books = 'No records found'
                 difference = 'N/A'
                 numerical_difference = students_in_grade * -1
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
                 enough_books = 'None'
-            if number_of_books == 'N/A':
+            if number_of_books == 'No records found':
                 self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade * cost_of_book)
-            elif (students_in_grade - number_of_books) >= 0:
-                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
-            else:
-                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
-            if number_of_books == 'N/A':
                 self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade)
             elif (students_in_grade - number_of_books) >= 0:
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade - number_of_books) * cost_of_book
                 self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade - number_of_books)
             else:
+                self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += 0
                 self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += 0
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'].append(
                 {
