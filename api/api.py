@@ -39,7 +39,7 @@ class SchoolCurriculaResource(ModelResource):
         resource_name = 'school_curricula'
         allowed_methods = ['get']
 
-    # Functions to help assemble cirriculum data for school and grade
+    # Functions to help assemble curriculum data for school and grade
     # Taken from curricula.views#SchoolAggregateView
     context = {}
 
