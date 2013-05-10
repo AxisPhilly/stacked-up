@@ -149,14 +149,23 @@ $('.needed-material input').on('change', function() {
   var needed = this;
   var $difference = $(needed).parent().next('.material-difference');
   var $container = $(needed).parents('.tablesorter');
+  // What's the difference between input value and the original value?
   var calc = Number(needed.value - needed.defaultValue);
   var originalDifference = $difference.attr('data-original-difference');
-  var materialPk = $difference.attr('data-material-pk');
-  var compute = originalDifference - calc;
-  $difference.html(compute);
-  if (compute > 0) {
+  // Compute the current difference for that material
+  var currentDifference = originalDifference - calc;
+  $difference.html(currentDifference);
+  if (currentDifference >= 0) {
+    $difference.next('td').removeClass('notEnough unknown').addClass('enough');
+  }
+  else {
+    $difference.next('td').removeClass('enough').addClass('notEnough');
+  }
+  if (currentDifference > 0) {
     return;
   }
+  var materialPk = $difference.attr('data-material-pk');
+  // Locate the container of the shortfall info
   var $shortfallDetail = $(needed).parents('.tablesorter').next('.shortfall-detail');
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
@@ -164,12 +173,20 @@ $('.needed-material input').on('change', function() {
   if (originalDifference > 0) {
     calc = calc - needed.defaultValue - origShortfallCount - 1;
   }
+  // Add the difference between the value and the default value
   $shortfallCount.html(origShortfallCount + calc);
+
+  // TODO Store prices in object, don't have to get them every time
+  // var prices = prices || {}
+  // if(prices.materialISBN) {
+  //     var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (prices.materialISBN) * calc);
+  //     $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
+  // }
   $.ajax({
     url: '/api/v1/learning_material/' + materialPk,
     success: function(resp){
+      // Make sure we get the right price
       var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (Number(resp.prices[0].value) * calc);
-      //console.log(resp.prices[0].value);
       $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
     }
   });
