@@ -3,3 +3,4 @@
 settings/local.py
 static
 *.pyc
+venv
