@@ -159,7 +159,7 @@ $('.needed-material input').on('change', function() {
     $difference.next('td').removeClass('notEnough unknown').addClass('enough');
   }
   else {
-    $difference.next('td').removeClass('enough').addClass('notEnough');
+    $difference.next('td').removeClass('enough unknown').addClass('notEnough');
   }
   if (currentDifference > 0) {
     return;

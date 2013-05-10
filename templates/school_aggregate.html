@@ -83,9 +83,9 @@
                                                 <td class="material-difference" data-original-difference="{{ material.numerical_difference }}" data-material-pk="{{material.pk}}">
                                                     {{ material.difference }}
                                                     </td>       
-                                                <td>
-                                                    <img class="enough-circle" src="{{ STATIC_URL }}{% if material.enough == 'True' %}images/circleTrue.png{% elif material.enough == 'False' %}images/circleFalse.png{% else %}images/circleNA.png{% endif %}" alt="{{ material.enough }}">
-                                                    </td>
+                                                <td class="{% if material.enough == 'True' %}enough{% elif material.enough == 'False' %}notEnough{% else %}unknown{% endif %}">
+                                                    <span class="icon"></span>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

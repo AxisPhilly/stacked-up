@@ -86,9 +86,21 @@ p {
 }
 
 
-.enough-circle {
+.enough .icon, .notEnough .icon, .unknown .icon {
   width: 16px;
   height: 16px;
+  display: block;
+}
+.enough > .icon {
+  background: url('../images/circleTrue.png') no-repeat;
+}
+
+.notEnough > .icon {
+  background: url('../images/circleFalse.png') no-repeat;
+}
+
+.unknown > .icon {
+  background: url('../images/circleNA.png') no-repeat;
 }
 
 .note {
