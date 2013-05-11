@@ -33,6 +33,6 @@
 var grade = "{{ current_grade }}";
 if(grade === "K") { grade = 0 };
 
-app.displayCharts({{ school.pk }}, grade);
+app.getChartData({{ school.pk }}, grade);
 </script>
 {% endblock %}

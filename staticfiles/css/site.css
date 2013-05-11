@@ -245,6 +245,12 @@ a:active {
   color: #222222;
 }
 
+/* Graphs */
+.scores-container {
+  height: 200px;
+  width: 300px;
+}
+
 /* Tables */
 
 .tablesorter th {
