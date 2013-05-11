@@ -81,12 +81,19 @@ p {
   color: #e1e1e1 !important;
 }
 
-
+/* Icons */
+.tooltip-icon, 
 .enough .icon, .notEnough .icon, .unknown .icon {
   width: 16px;
   height: 16px;
   display: block;
 }
+
+.tooltip-icon {
+  background: url('../images/tooltip.png') no-repeat;
+  display: inline-block;
+}
+
 .enough > .icon {
   background: url('../images/circleTrue.png') no-repeat;
 }
