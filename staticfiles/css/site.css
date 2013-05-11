@@ -1,5 +1,8 @@
-body {
+body, input {
   font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+}
+
+body {
   font-size: 15px;
 }
 
