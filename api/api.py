@@ -6,6 +6,7 @@ from schools.models import School, SchoolType
 from curricula.models import LearningMaterial, GradeCurriculum
 from students.models import Grade, Cohort
 import simplejson as json
+from django.db.models import Q
 from tastypie import fields
 
 
@@ -146,7 +147,7 @@ class SchoolCurriculaResource(ModelResource):
 class SchoolResource(ModelResource):
 
     class Meta:
-        queryset = School.objects.all()
+        queryset = School.objects.filter(~Q(schoolaggregate=None))
         resource_name = 'schools'
         allowed_methods = ['get']
         limit = 300
