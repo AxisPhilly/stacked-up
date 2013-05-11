@@ -171,7 +171,7 @@ $('.needed-material input').on('change', function() {
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
   var origShortfallCount = Number($shortfallCount.attr('data-original-count'));
   if (originalDifference > 0) {
-    calc = calc - needed.defaultValue - origShortfallCount - 1;
+    calc = calc - originalDifference;
   }
   // Add the difference between the value and the default value
   $shortfallCount.html(origShortfallCount + calc);
