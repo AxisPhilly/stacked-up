@@ -14,72 +14,86 @@ function numberWithCommas(x) {
 // APP
 var app = app || {};
 
-app.displayCharts = function(school_pk, grade) {
-  $.ajax({
-    url: '/api/v1/school_curricula/' + school_pk + '/?format=json&grade=' + grade,
-    success: function(resp) {
-      scores = JSON.parse(resp.curriculum.pssa_test_scores);
+app.getChartData = function(school_pk, grade) {
+  $.when(
+    $.ajax({
+      url: '/api/v1/school_curricula/' + school_pk + '/?format=json&grade=' + grade,
+    }),
+    $.ajax({
+      url: '/static/data/pssa.json'
+    })
+  ).then(function(schoolInfo, districtInfo) {
+    var schoolScores = app.formatPSSASchoolData(JSON.parse(schoolInfo[0].curriculum.pssa_test_scores));
+    var districtScores = districtInfo[0][grade];
 
-      var sortedScores = scores.sort(function(a, b){
-        return a.year_start - b.year_start;
-      });
-
-      app.createChart(sortedScores, 'reading');
-      app.createChart(sortedScores, 'math');
-    }
+    app.createChart(schoolScores, districtScores, 'read', 'reading-scores');
+    app.createChart(schoolScores, districtScores, 'math', 'math-scores');
   });
-};
+}
 
-app.chartMapping = {
-  'reading': [
-    'read_below_basic_percent',
-    'read_basic_percent',
-    'read_proficient_percent',
-    'read_advanced_percent'
-  ],
-  'math': [
-    'math_below_basic_percent',
-    'math_basic_percent',
-    'math_proficient_percent',
-    'math_advanced_percent'
-  ]
-};
+app.formatPSSASchoolData = function(scores) {
+  var fScores = {
+    "read": [],
+    "math": []
+  };
 
-app.createChart = function(scores, subject) {
-  var mapping = app.chartMapping[subject];
-  var $container = $('#' + subject + '-scores.scores-container');
-  var has_scores = scores.length > 1
-  if (has_scores) {
-    $container.append('<strong>PSSA scores in ' + subject + ' for this grade at this school for the past 4 years</strong>');
-  }
   for(var i=0; i<scores.length; i++) {
-    if(scores[i].year_start === 2012) { continue; } // We don't have 2012-13 scores
-    var html = 
-      "<div class='scores'>" +
-        "<span class='year'>" + scores[i].year_start  + "-" + String(scores[i].year_end).slice(2, 4) + "</span>" +
-        "<div class='steps'>" +
-          "<span class='tooltip' title='Below basic: " + scores[i][mapping[0]] + "%'>" + 
-            "<div class='step step1' style='width:" + scores[i][mapping[0]] + "%;'></div>" +
-          "</span>" + 
-          "<span class='tooltip' title='Basic: " + scores[i][mapping[1]] + "%'>" + 
-            "<div class='step step2' style='width:" + scores[i][mapping[1]] + "%;'></div>" + 
-          "</span>" + 
-          "<span class='tooltip' title='Proficient: " + scores[i][mapping[2]] + "%'>" +
-            "<div class='step step3' style='width:" + scores[i][mapping[2]] + "%;'></div>" +
-          "</span>" +
-          "<span class='tooltip' title='Advanced: " + scores[i][mapping[3]] + "%'>" +
-            "<div class='step step4' style='width:" + (scores[i][mapping[3]] - 0.1) + "%;'></div>" +
-          "</span>" +
-        "</div>" +
-      "</div>";
-    $container.append(html);
+    fScores.read.push(scores[i].read_combined_percent);
+    fScores.math.push(scores[i].math_combined_percent);
   }
-  if (has_scores) { 
-    $container.append('<hr>');
-  }
-  $('.tooltip').tooltipster({
-      maxWidth: 250
-    });
+
+  return fScores;
+};
+
+app.createChart = function(schoolScores, districtScores, subject, container) {
+  var chart = new CanvasJS.Chart(container, {  
+    title: {
+      text: "PSSA " + subject + " combined percent scores",
+      fontSize: 12
+    },
+    theme: "theme2",
+    axisX: {
+      // we are cheating here and using the month value as the
+      // second part of the school year in the x label
+      valueFormatString: "YYYY-MM",
+      lineThickness: 0,
+      labelFontSize: 0,
+      tickThickness: 0,
+      tickLength: 0
+    },
+    axisY: {
+      valueFormatString: "#'%'"
+    },
+    toolTip: {
+      shared: true
+    },
+    data: [
+      {
+        type: "line",
+        lineThickness: 2,
+        name: "District",
+        dataPoints: [
+          {x: new Date(2008,08,1), y: districtScores[subject][0]},
+          {x: new Date(2009,09,1), y: districtScores[subject][1]},
+          {x: new Date(2010,10,1), y: districtScores[subject][2]},
+          {x: new Date(2011,11,1), y: districtScores[subject][3]}
+        ]
+      },
+      {
+        type: "line",
+        lineThickness: 2,
+        name: "School",
+        dataPoints: [
+          {x: new Date(2008,08,01), y: schoolScores[subject][0]},
+          {x: new Date(2009,09,01), y: schoolScores[subject][1]},
+          {x: new Date(2010,10,01), y: schoolScores[subject][2]},
+          {x: new Date(2011,11,01), y: schoolScores[subject][3]},
+        ]
+      }
+    ]
+  });
+
+  chart.render();
 };
 
 // jQuery global instatiations
