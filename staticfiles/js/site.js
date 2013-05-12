@@ -25,9 +25,10 @@ app.getChartData = function(school_pk, grade) {
   ).then(function(schoolInfo, districtInfo) {
     var schoolScores = app.formatPSSASchoolData(JSON.parse(schoolInfo[0].curriculum.pssa_test_scores));
     var districtScores = districtInfo[0][grade];
-
-    app.createChart(schoolScores, districtScores, 'read', 'reading-scores');
-    app.createChart(schoolScores, districtScores, 'math', 'math-scores');
+    if(schoolScores.read.length > 1) {
+      app.createChart(schoolScores, districtScores, 'read', 'reading-scores');
+      app.createChart(schoolScores, districtScores, 'math', 'math-scores');
+    }
   });
 }
 
@@ -46,6 +47,7 @@ app.formatPSSASchoolData = function(scores) {
 };
 
 app.createChart = function(schoolScores, districtScores, subject, container) {
+  $('#' + container).addClass('scores-container');
   var chart = new CanvasJS.Chart(container, {  
     title: {
       text: "PSSA " + subject + " combined percent scores",
@@ -92,7 +94,6 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
       }
     ]
   });
-
   chart.render();
 };
 
