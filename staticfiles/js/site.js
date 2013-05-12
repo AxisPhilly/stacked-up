@@ -25,6 +25,7 @@ app.getChartData = function(school_pk, grade) {
   ).then(function(schoolInfo, districtInfo) {
     var schoolScores = app.formatPSSASchoolData(JSON.parse(schoolInfo[0].curriculum.pssa_test_scores));
     var districtScores = districtInfo[0][grade];
+    console.log(schoolScores);
     if(schoolScores.read.length > 1) {
       app.createChart(schoolScores, districtScores, 'read', 'reading-scores');
       app.createChart(schoolScores, districtScores, 'math', 'math-scores');
