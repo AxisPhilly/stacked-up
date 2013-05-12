@@ -145,6 +145,7 @@ $(document).ready(function() {
 
 // Create data binding for "change assumptions" feature
 
+var prices = prices || {};
 $('.needed-material input').on('change', function() {
   var needed = this;
   var $difference = $(needed).parent().next('.material-difference');
@@ -169,25 +170,36 @@ $('.needed-material input').on('change', function() {
   var $shortfallDetail = $(needed).parents('.tablesorter').next('.shortfall-detail');
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
-  var origShortfallCount = Number($shortfallCount.attr('data-original-count'));
-  if (originalDifference > 0) {
-    calc = calc - originalDifference;
-  }
-  // Add the difference between the value and the default value
-  $shortfallCount.html(origShortfallCount + calc);
-
-  // TODO Store prices in object, don't have to get them every time
-  // var prices = prices || {}
-  // if(prices.materialISBN) {
-  //     var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (prices.materialISBN) * calc);
-  //     $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
-  // }
-  $.ajax({
-    url: '/api/v1/learning_material/' + materialPk,
-    success: function(resp){
-      // Make sure we get the right price
-      var shortfallCost = Number($shortfallCost.attr('data-original-cost')) + (Number(resp.prices[0].value) * calc);
-      $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
+  var shortfallCount = 0; 
+  var shortfallCost = 0;
+  $container.find('.material-difference').each(function(){
+    var diff = this.innerHTML.trim();
+    if (diff < 0) {
+      // Increase the shortfall count by subtracting the negative diff
+      shortfallCount = shortfallCount - diff;
+      var materialPk = $(this).attr('data-material-pk');
+      var materialKey = 'key' + materialPk;
+      // If we have the price, get it
+      var price;
+      if(prices[materialKey]) {
+        price = prices[materialKey];
+        shortfallCost += price * (diff * -1);
+      }
+      // Otherwise go get it
+      else {
+          $.ajax({
+            url: '/api/v1/learning_material/' + materialPk,
+            success: function(resp){
+              // TODO Make sure we get the right price
+              price = Number(resp.prices[0].value);
+              prices[materialKey] = price;
+              shortfallCost += price * (diff * -1);
+              $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
+            }
+          });
+      }
     }
+    $shortfallCount.html(shortfallCount);
+    $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
   });
 });
