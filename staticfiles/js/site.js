@@ -17,9 +17,10 @@ var app = app || {};
 app.getChartData = function(school_pk, grade) {
   $.when(
     $.ajax({
-      url: '/api/v1/school_curricula/' + school_pk + '/?format=json&grade=' + grade,
+      url: '/api/v1/school_curricula/' + school_pk + '/?format=json&grade=' + grade
     }),
     $.ajax({
+      dataType: 'json',
       url: '/static/data/pssa.json'
     })
   ).then(function(schoolInfo, districtInfo) {
@@ -33,7 +34,7 @@ app.getChartData = function(school_pk, grade) {
       app.createChart(schoolScores, districtScores, 'math', 'math-scores');
     }
   });
-}
+};
 
 app.formatPSSASchoolData = function(scores) {
   var fScores = {

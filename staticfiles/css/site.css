@@ -57,9 +57,9 @@ p {
     padding-left: 6px;
   }
 
-#inventory-selector {
-  margin-bottom: 0;
-}
+  .addthis_toolbox {
+    min-width: 310px;
+  }
 
 .explainer-wrap {
   background: #1e1e1e;
