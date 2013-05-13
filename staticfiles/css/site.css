@@ -221,17 +221,22 @@ h6,
 }
 
 .grade-listing {
-  background-color: #f3f3f3; padding: 12px 4px 8px 10px;
+  background-color: #f0f0f0; padding: 12px 4px 8px 10px;
   margin-bottom: 2em;
 }
 
 /* Columns */
 
 .container {
-  max-width: 1140px;
+  max-width: 1120px;
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.container-full {
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 /* Links */
@@ -258,13 +263,17 @@ a:active {
 
 /* Tables */
 
+table th,
+table td {
+  border-top: 1px solid #eeeeee;
+}
+
 .tablesorter th {
-  background-color: #e6EEEE;
-  border: 1px solid #FFF;
+  background-color: #fcfcfc;
   padding: 10px;
 }
 .tablesorter .header {
-  background-image: url(../images/bg.gif);
+  background-image: url(../images/bg.gif);  
   background-repeat: no-repeat;
   background-position: center right;
   cursor: pointer;
@@ -273,17 +282,14 @@ a:active {
   padding: 10px;
   vertical-align: middle;
 }
-.tablesorter tbody > tr.odd td {
+/*.tablesorter tbody > tr.odd td {
   background-color:#F0F0F6;
-}
+}*/
 .tablesorter .headerSortUp {
   background-image: url(../images/asc.gif);
 }
 .tablesorter .headerSortDown {
   background-image: url(../images/desc.gif);
-}
-.tablesorter .headerSortDown, .tablesorter .headerSortUp {
-background-color: #8dbdd8;
 }
 
 .numeric {
