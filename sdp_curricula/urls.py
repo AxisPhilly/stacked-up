@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^$',
         IndexListView.as_view()),
+    url(r'^schools/$',
+        SchoolsListView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('api.urls')),
     url(r'^school/', include('schools.urls'), name='school_listing'),
