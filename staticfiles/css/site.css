@@ -212,10 +212,6 @@ h6,
   padding: 5px;
 }
 
-.grade-listing .selected {
-  font-weight: bold;
-}
-
 .grade-listing h6 .grade:first-child:before{
   content:none;
 }
