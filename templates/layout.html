@@ -1,12 +1,16 @@
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <title>{% block title %}Empty Shelves: Exploring Philadelphia School District Curricula{% endblock %}</title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tooltipster.css" />        
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css?v1">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v4">
+    {% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tooltipster.css" />        
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css?v1">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v4">
+        {% block extra_css %}{% endblock %}
+    {% endcompress %}
     <meta property="og:title" content="{% block ogtitle %}Empty Shelves{% endblock %}" />
     <meta property="og:type" content="news_application" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
@@ -47,15 +51,17 @@
       <a href="https://github.com/AxisPhilly/sdp_curricula">View the source on Github</a>.
     </div>
 
-    <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script>
-    <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
-    <script src="{{ STATIC_URL }}js/canvasjs.min.js"></script>
-    <script src="{{ STATIC_URL }}js/site.js?v4"></script>
-    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, "ui_click": true};</script>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5182ce4b100f38d0"></script>
-    {% block scripts %}{% endblock %}
+    {% compress js %}
+        <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script>
+        <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
+        <script src="{{ STATIC_URL }}js/canvasjs.min.js"></script>
+        <script src="{{ STATIC_URL }}js/site.js?v4"></script>
+        {% block scripts %}{% endblock %}
+    {% endcompress %}
+        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, "ui_click": true};</script>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5182ce4b100f38d0"></script>
     </body>
 </html>

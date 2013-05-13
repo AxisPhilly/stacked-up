@@ -199,6 +199,16 @@ h6,
 	font-family: "minion pro", "Times New Roman", times, serif;
 }
 
+.schools-list h4 {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.schools-list ul {
+  list-style: none;
+  padding: 0;
+}
+
 .curriculum-title {
 	font-weight: bold;
   margin-top: 4px;
@@ -234,10 +244,6 @@ h6,
   padding: 5px;
 }
 
-.grade-listing .selected {
-  font-weight: bold;
-}
-
 .grade-listing h6 .grade:first-child:before{
   content:none;
 }
@@ -247,6 +253,12 @@ h6,
   margin-bottom: 2em;
 }
 
+.changed {
+  background-color: #fff5a4;
+  -webkit-transition: background-color .25s linear;
+  -moz-transition: background-color .25s linear;
+  transition: background-color .25s linear;
+}
 /* Columns */
 
 .container {

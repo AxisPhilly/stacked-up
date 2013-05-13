@@ -22,7 +22,7 @@
                         <h6 id="inventory-selector" class="mbn">Inventory for Grade: 
                             {% for grade in grades %}
                                 {% if current_grade == grade.human_grade %}
-                                    <span class="selected grade">
+                                    <span class="selected grade strong">
                                         {{ grade.human_grade }}
                                     </span>
                                 {% else %}
@@ -33,6 +33,7 @@
                                 </span>
                                 {% endif %}
                             {% endfor %}
+                            <a href="/school/inventory/{{ school.school_code }}" class="right mrm">View full inventory for this school</a>
                         </h6>
                     </div>
                     <div>
@@ -93,7 +94,7 @@
                                     </table>
                                     <div class="block shortfall-detail">
                                         <p>It would cost 
-                                            $<span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">{{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
+                                            <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
                                             to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the 
                                             <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}">{{ grade_curriculum.book_shortfall }}</span> missing materials listed above.</p>
                                         <hr>
@@ -112,35 +113,6 @@
     {% endblock %}
 
 {% block scripts %}
-<style>
-  .year {
-    font-size: 10px;
-    display: inline-block;
-    width: 40px;
-    height: 14px;
-  }
-  .steps {
-    display: inline-block;
-    height: 14px;
-    width: 60%;
-  }
-  .step {
-    height: 100%;
-    display: inline-block;
-  }
-  .step1 {
-    background-color: #F2F0F7;
-  }
-  .step2 {
-    background-color: #CBC9E2;
-  }
-  .step3 {
-    background-color: #9E9AC8;
-  }
-  .step4 {
-    background-color: #6A51A3;
-  }
-</style>
 <script type="text/javascript">
 var grade = "{{ current_grade }}";
 if(grade === "K") { grade = 0 };

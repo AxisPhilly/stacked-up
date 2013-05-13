@@ -1,0 +1,158 @@
+{% include "analysis/_header.html" %}
+
+ <script src="/static/js/jquery-1.7.2.js"></script>
+    <script src="/static/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script src="/static/js/jquery.tablesorter.min.js"></script> 
+    <script>
+      $(document).ready(function() 
+        { 
+          $("#matched-grade-curricula").tablesorter({ 
+            widgets: ['zebra'],
+            sortList: [[2,0],[1,0],[4,0]]        
+          });
+          $(".tablesorter").tablesorter({ 
+            widgets: ['zebra'],
+          })          
+        } 
+      );    
+    </script>
+     <script>
+  $(document).ready(function() {
+    var schoolObjects;
+
+    $.ajax({
+      url: 'http://localhost:8111/api/v1/schools/?format=json',
+      success: function(resp) {
+        setupAutoComplete(resp);
+      },
+      select: function(event, ui) {
+        console.log('hello');
+      }
+    });
+
+    function setupAutoComplete(resp) {
+      schoolObjects = resp.objects;
+      var sourceList = [];
+
+      for(var i=0; i<schoolObjects.length; i++) {
+        sourceList.push(schoolObjects[i].name);
+      }
+
+      $("#search").autocomplete({
+        source: sourceList
+      });
+    };
+
+    $("#search").on("autocompleteselect", function(event, ui) {
+      var school;
+
+      for(var i=0; i<schoolObjects.length; i++) {
+        if(schoolObjects[i].name === ui.item.value) {
+          school = schoolObjects[i];
+          break;
+        }
+      }
+
+      window.location = 'http://localhost:8111/school/' + school.school_code;
+    });
+
+  });
+  </script>
+
+        <div class="container content-inner">
+            <div class="section row">
+                <div class="twelve columns mobile-full" id="breadcrumbs">
+                    <div><a href="/analysis">Home</a> > <a href="/curricula/">Curricula</a></div>
+                </div>
+            </div>
+        </div>  
+        <div class="container content-inner">
+            <div class="section row">
+                <div class="twelve columns mobile-full">
+                    <table class="tablesorter">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    ISBN
+                                </th>                                                                
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    # Schools
+                                </th>   
+                                <th>
+                                    # Books
+                                </th>                                                                                                           
+                            </tr>              
+                        </thead>      
+                    {% for subject, value in output.items %}
+                    <tbody>
+                        <tr>
+                            <td>{{ value.id }}</td>
+                            <td>{{ value.isbn }}</td>                            
+                            <td>{{ subject }}</td>
+                            <td>{{ value.number_schools }}</td>
+                            <td>{{ value.number_books }}</td>                            
+                        </tr>
+                    </tbody>
+                    {% endfor %}                    
+                    <h2>{{ curriculum_list.curriculum }}, Grade {{ curriculum_list.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ curriculum_list.grade_level_end }} {% endif %}</h2>
+                        <div class="section row">
+                            <div class="three columns mobile-full">                     
+                                <h5>Subject</h5>{{ curriculum_list.curriculum.subject_area }}
+                            </div>
+                            <div class="three columns mobile-full">                     
+                                <h5>Publisher</h5>{{ curriculum_list.curriculum.publisher }}
+                            </div>                  
+                            <div class="three columns mobile-full">                     
+                                <h5>Grade</h5>{{ curriculum_list.grade_level_start }} {% if curriculum_list.grade_level_start == curriculum_list.grade_level_end %} {% else %} to {{ curriculum_list.grade_level_end }} {% endif %}
+                            </div>      
+                            <div class="three columns mobile-full">                     
+                                <h5>Approved</h5>
+                                {% for approved in curriculum_list.approved_for_type.all %}
+                                    {{ approved }}
+                                {% endfor %}
+                            </div>                                  
+                        </div>          
+                    <hr>
+                    <h4>Learning Materials</h4>
+                    <table>
+                        <tr>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Material Type
+                            </th>   
+                            <th>
+                                Teacher's Edition
+                            </th>                                                           
+                            <th>
+                                ISBN
+                            </th>                                                   
+                        </tr>
+                        {% for book in curriculum_list.materials.all %}
+                            <tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+                                <td>
+                                    <a href="/analysis/learningmaterial/{{ book.isbn }}/">{{ book.title }}</a>
+                                </td>
+                                <td>
+                                    {{ book.material_type }}
+                                </td>   
+                                <td>
+                                    {{ book.isTeacherEdition }}
+                                </td>                                                                   
+                                <td>
+                                    {{ book.isbn }}
+                                </td>   
+                            </tr>                       
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+{% include "footer.html" %}
