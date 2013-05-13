@@ -20,12 +20,14 @@ app.getChartData = function(school_pk, grade) {
       url: '/api/v1/school_curricula/' + school_pk + '/?format=json&grade=' + grade
     }),
     $.ajax({
+      dataType: 'json',
       url: '/static/data/pssa.json'
     })
   ).then(function(schoolInfo, districtInfo) {
-    console.log(districtInfo);
     var schoolScores = app.formatPSSASchoolData(JSON.parse(schoolInfo[0].curriculum.pssa_test_scores));
-    var districtScores = JSON.parse(districtInfo[0])[grade];
+    var districtScores = districtInfo[0][grade];
+    console.log(schoolScores);
+    console.log(districtScores);
     if(schoolScores.read.length > 1) {
       app.createChart(schoolScores, districtScores, 'read', 'reading-scores');
       app.createChart(schoolScores, districtScores, 'math', 'math-scores');
