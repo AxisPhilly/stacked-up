@@ -12,4 +12,5 @@ class IndexListView(ListView):
         filtered = sorted(SchoolAggregate.objects.all(), key=lambda a: -a.books_for_students())
         context['top_schools'] = filtered[:5]
         context['bottom_schools'] = reversed(filtered[-5:])
+        context['request'] = self.request
         return context

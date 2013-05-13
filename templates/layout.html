@@ -7,10 +7,16 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tooltipster.css" />        
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css?v1">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v4">
-    <meta property="og:title" content="" />
-    <meta property="og:type" content="" />
-    <meta property="og:url" content="" />
+    <meta property="og:title" content="{% block ogtitle %}Empty Shelves{% endblock %}" />
+    <meta property="og:type" content="news_application" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:image" content="" />
+    <meta property="og:description" content="Empty Shelves allows you to explore and understand the Philadelphia School District's inventory as related to curriculum in schools.">
+    <meta property="twitter:site" content="@AxisPhilly">
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="Empty Shelves">
+    <meta property="twitter:description" content="Empty Shelves allows you to explore and understand the Philadelphia School District's inventory as related to curriculum in schools.">
     <script type="text/javascript" src="//use.typekit.net/nuc2aoh.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>        
   </head>

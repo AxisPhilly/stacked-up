@@ -211,4 +211,5 @@ class SchoolAggregateView(ListView):
         context['curriculum_list'] = self.curriculum_list
         context['pssa_test_scores'] = json.dumps([obj for obj in cohort_set.values()])
         context['school'] = self.school
+        context['request'] = self.request
         return context
