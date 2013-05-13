@@ -287,7 +287,7 @@ table td {
   line-height: 18px;
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid #eeeeee;
+  border-top: 4px solid #eeeeee;
 }
 table thead th {
   vertical-align: bottom;

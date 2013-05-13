@@ -73,6 +73,12 @@
                         <thead>
                             <tr>
                                 <th>
+                                    ID
+                                </th>
+                                <th>
+                                    ISBN
+                                </th>                                                                
+                                <th>
                                     Title
                                 </th>
                                 <th>
@@ -86,6 +92,8 @@
                     {% for subject, value in output.items %}
                     <tbody>
                         <tr>
+                            <td>{{ value.id }}</td>
+                            <td>{{ value.isbn }}</td>                            
                             <td>{{ subject }}</td>
                             <td>{{ value.number_schools }}</td>
                             <td>{{ value.number_books }}</td>                            

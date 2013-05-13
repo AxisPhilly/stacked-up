@@ -1,3 +1,15 @@
+.scores-container div {
+  font-style: normal !important;
+  font-size: 12px !important;
+  font-family: helvetica, arial, sans-serif !important; 
+  border-top-left-radius: 0 !important; 
+  border-top-right-radius: 0 !important; 
+  border-bottom-right-radius: 0 !important; 
+  border-bottom-left-radius: 0 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;  
+}
+
 body, input {
   font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
 }
@@ -34,6 +46,16 @@ p {
   border-bottom: 2px solid #eee;
   padding: 16px 0 12px 0;
 }
+
+#sub-header {
+  background-color: #fff; 
+  font-size: 18px;
+  margin-bottom: .1em;
+  border-bottom: 2px solid #eee;
+  padding: 16px 0 12px 0;
+  margin-bottom: 2em;
+}
+
   .top-bar > .container > li {
     float: left;
     list-style: none;
@@ -255,10 +277,13 @@ a:active {
   color: #222222;
 }
 
+
+
 /* Graphs */
 .scores-container {
-  height: 200px;
-  width: 400px;
+  height: 95px;
+  width: 220px;
+  float: right;
 }
 
 /* Tables */

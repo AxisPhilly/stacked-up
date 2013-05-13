@@ -38,10 +38,10 @@
                     <div>
                         {% if curriculum_list %}                         
                             {% for subject, value in curriculum_list.items %}
-                                <h2 class="subject-title">{{ subject.title }}</h2>
                                 <div class="subject-intro">
-                                    <div id="{{ subject }}-scores"></div>
-                                </div>
+                                    <div id="{{ subject }}-scores"><div style="font-size: 12px; text-align: center">PSSA Scores</div></div>
+                                </div>                            
+                                <h2 class="subject-title">{{ subject.title }}</h2>
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
                                     <div class="block">
