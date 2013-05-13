@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Empty Shelves: Exploring Philadelphia School District Curricula{% endblock %}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tooltipster.css" />        
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css?v1">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v4">
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <script type="text/javascript" src="//use.typekit.net/nuc2aoh.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>        
+  </head>
+  <body>    
+    <div id="header" class="top-bar">
+      <ul class="container content-inner cf">
+        <li class="main-logo"><a href="http://www.axisphilly.org" class="pan"><img src="/static/images/axisphilly-logo.png" height="28"></a></li>
+            <li class="menu-item" id="first-menu-item"><a href="http://axisphilly.org/projects/">Our Projects</a></li>
+            <li class="menu-item"><a href="http://www.axisphilly.org/tools">Tools &amp; Data</a></li>
+            <li class="menu-item"><a href="http://www.axisphilly.org/about">About</a></li>
+            <li class="social"><a href="http://www.twitter.com/AxisPhilly"><i class="social-foundicon-twitter"></i></a></li>
+            <li class="social"><a href="http://www.facebook.com/AxisPhilly"><i class="social-foundicon-facebook"></i></a></li>
+            <li class="social"><a href="http://www.axisphilly.org/?feed=rss"><i class="social-foundicon-rss"></i></a></li>
+      </ul>
+    </div>
+    <div id="header" class="top-bar">
+        <div class="container content-inner cf">
+            <a href="/">
+                <h6 id="project-header">Empty Shelves</h6>
+                <h6 id="project-sub-header">Exploring Philadelphia School District Curricula</h6>
+            </a>
+        </div>
+    </div>    
+    {% block content %} 
+    {% endblock %} 
+    <div class="credits container content-inner">
+      A project of <a href="http://axisphilly.org">AxisPhilly</a>. 
+      <a href="https://github.com/AxisPhilly/sdp_curricula">View the source on Github</a>.
+    </div>
+
+    <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script>
+    <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
+    <script src="{{ STATIC_URL }}js/canvasjs.min.js"></script>
+    <script src="{{ STATIC_URL }}js/site.js?v4"></script>
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, "ui_click": true};</script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5182ce4b100f38d0"></script>
+    {% block scripts %}{% endblock %}
+    </body>
+</html>
