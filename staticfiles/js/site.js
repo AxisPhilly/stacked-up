@@ -54,7 +54,6 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
   $('#' + container).addClass('scores-container');
   var chart = new CanvasJS.Chart(container, {  
     title: {
-      text: "PSSA " + subject + " combined percent scores",
       fontSize: 12
     },
     theme: "theme2",
@@ -68,15 +67,20 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
       tickLength: 0
     },
     axisY: {
-      valueFormatString: "#'%'"
+      valueFormatString: "#'%'",
+      lineThickness: 0,
+      labelFontSize: 12,
     },
     toolTip: {
-      shared: true
+      shared: true,
+      borderColor: "#ffffff",      
     },
     data: [
       {
         type: "line",
-        lineThickness: 2,
+        markerSize: 5,
+        color: "#aaa",
+        lineThickness: 1,
         name: "District",
         dataPoints: [
           {x: new Date(2008,08,1), y: districtScores[subject][0]},
@@ -87,7 +91,9 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
       },
       {
         type: "line",
-        lineThickness: 2,
+        markerSize: 5,        
+        color: "#1fb4fc",
+        lineThickness: 1,
         name: "School",
         dataPoints: [
           {x: new Date(2008,08,01), y: schoolScores[subject][0]},
