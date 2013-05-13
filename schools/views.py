@@ -6,6 +6,7 @@ from core.models import SchoolAggregate
 from django.views.generic import ListView
 import simplejson as json
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 class SchoolCurriculaMatch(ListView):
@@ -99,11 +100,18 @@ class SchoolDetailView(ListView):
         return context
 
 
-class SchoolsListView(ListView):
+class AnalysisSchoolsListView(ListView):
 
     context_object_name = "schools"
     template_name = "analysis/schools_list.html"
     model = School
+
+
+class SchoolsListView(ListView):
+
+    context_object_name = "schools"
+    template_name = "school_list.html"
+    queryset = School.objects.filter(~Q(schoolaggregate=None))
 
 
 class SchoolAggregateView(ListView):

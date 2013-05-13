@@ -177,6 +177,16 @@ h6,
 	font-family: "minion pro", "Times New Roman", times, serif;
 }
 
+.schools-list h4 {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.schools-list ul {
+  list-style: none;
+  padding: 0;
+}
+
 .curriculum-title {
 	font-weight: bold;
   margin-top: 4px;
