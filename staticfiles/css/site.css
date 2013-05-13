@@ -84,6 +84,11 @@ p {
   color: #e1e1e1 !important;
 }
 
+.change-input {
+  font-size: 15px;
+  width: 5em;
+}
+
 /* Icons */
 .tooltip-icon, 
 .enough .icon, .notEnough .icon, .unknown .icon {
