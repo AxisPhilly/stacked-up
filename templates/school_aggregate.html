@@ -97,7 +97,7 @@
                                     </table>
                                     <div class="block shortfall-detail">
                                         <p>It would cost 
-                                            $<span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">{{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
+                                            <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
                                             to provide each student in grade {{ current_grade }} at {{ school.name.title }} with the 
                                             <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}">{{ grade_curriculum.book_shortfall }}</span> missing materials listed above.</p>
                                         <hr>

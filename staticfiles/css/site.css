@@ -220,6 +220,12 @@ h6,
   margin-bottom: 2em;
 }
 
+.changed {
+  background-color: #fff5a4;
+  -webkit-transition: background-color .25s linear;
+  -moz-transition: background-color .25s linear;
+  transition: background-color .25s linear;
+}
 /* Columns */
 
 .container {

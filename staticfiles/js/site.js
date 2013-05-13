@@ -188,7 +188,7 @@ $('.needed-material input').on('change', function() {
   var $shortfallDetail = $(needed).parents('.tablesorter').next('.shortfall-detail');
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
-  var shortfallCount = 0; 
+  var shortfallCount = 0;
   var shortfallCost = 0;
   $container.find('.material-difference').each(function(){
     var diff = this.innerHTML.trim();
@@ -212,12 +212,18 @@ $('.needed-material input').on('change', function() {
               price = Number(resp.prices[0].value);
               prices[materialKey] = price;
               shortfallCost += price * (diff * -1);
-              $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
+              $shortfallCost.html('$' + numberWithCommas(shortfallCost.toFixed(2)));
             }
           });
       }
     }
     $shortfallCount.html(shortfallCount);
-    $shortfallCost.html(numberWithCommas(shortfallCost.toFixed(2)));
+    $shortfallCost.html('$' + numberWithCommas(shortfallCost.toFixed(2)));
+    $shortfallCount.addClass('changed');
+    $shortfallCost.addClass('changed');
+    window.setTimeout(function() {
+      $shortfallCount.removeClass('changed');
+      $shortfallCost.removeClass('changed');
+    }, 600);
   });
 });
