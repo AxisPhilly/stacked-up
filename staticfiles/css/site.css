@@ -255,11 +255,11 @@ h6,
   padding: 5px;
 }
 
-.grade-listing h4 .grade:first-child:before{
+.grade-listing h3 .grade:first-child:before{
   content:none;
 }
 
-.grade-listing h4 .grade:first-child{
+.grade-listing h3 .grade:first-child{
   margin-left: 4px;
 }
 
