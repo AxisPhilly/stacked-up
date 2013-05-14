@@ -19,7 +19,7 @@ hr {
 }
 
 body, input {
-  font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
 }
 
 body {
@@ -33,7 +33,7 @@ img {
 p {
   font-family: "minion-pro", georgia, serif;
   font-size: 18px;
-  color: #444;
+  color: #222222;
   line-height: 1.4em;
 }
 
@@ -193,13 +193,13 @@ h6,
 
 #project-header {
   margin-bottom: 6px;  
-  font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 #project-sub-header {
   font-size: 14px;
   margin-bottom: 0;
-  font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 #first-menu-item {
@@ -208,6 +208,7 @@ h6,
 
 #headline {
 	font-family: "minion pro", "Times New Roman", times, serif;
+  margin-bottom: .5em;
 }
 
 .schools-list h4 {
@@ -255,11 +256,11 @@ h6,
   padding: 5px;
 }
 
-.grade-listing h6 .grade:first-child:before{
+.grade-listing h4 .grade:first-child:before{
   content:none;
 }
 
-.grade-listing h6 .grade:first-child{
+.grade-listing h4 .grade:first-child{
   margin-left: 4px;
 }
 
@@ -270,7 +271,7 @@ h6,
 }
 
 #inventory-selector {
-  font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
 }
 
 .changed {
