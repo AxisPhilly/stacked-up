@@ -25,7 +25,6 @@
                         <div class="h3">How to use this tool</div>                        
                         <p>When you change the number of needed materials from the default, you'll see that the number of materials needed for that curriculum changes, as does the price to close the gap (based on current negotated prices for each material). If there are no curriculum listed, it means we found no matches in that school's inventory for a curriculum approved for this grade/subject. Some records have No Records as the quantity, meaning that while the material is common for the curriculum, it is not recorded at all in the school's inventory. </p>
                     </div>
-
                 </div>
             </div>
             <div class="section row">
@@ -52,10 +51,10 @@
                         {% if curriculum_list %}                         
                             {% for subject, value in curriculum_list.items %}
                                 <div class="subject-intro">
-                                    <div id="{{ subject }}-scores">
-                                    <div>
+                                    <div class="scores-container">
+                                        <div id="{{ subject }}-scores"></div>
+                                        <div id="{{ subject }}-chart-title" class="chart-title"></div>
                                     </div>
-
                                 </div>                            
                                 <h2 class="subject-title">{{ subject.title }}</h2>
                                 {% if value.curricula.items %}

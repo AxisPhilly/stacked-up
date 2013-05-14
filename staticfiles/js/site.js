@@ -29,8 +29,8 @@ app.getChartData = function(school_pk, grade) {
     console.log(schoolScores);
     console.log(districtScores);
     if(schoolScores.read.length > 1) {
-      app.createChart(schoolScores, districtScores, 'read', 'reading-scores');
-      app.createChart(schoolScores, districtScores, 'math', 'math-scores');
+      app.createChart(schoolScores, districtScores, 'read', 'reading-scores', 'reading-chart-title');
+      app.createChart(schoolScores, districtScores, 'math', 'math-scores', 'math-chart-title');
     }
   });
 };
@@ -49,9 +49,8 @@ app.formatPSSASchoolData = function(scores) {
   return fScores;
 };
 
-app.createChart = function(schoolScores, districtScores, subject, container) {
-  $('#' + container).addClass('scores-container');
-  var chart = new CanvasJS.Chart(container, {  
+app.createChart = function(schoolScores, districtScores, subject, container, titleContainer) {
+  var chart = new CanvasJS.Chart(container, {
     title: {
       fontSize: 12
     },
@@ -68,11 +67,11 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
     axisY: {
       valueFormatString: "#'%'",
       lineThickness: 0,
-      labelFontSize: 12,
+      labelFontSize: 12
     },
     toolTip: {
       shared: true,
-      borderColor: "#ffffff",      
+      borderColor: "#ffffff"
     },
     data: [
       {
@@ -90,7 +89,7 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
       },
       {
         type: "line",
-        markerSize: 5,        
+        markerSize: 5,
         color: "#1fb4fc",
         lineThickness: 1,
         name: "School",
@@ -98,12 +97,17 @@ app.createChart = function(schoolScores, districtScores, subject, container) {
           {x: new Date(2008,08,01), y: schoolScores[subject][0]},
           {x: new Date(2009,09,01), y: schoolScores[subject][1]},
           {x: new Date(2010,10,01), y: schoolScores[subject][2]},
-          {x: new Date(2011,11,01), y: schoolScores[subject][3]},
+          {x: new Date(2011,11,01), y: schoolScores[subject][3]}
         ]
       }
     ]
   });
   chart.render();
+  if (subject == "read")
+    var sub = "Reading";
+  else
+    var sub = "Mathematics";
+  $('#' + titleContainer).html('<div class="chart-caption">PSSA ' + sub + ' Scores</div>');
 };
 
 // jQuery global instatiations

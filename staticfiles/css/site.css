@@ -318,6 +318,18 @@ a:active {
   float: right;
 }
 
+#reading-scores {
+  height: 90px;
+}
+
+#math-scores {
+  height: 90px;
+}
+
+.chart-caption {
+  text-align: center;
+}
+
 /* Tables */
 
 table th,
