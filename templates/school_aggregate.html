@@ -36,14 +36,14 @@
                                 </span>
                                 {% endif %}
                             {% endfor %}
-                            <a href="/school/inventory/{{ school.school_code }}" class="right mrm">View full inventory for this school</a>
+                            <a href="/school/inventory/{{ school.school_code }}" id="full-inventory" class="right mrm">View full inventory for this school</a>
                         </h6>
                     </div>
                     <div>
                         {% if curriculum_list %}                         
                             {% for subject, value in curriculum_list.items %}
                                 <div class="subject-intro">
-                                    <div id="{{ subject }}-scores"><div style="font-size: 12px; text-align: center">PSSA Scores</div></div>
+                                    <div id="{{ subject }}-scores"></div>
                                 </div>                            
                                 <h2 class="subject-title">{{ subject.title }}</h2>
                                 {% if value.curricula.items %}
