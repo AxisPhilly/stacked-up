@@ -165,39 +165,39 @@ h6 {
 }
 h1,
 .h1 {
-  font-size: 49px;
+  font-size: 42px;
   margin-bottom: 0;
   font-weight: bold;
 }
 h2,
 .h2 {
-  font-size: 39px;
+  font-size: 32px;
 }
 h3,
 .h3 {
-  font-size: 31px;
+  font-size: 24px;
 }
 h4,
 .h4 {
-  font-size: 25px;
+  font-size: 18px;
 }
 h5,
 .h5 {
-  font-size: 20px;
+  font-size: 14px;
 }
 h6,
 .h6 {
-  font-size: 18px;
+  font-size: 10px;
   text-transform: normal;
 }
 
 #project-header {
-  margin-bottom: 4px;  
+  margin-bottom: 6px;  
   font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 #project-sub-header {
-  font-size: 15px;
+  font-size: 14px;
   margin-bottom: 0;
   font-family: "ff-meta-web-pro", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
@@ -284,8 +284,8 @@ h6,
 .container {
   max-width: 1140px;
   margin: 0 auto;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* Links */
