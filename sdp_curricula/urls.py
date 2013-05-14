@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from curricula.views import LearningMaterialDetailView, GradeCurriculumDetailView, CurriculumListView, AnalysisIndexListView, GradeCurriculumUse
-from schools.views import SchoolDetailView, SchoolsListView, SchoolCurriculaMatch, AnalysisSchoolInventory
-from core.views import IndexListView
+from schools.views import SchoolDetailView, SchoolCurriculaMatch, AnalysisSchoolsListView, AnalysisSchoolInventory
+from core.views import IndexListView, SchoolsListView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     url(r'^analysis/$',
         AnalysisIndexListView.as_view()),
     url(r'^analysis/schools/$',
-        SchoolsListView.as_view()),
+        AnalysisSchoolsListView.as_view()),
     url(r'^analysis/school/match/(?P<id>(.+))/$',
         SchoolCurriculaMatch.as_view()),
     url(r'^analysis/school/inventory/(?P<id>(.+))/$',

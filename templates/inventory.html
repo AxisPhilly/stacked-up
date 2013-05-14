@@ -1,4 +1,5 @@
-{% include "header.html" %}
+{% extends "layout.html" %}
+    {% block content %}
     <div class="container content-inner" id="inventory">
       <div class="section row">
         <div class="three col mobile-full" id="breadcrumbs">
@@ -41,7 +42,7 @@
                                 {% for book in inventory %}
                                 <tr>
                                     <td>
-                                        {{ book.material.isbn }}
+                                        <a href="http://www.abebooks.com/servlet/SearchResults?isbn={{ book.material.isbn }}&sts=t&x=69&y=10">{{ book.material.isbn }}</a>
                                     </td>
                                     <td>
                                         {{ book.material.title }}
@@ -76,4 +77,4 @@
             </div>
         </div>
     </div>               
-{% include "footer.html" %}
+{% endblock %}

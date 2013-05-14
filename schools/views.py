@@ -107,13 +107,6 @@ class AnalysisSchoolsListView(ListView):
     model = School
 
 
-class SchoolsListView(ListView):
-
-    context_object_name = "schools"
-    template_name = "school_list.html"
-    queryset = School.objects.filter(~Q(schoolaggregate=None))
-
-
 class SchoolAggregateView(ListView):
 
     context_object_name = "curricula"
