@@ -248,8 +248,12 @@ h6,
   content:none;
 }
 
+.grade-listing h6 .grade:first-child{
+  margin-left: 4px;
+}
+
 .grade-listing {
-  background-color: #f0f0f0; padding: 12px 4px 8px 10px;
+  background-color: #eee; padding: 12px 0px 12px 10px;
   margin-bottom: 2em;
 }
 
