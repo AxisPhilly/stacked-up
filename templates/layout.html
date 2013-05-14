@@ -11,10 +11,13 @@
       <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v1">
       {% block extra_css %}{% endblock %}
     {% endcompress %}
+    <link rel="icon" href="https://s3.amazonaws.com/axisphilly-assets/images/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://s3.amazonaws.com/axisphilly-assets/images/favicon.png" type="image/x-icon" />
+
     <meta property="og:title" content="{% block ogtitle %}Stacked: Do Philly students have enough books?{% endblock %}" />
     <meta property="og:type" content="news_application" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="http://axisphilly.org/news/wp-content/themes/ally/images/transparent.png">
     <meta property="og:description" content="Stacked: See what curriculum your school is using and what textbooks are missing">
     <meta property="twitter:site" content="@AxisPhilly">
     <meta property="twitter:card" content="summary">
