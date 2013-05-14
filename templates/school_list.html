@@ -1,14 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-{% regroup schools by school_level as school_list %}
     <div class="schools-list container content-inner">
-    {% for school in school_list %}
-        <h4>{{ school.grouper.title }}</h4>
-        <ul>
-            {% for item in school.list %}
-              <li><a href="/school/{{ item.school_code }}">{{ item.name.title }}</a></li>
+        <table class="tablesorter">
+            <thead>
+                <tr>
+                    <th>
+                        School
+                    </th>
+                    <th>
+                        School Type
+                    </th>
+                    <th class="tooltip" title="The difference between the common materials and the assumed curriculum in use for each grade.">
+                        Difference
+                        <span class="tooltip-icon"></span>
+                    </th>
+                </tr> 
+            </thead>
+            {% for school in schools %}
+            <tr>
+                <td><a href="/school/{{ school.school_code }}">{{ school.name.title }}</a></td>
+                <td>{{ school.school_level.title }}</td>
+                <td>123</td>
+            <tr>
             {% endfor %}
-        </ul>
-    {% endfor %}
+        </table>
     </div>
 {% endblock %}
