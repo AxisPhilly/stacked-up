@@ -31,7 +31,7 @@
             <div class="section row">
                 <div class="col twelve mobile-full">            
                     <div class="grade-listing">
-                        <h4 id="inventory-selector" class="mbn">Inventory for Grade: 
+                        <h3 id="inventory-selector" class="mbn">Inventory for Grade: 
                             {% for grade in grades %}
                                 {% if current_grade == grade.human_grade %}
                                     <span class="selected grade strong">
@@ -46,7 +46,7 @@
                                 {% endif %}
                             {% endfor %}
                             <a href="/school/inventory/{{ school.school_code }}" id="full-inventory" class="right mrm">View full inventory for this school</a>
-                        </h4>
+                        </h3>
                     </div>
                     <div>
                         {% if curriculum_list %}                         
@@ -116,7 +116,8 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <p>No curriculum matched any records at this school.</p>
+                                <p class="no-match">No curriculum matched any records at this school.</p>
+                                <hr>
                             {% endif %}
                         {% endfor %}
                     {% else %}
