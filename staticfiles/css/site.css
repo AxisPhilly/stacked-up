@@ -2,6 +2,10 @@ hr {
   background-color: #ccc;
 }
 
+.no-match {
+  padding-bottom: 1em;
+}
+
 .scores-container div {
   font-style: normal !important;
   font-size: 12px !important;
