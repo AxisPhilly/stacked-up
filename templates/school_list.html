@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load humanize %}
 {% block content %}
     <div class="schools-list container content-inner">
         <table class="tablesorter">
@@ -10,7 +11,7 @@
                     <th>
                         School Type
                     </th>
-                    <th class="tooltip" title="The difference between the common materials and the assumed curriculum in use for each grade.">
+                    <th class="tooltip" title="The total difference between the common materials and the assumed curriculum in use for each grade.">
                         Difference
                         <span class="tooltip-icon"></span>
                     </th>
@@ -18,9 +19,9 @@
             </thead>
             {% for school in schools %}
             <tr>
-                <td><a href="/school/{{ school.school_code }}">{{ school.name.title }}</a></td>
-                <td>{{ school.school_level.title }}</td>
-                <td>123</td>
+                <td><a href="/school/{{ school.school.school_code }}">{{ school.school.name.title }}</a></td>
+                <td>{{ school.school.school_level.title }}</td>
+                <td>{{ school.books_for_students }}</td>
             <tr>
             {% endfor %}
         </table>

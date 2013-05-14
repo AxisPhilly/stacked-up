@@ -17,3 +17,8 @@ class IndexListView(ListView):
         context['request'] = self.request
         context['schools'] = School.objects.filter(~Q(schoolaggregate=None))
         return context
+
+class SchoolsListView(ListView):
+    context_object_name = "schools"
+    template_name = "school_list.html"
+    queryset = SchoolAggregate.objects.prefetch_related('school').all().order_by('school')
