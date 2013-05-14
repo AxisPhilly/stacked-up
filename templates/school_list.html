@@ -17,13 +17,15 @@
                     </th>
                 </tr> 
             </thead>
-            {% for school in schools %}
-            <tr>
-                <td><a href="/school/{{ school.school.school_code }}">{{ school.school.name.title }}</a></td>
-                <td>{{ school.school.school_level.title }}</td>
-                <td>{{ school.books_for_students }}</td>
-            <tr>
-            {% endfor %}
+            <tbody>
+                {% for school in schools %}
+                    <tr>
+                        <td><a href="/school/{{ school.school.school_code }}">{{ school.school.name.title }}</a></td>
+                        <td>{{ school.school.school_level.title }}</td>
+                        <td>{{ school.books_for_students }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 {% endblock %}
