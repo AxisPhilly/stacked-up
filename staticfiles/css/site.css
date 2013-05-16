@@ -331,14 +331,22 @@ a:active {
 
 /* Tables */
 
-table th,
+table th {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;  
+}
+
+.headerSortDown, .headerSortUp, .sorted {
+  background-color: #eee;
+}
+
 table td {
-  border-top: 0;
+  border-top: 1px dotted #222;
 }
 
 .tablesorter th {
-  background-color: #fff;
   padding: 12px;
+  background-color: #eee;  
 }
 .tablesorter .header {
   background-image: url(../images/bg.gif);  
