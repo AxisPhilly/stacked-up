@@ -19,7 +19,7 @@ hr {
 }
 
 #full-inventory {
-  font-size: 15px;
+  font-size: 0.8em;
 }
 
 body, input {
@@ -146,10 +146,6 @@ p {
 
 .unknown > .icon {
   background: url('../images/circleNA.png') no-repeat;
-}
-
-.note {
-  color: #aaa;
 }
 
 /* Headings */

@@ -103,27 +103,25 @@ app.createChart = function(schoolScores, districtScores, subject, container, tit
     ]
   });
   chart.render();
-  if (subject == "read")
-    var sub = "Reading";
-  else
-    var sub = "Mathematics";
+
+  var sub = subject === "read" ? "Reading" : "Mathematics";
   $('#' + titleContainer).html('<div class="chart-caption">PSSA ' + sub + ' Scores</div>');
 };
 
 // jQuery global instatiations
-$(document).ready(function() 
-  { 
-    $("#matched-grade-curricula").tablesorter({ 
+$(document).ready(function()
+  {
+    $("#matched-grade-curricula").tablesorter({
       widgets: ['zebra'],
-      sortList: [[2,0],[1,0],[4,0]]        
+      sortList: [[2,0],[1,0],[4,0]]
     });
     $(".tablesorter").tablesorter({
-      sortList: [[0,0]],
+      sortList: [[0,0]]
     });
     $('.tooltip').tooltipster({
       maxWidth: 250
     });
-  } 
+  }
 );
 
 // Search
