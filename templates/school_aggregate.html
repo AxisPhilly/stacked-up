@@ -122,7 +122,7 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <p class="no-match">No curriculum matched any records at this school.</p>
+                                <p class="no-match">We didn't find any inventory records at this school that matched an approved curriculum for this subject in this grade. <a href="/school/inventory/{{ school.school_code }}">View all inventory records at this school</a>.</p>
                                 <hr>
                             {% endif %}
                         {% endfor %}
