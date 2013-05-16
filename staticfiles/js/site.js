@@ -183,11 +183,11 @@ $('.needed-material input').on('change', function() {
   var currentDifference = originalDifference - calc;
   $difference.html(currentDifference);
   if (currentDifference >= 0) {
-    $difference.next('td').removeClass('notEnough unknown').addClass('enough')
+    $difference.next('td').removeClass('notEnough').addClass('enough')
     .find('.icon').html('1');
   }
   else {
-    $difference.next('td').removeClass('enough unknown').addClass('notEnough')
+    $difference.next('td').removeClass('enough').addClass('notEnough')
     .find('.icon').html('-1');
   }
   if (currentDifference > 0) {
