@@ -144,7 +144,7 @@ class SchoolAggregateView(ListView):
                 numerical_difference = difference
             else:
                 number_of_books = 'No records found'
-                difference = 'N/A'
+                difference = students_in_grade * -1
                 numerical_difference = students_in_grade * -1
                 cost_of_book = NegotiatedPrice.objects.filter(material=material)[0].value
                 enough_books = 'None'
