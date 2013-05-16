@@ -129,6 +129,8 @@ p {
   width: 16px;
   height: 16px;
   display: block;
+  text-indent: -9999px;
+  direction: ltr;
 }
 
 .tooltip-icon {

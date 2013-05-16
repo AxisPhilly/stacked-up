@@ -117,7 +117,7 @@
                                                     {{ material.difference }}
                                                     </td>       
                                                 <td class="{% if material.enough == 'True' %}enough{% elif material.enough == 'False' %}notEnough{% else %}unknown{% endif %}">
-                                                    <span class="icon"></span>
+                                                    <span class="icon">{% if material.enough == 'True' %}1{% elif material.enough == 'False' %}-1{% else %}0{% endif %}</span>
                                                 </td>
                                             </tr>
                                         {% endfor %}
