@@ -66,13 +66,6 @@
                                     <div class="block">
                                         <h3 class="curriculum-title">{% if grade_curriculum.likely_curriculum %}<img class="left mrm tooltip" src="{{ STATIC_URL }}images/book-icon-blue.png" height="20" style="margin-top: 4px" title="Inventory records suggest that this curriculum is mostly likely being used at this school. Is it?">{% endif %}{{ title }}</h3>
                                     </div>
-                                    <div class="block shortfall-detail">
-                                        <p>It would cost 
-                                            <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
-                                            to purchase the 
-                                            <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}">{{ grade_curriculum.book_shortfall }}</span> missing materials listed below for the students in grade {{ current_grade }} at {{ school.name.title }}. This does not take into account possible redistribution from other schools or the school district. Update the "needed material" numbers below to change the number of materials needed for this grade (ex. if you believe there may be more materials than recorded).</p>
-                                        <hr>
-                                    </div>
                                     <table class="tablesorter">
                                         <thead>
                                             <tr>
@@ -123,6 +116,14 @@
                                         {% endfor %}
                                         </tbody>
                                     </table>
+                                    <div class="block shortfall-detail">
+                                        <p>It would cost 
+                                            <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
+                                            to purchase the 
+                                            <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}">{{ grade_curriculum.book_shortfall }}</span> missing materials listed above for the students in grade {{ current_grade }} at {{ school.name.title }}. This does not take into account possible redistribution from other schools or the school district.</p>
+                                            <!--  Update the "needed material" numbers below to change the number of materials needed for this grade (ex. if you believe there may be more materials than recorded). -->
+                                        <hr>
+                                    </div>
                                 {% endfor %}
                             {% else %}
                                 <p class="no-match">We didn't find any inventory records at this school that matched an approved curriculum for this subject in this grade. <a href="/school/inventory/{{ school.school_code }}">View all inventory records at this school</a>.</p>
