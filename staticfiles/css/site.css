@@ -56,7 +56,7 @@ p {
   font-size: 18px;
   margin-bottom: .1em;
   border-bottom: 2px solid #eee;
-  padding: 16px 0 12px 0;
+  padding: 12px 0 8px 0;
 }
 
 #sub-header {
@@ -64,8 +64,8 @@ p {
   font-size: 18px;
   margin-bottom: .1em;
   border-bottom: 2px solid #eee;
-  padding: 16px 0 12px 0;
-  margin-bottom: 2em;
+  padding: 12px 0 8px 0;
+  margin-bottom: 1.7em;
 }
 
   .top-bar > .container > li {
@@ -132,7 +132,7 @@ p {
 }
 
 .tooltip-icon {
-  background: url('../images/tooltip.png') no-repeat;
+  background: url('../images/tooltip2.png') no-repeat;
   display: inline-block;
 }
 
