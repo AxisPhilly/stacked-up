@@ -7,8 +7,8 @@
     {% compress css %}
       <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />
       <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tooltipster.css" />        
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css?">
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?">
+      <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+      <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v1">
       {% block extra_css %}{% endblock %}
     {% endcompress %}
     <link rel="icon" href="https://s3.amazonaws.com/axisphilly-assets/images/favicon.png" type="image/x-icon" />
@@ -62,7 +62,7 @@
       <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script>
       <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
       <script src="{{ STATIC_URL }}js/canvasjs.min.js"></script>
-      <script src="{{ STATIC_URL }}js/site.js?"></script>
+      <script src="{{ STATIC_URL }}js/site.js?v1"></script>
       {% block scripts %}{% endblock %}
     {% endcompress %}
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, "ui_click": true};</script>
