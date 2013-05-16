@@ -193,7 +193,7 @@ $('.needed-material input').on('change', function() {
   }
   var materialPk = $difference.attr('data-material-pk');
   // Locate the container of the shortfall info
-  var $shortfallDetail = $(needed).parents('.tablesorter').next('.shortfall-detail');
+  var $shortfallDetail = $container.siblings('.shortfall-detail');
   var $shortfallCost = $shortfallDetail.find('.shortfall-cost');
   var $shortfallCount = $shortfallDetail.find('.shortfall-count');
   var shortfallCount = 0;
