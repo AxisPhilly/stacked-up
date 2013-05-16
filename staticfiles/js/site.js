@@ -117,8 +117,8 @@ $(document).ready(function()
       widgets: ['zebra'],
       sortList: [[2,0],[1,0],[4,0]]        
     });
-    $(".tablesorter").tablesorter({ 
-      widgets: ['zebra']
+    $(".tablesorter").tablesorter({
+      sortList: [[0,0]],
     });
     $('.tooltip').tooltipster({
       maxWidth: 250
