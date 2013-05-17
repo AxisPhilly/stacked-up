@@ -1,4 +1,6 @@
-# Stacked Up: Do Philly students have enough books?
+# Stacked Up
+
+## Do Philly students have enough books?
 
 Explore the textbook inventory of Philadelphia public schools and see if schools have enough reported books
 to teach approved reading and math curriculum.
@@ -15,10 +17,10 @@ Getting started:
         vagrant up # this will take a while your first time
 
         vagrant ssh # ssh into the virtual machine
+        
+        # then, within the SSH session:
 
         pip install -r requirements.txt # install the requirements, you should only have to do this the first time
-
-        (then, within the SSH session:)
           
         pg_restore -U postgres -d sdp_curricula sdp_curricula.dump # load all the datas
 
