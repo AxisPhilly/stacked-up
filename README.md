@@ -1,6 +1,7 @@
-# Curricula Navigator
+# Stacked Up: Do Philly students have enough books?
 
-This project stores and ...
+Explore the textbook inventory of Philadelphia public schools and see if schools have enough reported books
+to teach approved reading and math curriculum.
 
 ## Running locally
 
@@ -21,7 +22,7 @@ Getting started:
           
         pg_restore -U postgres -d sdp_curricula sdp_curricula.dump # load all the datas
 
-        ./manage.py runserver 0.0.0.0:8000
+        ./manage.py runserver 0.0.0.0:8000 # or sdprun for a shortcut
 
 Your app is then accessible on `localhost:8111` (where your vagrant port was setup, note that it will not be on 8000).
 
@@ -35,4 +36,4 @@ This is how you'll start the app when you want to work on it. You are now in a v
 
 ## Thanks
 
-This project uses [vagrant-django-template](https://github.com/torchbox/vagrant-django-template) to get up and running quickly.
+This project leverages [vagrant-django-template](https://github.com/torchbox/vagrant-django-template) to get up and running quickly.
