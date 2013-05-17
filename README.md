@@ -1,6 +1,6 @@
 # Stacked Up
 
-## Do Philly students have enough books?
+## Do Philly students have the books they need?
 
 Explore the textbook inventory of Philadelphia public schools and see if schools have enough reported books
 to teach approved reading and math curriculum.
