@@ -19,15 +19,12 @@
                 <div class="col twelve mobile-full" id="graph-sidebar">        
                     <div class="col six mobile-full">        
                         <div class="h3">What's here?</div>
-                        <p>Below is inventory data about the reading and math programs at {{ school.name.title }}. Materials shown are those deemed to likely to be necessary for students in a classroom.</p>
-                        <p>A curriculum is shown for a grade if there is some evidence of the curriculum being present at the school, either in the common materials (shown), or other materials that you can see in the full inventory. Some records have "No records" as the quantity, meaning that while the material is common for the curriculum, it is not recorded at all in the school's inventory.</p>
-                        <p>PSSA test scores will be displayed for grades 3-5, 6-8, and 11. The inventory data was collected from the Philadelphia School District's inventory system, the number of students from their enrollment records.</p> 
+                        <p>Below is inventory data about the reading and math programs at {{ school.name.title }}. For each subject, a curriculum is displayed if there is some evidence of that curriculum in the school's inventory.</p>
+                        <p>The materials displayed for each curriculum are those deemed to likely to be necessary for students in a classroom. Some materials have "No records" displayed as the quantity, meaning that while the material is common for the curriculum, it is not recorded at all in the school's inventory.</p>
                     </div>
                     <div class="col six mobile-full">
                         <div class="h3">How to use this tool</div>
-                        <p>For each curriculum, you'll see the common materials needed for students, and below, you'll see how much it would cost to close the gap for the number of needed materials (defaults to 1 material per student).</p> 
-                        <p>By changing the "Needed Materials" column, you'll update this cost/number of missing materials, for example, if you believe that it is not necessary to have one material per student for a given curriculum.</p>                      
-                        <p>When you change the number of needed materials from the default, you'll see that the number of materials needed for that curriculum changes, as does the price to close the gap (based on current negotated prices for each material).</p>
+                        <img src="{{ STATIC_URL }}images/needed.png" style="float: right; margin-left: 10px"><p>For each curriculum, you'll see the common materials needed for students along with the cost to close the gap for the number of needed materials. By changing the "Needed Materials" column, you'll see that the number of materials needed for that curriculum changes, as does the price to close the gap.</p>
                     </div>
                 </div>
             </div>
@@ -59,7 +56,7 @@
                                         <div id="{{ subject }}-scores"></div>
                                         <div id="{{ subject }}-chart-title" class="chart-title"></div>
                                     </div>
-                                </div>                            
+                                </div>
                                 <h2 class="subject-title">{{ subject.title }}</h2>
                                 {% if value.curricula.items %}
                                     {% for title, grade_curriculum in value.curricula.items %}
@@ -79,8 +76,8 @@
                                                 <th>
                                                     Recorded Inventory
                                                 </th>
-                                                <th class="tooltip" title="Defaults to number of students in grade ({{ students }} for this grade in '12-'13). If you want to know how much it would cost to stock this school with certain books, change these numbers.">
-                                                    Needed materials
+                                                <th class="tooltip" title="The default number of needed materials is set to the number of students in this grade in '12–'13. You can change the number of needed materials by using the arrows below.">
+                                                    Needed Materials
                                                     <span class="tooltip-icon"></span>
                                                 </th>
                                                 <th>
@@ -118,12 +115,11 @@
                                     </table>
                                     <div class="block shortfall-detail">
                                         <p>It would cost 
-                                            <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}">${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</span>
+                                            <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}"><strong>${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</strong></span>
                                             to purchase the 
-                                            <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}">{{ grade_curriculum.book_shortfall }}</span> missing materials listed above for the students in grade {{ current_grade }} at {{ school.name.title }}. This does not take into account possible redistribution from other schools or the school district.</p>
-                                            <!--  Update the "needed material" numbers below to change the number of materials needed for this grade (ex. if you believe there may be more materials than recorded). -->
+                                            <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}"><strong>{{ grade_curriculum.book_shortfall }}</strong></span> missing materials listed below for the students in grade {{ current_grade }} at {{ school.name.title }}. This does not take into account possible redistribution from other schools or the school district. You can <strong>change the number of needed materials</strong> by using the arrows above.</p>
                                         <hr>
-                                    </div>
+                                    </div>                                    
                                 {% endfor %}
                             {% else %}
                                 <p class="no-match">We didn't find any inventory records at this school that matched an approved curriculum for this subject in this grade. <a href="/school/inventory/{{ school.school_code }}">View all inventory records at this school</a>.</p>
