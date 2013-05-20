@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = True
+DEBUG = False
 INSTALLED_APPS = list(INSTALLED_APPS) + ['devserver']
 
 try:
