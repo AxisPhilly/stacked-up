@@ -26,8 +26,6 @@ app.getChartData = function(school_pk, grade) {
   ).then(function(schoolInfo, districtInfo) {
     var schoolScores = app.formatPSSASchoolData(JSON.parse(schoolInfo[0].curriculum.pssa_test_scores));
     var districtScores = districtInfo[0][grade];
-    console.log(schoolScores);
-    console.log(districtScores);
     if(schoolScores.read.length > 1) {
       app.createChart(schoolScores, districtScores, 'read', 'reading-scores', 'reading-chart-title');
       app.createChart(schoolScores, districtScores, 'math', 'math-scores', 'math-chart-title');
@@ -218,8 +216,20 @@ $('.needed-material input').on('change', function() {
           $.ajax({
             url: '/api/v1/learning_material/' + materialPk,
             success: function(resp){
-              // TODO Make sure we get the right price
-              price = Number(resp.prices[0].value);
+              if(resp.prices.length > 1) {
+                for (var i = resp.prices.length - 1; i >= 0; i--) {
+                  if(resp.prices[i].types.length > 1) {
+                    for (var j = resp.prices[i].types.length - 1; j >= 0; j--) {
+                      if(resp.prices[i].types[j].name == school_type) {
+                        price = Number(resp.prices[i].value);
+                        return;
+                      }
+                    }
+                  }
+                }
+              } else {
+                price = Number(resp.prices[0].value);
+              }
               prices[materialKey] = price;
               shortfallCost += price * (diff * -1);
               $shortfallCost.html('$' + numberWithCommas(shortfallCost.toFixed(2)));

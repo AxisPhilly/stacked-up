@@ -140,5 +140,6 @@ var grade = "{{ current_grade }}";
 if(grade === "K") { grade = 0 };
 
 app.getChartData({{ school.pk }}, grade);
+var school_type = "{{ school.school_type.name }}";
 </script>
 {% endblock %}
