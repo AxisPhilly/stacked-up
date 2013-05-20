@@ -119,9 +119,9 @@ class SchoolAggregateView(ListView):
 
     def is_enough_books(self, number_of_books, students_in_grade):
         if number_of_books >= students_in_grade:
-            return('True')
+            return True
         else:
-            return('False')
+            return False
 
     def get_materials_for_grade_curriculum(self, students_in_grade, subject,
                                            all_books, cohort, grade_curriculum_id, grade_curriculum_name):
@@ -132,9 +132,9 @@ class SchoolAggregateView(ListView):
             'likely_curriculum': False
         }
         grade_curriculum = GradeCurriculum.objects.get(id=grade_curriculum_id)
+        self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
         if (grade_curriculum == cohort.grade.likely_math_curriculum) or (grade_curriculum == cohort.grade.likely_reading_curriculum):
             self.curriculum_list[subject]['curricula'][grade_curriculum_name]['likely_curriculum'] = True
-        self.curriculum_list[subject]['curricula'][grade_curriculum_name]['necessary_material'] = []
         for material in grade_curriculum.necessary_materials.all():
             cost_of_book = self.get_material_price(material)
             if all_books.filter(material=material).exists():
@@ -146,7 +146,7 @@ class SchoolAggregateView(ListView):
                 number_of_books = 'No records found'
                 difference = students_in_grade * -1
                 numerical_difference = students_in_grade * -1
-                enough_books = 'None'
+                enough_books = False
                 self.curriculum_list[subject]['curricula'][grade_curriculum_name]['cost_shortfall'] += (students_in_grade * cost_of_book)
                 self.curriculum_list[subject]['curricula'][grade_curriculum_name]['book_shortfall'] += (students_in_grade)
             if number_of_books != 'No records found' and (students_in_grade - number_of_books) >= 0:
@@ -165,7 +165,8 @@ class SchoolAggregateView(ListView):
                     'difference': difference,
                     'numerical_difference': numerical_difference,
                     'pk': material.pk
-                })
+                }
+            )
 
     def get_material_price(self, material):
         prices = NegotiatedPrice.objects.filter(material=material)
