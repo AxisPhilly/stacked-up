@@ -666,6 +666,59 @@ label {
   font-weight: normal;
 }
 
+/*Homepage*/
+
+.index h3 {
+  font-weight: bold;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  margin-top: 1em;  
+}
+
+.index h4 {
+  font-weight: normal;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  margin-top: 1em;  
+  margin-bottom: 0;
+}
+
+.index .col {
+  border-right: 1px solid #eee;
+  padding-right: 1.7%;
+}
+
+.index .col:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.index .two {
+  width: 13%;
+}
+.index .three {
+  width: 21.5%;
+}
+.index .four {
+  width: 30%;
+}
+.index .five {
+  width: 38.5%;
+}
+
+.intro:first-letter {
+  font-size: 102px;
+  float: left;
+  margin: 4px 20px 0 0;
+  line-height: 0.8;
+  font-weight: bold;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+}
+
+.section-articles hr {
+  margin: 1em 0;
+}
+
+/*Media Query Overrides*/
+
 @media only screen and (min-width: 762px) and (max-width: 939px) {
     #hero h1 {
     font-size: 77px;
@@ -724,55 +777,4 @@ label {
     padding: 60px 40px 20px 40px;
   }
 
-}
-
-/*Homepage*/
-
-.index h3 {
-  font-weight: bold;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
-  margin-top: 1em;  
-}
-
-.index h4 {
-  font-weight: normal;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
-  margin-top: 1em;  
-  margin-bottom: 0;
-}
-
-.index .col {
-  border-right: 1px solid #eee;
-  padding-right: 1.7%;
-}
-
-.index .col:last-child {
-  border-right: 0;
-  padding-right: 0;
-}
-
-.index .two {
-  width: 13%;
-}
-.index .three {
-  width: 21.5%;
-}
-.index .four {
-  width: 30%;
-}
-.index .five {
-  width: 38.5%;
-}
-
-.intro:first-letter {
-  font-size: 102px;
-  float: left;
-  margin: 4px 20px 0 0;
-  line-height: 0.8;
-  font-weight: bold;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
-}
-
-.section-articles hr {
-  margin: 1em 0;
 }
