@@ -54,7 +54,6 @@ p {
 #header {
   background-color: #fff; 
   font-size: 18px;
-  margin-bottom: .1em;
   border-bottom: 2px solid #eee;
   padding: 12px 0 8px 0;
 }
@@ -68,32 +67,32 @@ p {
   margin-bottom: 1.7em;
 }
 
-  .top-bar > .container > li {
-    float: left;
-    list-style: none;
-    margin-top: 10px;
-    color: white;
-  }
+.top-bar > .container > li {
+  float: left;
+  list-style: none;
+  margin-top: 10px;
+  color: white;
+}
 
-  .top-bar > .container > li + li {
-    margin-left: 6px;
-  }
+.top-bar > .container > li + li {
+  margin-left: 6px;
+}
 
-  .top-bar > .container > li > a {
-    color: #7b7a7c;
-    padding: 0 6px;
-  }
+.top-bar > .container > li > a {
+  color: #7b7a7c;
+  padding: 0 6px;
+}
 
-  .top-bar .container > .menu-item a:after {
-    content: '/';
-    float: right;
-    font-weight: normal;
-    padding-left: 6px;
-  }
+.top-bar .container > .menu-item a:after {
+  content: '/';
+  float: right;
+  font-weight: normal;
+  padding-left: 6px;
+}
 
-  .addthis_toolbox {
-    min-width: 350px;
-  }
+.addthis_toolbox {
+  min-width: 350px;
+}
 
 .explainer-wrap {
   background: #1e1e1e;
@@ -102,10 +101,10 @@ p {
   bottom: 5px;
 } 
 
-  .explainer {
-    color: #fff;
-    margin: 20px;
-  }
+.explainer {
+  color: #fff;
+  margin: 20px;
+}
 
 .caption {
   position: absolute;
@@ -329,6 +328,35 @@ a:active {
 
 .chart-caption {
   text-align: center;
+}
+
+#hero {
+  height: 200px;
+  margin-bottom: 2em;
+  background: url(../images/book-hero2.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 10;
+  padding: 120px 100px 60px 100px;
+}
+
+#hero h1 {
+  font-size: 93px;
+  color: #fff;
+  text-align: center;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+}
+
+#hero h2 {
+  font-size: 32px;
+  color: #fff;
+  text-align: center;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 /* Tables */
@@ -632,4 +660,119 @@ font-weight: normal;
 
 .ui-state-disabled {
   cursor: default !important;
+}
+
+label {
+  font-weight: normal;
+}
+
+@media only screen and (min-width: 762px) and (max-width: 939px) {
+    #hero h1 {
+    font-size: 77px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: .25em;
+    line-height: 1;
+    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  }
+
+  #hero h2 {
+    font-size: 26px;
+    color: #fff;
+    text-align: center;
+    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  }
+}
+
+@media only screen and (max-width: 761px) {
+  .index .mobile-full {
+    clear: both;
+    float: none;
+    width: 90%;
+    margin: 1em 0 0 0;
+    padding: 0;
+    border: 0;
+  }
+  .index .mobile-full:first-child {
+    margin-top: 0;
+  }
+
+  .index .col:nth-child(2), .col:nth-child(1) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  #hero h1 {
+    font-size: 42px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: .25em;
+    line-height: 1;
+    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  }
+
+  #hero h2 {
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  }
+
+  #hero {
+    height: 160px;
+    margin-bottom: 2em;
+    padding: 60px 40px 20px 40px;
+  }
+
+}
+
+/*Homepage*/
+
+.index h3 {
+  font-weight: bold;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  margin-top: 1em;  
+}
+
+.index h4 {
+  font-weight: normal;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
+  margin-top: 1em;  
+  margin-bottom: 0;
+}
+
+.index .col {
+  border-right: 1px solid #eee;
+  padding-right: 1.7%;
+}
+
+.index .col:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.index .two {
+  width: 13%;
+}
+.index .three {
+  width: 21.5%;
+}
+.index .four {
+  width: 30%;
+}
+.index .five {
+  width: 38.5%;
+}
+
+.intro:first-letter {
+  font-size: 102px;
+  float: left;
+  margin: 4px 20px 0 0;
+  line-height: 0.8;
+  font-weight: bold;
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+}
+
+.section-articles hr {
+  margin: 1em 0;
 }

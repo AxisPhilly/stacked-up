@@ -10,26 +10,39 @@
         <!-- AddThis Button END -->
     {% endblock %}
     {% block content %}
+
+    <div id="hero">
+      <div style="background-color: #000; opacity: 0.8; padding: 1em 2em 0em 2em; display: inline-block;">
+        <h1>Stacked Up</h1>
+        <h2>Do Philly students have enough books?</h2>
+      </div>
+    </div>
+
     <div class="container content-inner">
-      <div class="row section">
+<!--       <div class="row section">
         <img src="/static/images/school_library_seniwati.jpg">
         <p class="caption">Photo by <a href="http://www.flickr.com/photos/seniwati/">seniwati</a> under Creative Commons license</p>
         <div class="twelve explainer-wrap">
           <p class="explainer mobile-full"><strong>Stacked Up</strong> is a project exploring and understanding how the Philadelphia School District keeps, tracks, and doles out books and learning materials to Philly students, and how those materials stack up against students in the school and state-approved curricula for reading and math.</p>
         </div>
-      </div>
-      <div class="section row">
-        <div class="col four mobile-full">
-          <h3>About this Project</h3>
-          <p>AxisPhilly editor Carla Robinson details some of the ways you can use this website, and more about
-            the project and articles. <a href="#">Read more &rarr;</a></p>
+      </div> -->
+      <div class="section row index">
+        <div class="col five tablet-four mobile-full">
+          <p class="intro">This project explores and understands how the Philadelphia School District keeps, tracks, and doles out books and learning materials to Philly students, and how those materials stack up against students in the school and state-approved curricula for reading and math.</p>
+          <p>AxisPhilly editor Carla Robinson details some of the ways you can use this website, and more about the project and articles. There is also some more information about this somewhere else. <a href="#">Read more &rarr;</a></p>
         </div>
-        <div class="col four mobile-full">
-          <h3>First article title</h3>
-          <p>TKTKTK TKTKT TKTK TKTKTKTT KTKTKBlurb. TKTKTKTKTKTT KTKTKTKTKTTKTK TKTKTKTKTKTKTT KTKTKTKTK TTKTKTK
-            TKTKTKT KTKTTKTKTK TKTKTTKT KTKTKTKTKT KTKTT KTKTK TKTKTTK TKTK <a href="#">Read more &rarr;</a></p>
+        <div class="col three tablet-four mobile-full section-articles">
+          <h3>Articles</h3>
+          <h4><a href="#">AVI study commissioned by Alan Butkovitz</a></h4>
+          by Meredith Broussard, May 9
+          <hr>
+          <h4><a href="#">How a few Philly high school students organized themselves into a few hundred in four days</a></h4>
+          by Meredith Broussard, May 9
+          <hr>
+          <h4><a href="#">Inclusivity is a big hurdle for bike-share programs</a></h4>
+          by Meredith Broussard, May 9
         </div>
-        <div class="col four mobile-full">
+        <div class="col four tablet-four mobile-full section-schools">
           <h3>Find a school</h3>
           <div class="ui-widget">
             <label for="search">Search for a school: </label>
@@ -37,7 +50,8 @@
           </div>
           <p>Start typing the name of a school and choose from the filtered options 
             to find what you're looking for.</p>
-          <p><a href="/schools">View all schools &rarr;</a>
+          <hr>
+          <a href="/schools">View all schools &rarr;</a>
         </div>
       </div>
     </div>    
