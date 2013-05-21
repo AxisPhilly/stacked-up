@@ -348,14 +348,14 @@ a:active {
 #hero h1 {
   font-size: 93px;
   color: #fff;
-  text-align: center;
+  text-align: left;
   font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 #hero h2 {
   font-size: 32px;
   color: #fff;
-  text-align: center;
+  text-align: left;
   font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
@@ -668,6 +668,13 @@ label {
 
 /*Homepage*/
 
+#title-box {
+  background-color: #000; 
+  opacity: 0.8; 
+  padding: 1em 2em 0em 2em; 
+  display: inline-block;
+}
+
 .index h3 {
   font-weight: bold;
   font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;
@@ -722,18 +729,12 @@ label {
 @media only screen and (min-width: 762px) and (max-width: 939px) {
     #hero h1 {
     font-size: 77px;
-    color: #fff;
-    text-align: center;
     margin-bottom: .25em;
     line-height: 1;
-    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
   }
 
   #hero h2 {
     font-size: 26px;
-    color: #fff;
-    text-align: center;
-    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
   }
 }
 
@@ -757,18 +758,13 @@ label {
 
   #hero h1 {
     font-size: 42px;
-    color: #fff;
-    text-align: center;
     margin-bottom: .25em;
     line-height: 1;
-    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
   }
 
   #hero h2 {
     font-size: 18px;
     color: #fff;
-    text-align: center;
-    font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
   }
 
   #hero {
