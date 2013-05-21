@@ -94,29 +94,6 @@ p {
   min-width: 350px;
 }
 
-.explainer-wrap {
-  background: #1e1e1e;
-  background: rgba(0,0,0,.4);
-  position: absolute;
-  bottom: 5px;
-} 
-
-.explainer {
-  color: #fff;
-  margin: 20px;
-}
-
-.caption {
-  position: absolute;
-  bottom: -5px;
-  right: 10px;
-  font-size: 10px;
-}
-
-.caption, .caption a {
-  color: #e1e1e1 !important;
-}
-
 .change-input {
   font-size: 15px;
   width: 5em;
