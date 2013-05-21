@@ -645,6 +645,10 @@ label {
 
 /*Homepage*/
 
+.index .addthis_toolbox {
+  padding-top: 1em;
+}
+
 #title-box {
   background-color: #000; 
   opacity: 0.8; 
