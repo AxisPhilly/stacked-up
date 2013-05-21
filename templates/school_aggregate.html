@@ -2,16 +2,8 @@
 {% load humanize %}
     {% block title %}Stacked Up | {{ school.name.title }} | AxisPhilly{% endblock %}
     {% block ogtitle %}Stacked Up | {{ school.name.title }} | AxisPhilly{% endblock %}    
+    
     {% block content %}
-        <div id="sub-header" class="top-bar">
-          <div class="container content-inner cf">
-            <a href="/" class="left">
-              <h1 id="project-header" class="h2">Stacked Up</h1>
-              <h2 id="project-sub-header" class="h4">Do Philly students have the books they need?</h2>
-            </a>
-            {% block index_social %}{% endblock %}
-          </div>
-        </div>      
         <div class="container content-inner">
             <div class="section row mbn mtm">
                 <h1 id="headline" class="left">{{ school.name.title }}</h1>
