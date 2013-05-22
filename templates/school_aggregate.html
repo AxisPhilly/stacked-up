@@ -93,22 +93,22 @@
                                         <tbody>
                                         {% for material in grade_curriculum.necessary_material %}
                                             <tr>
-                                                <td>
+                                                <td data-title="Title">
                                                     {{ material.title }}
                                                 </td>
-                                                <td>
+                                                <td data-title="Price / Material">
                                                     ${{ material.cost }}
                                                 </td>                                                
-                                                <td>
+                                                <td data-title="Recorded Inventory">
                                                     {{ material.total_copies }}
                                                 </td>       
-                                                <td class="needed-material">
+                                                <td class="needed-material" data-title="Needed Material">
                                                     <input value="{{ material.needed }}" type="number" class="change-input">
                                                 </td>       
-                                                <td class="material-difference" data-original-difference="{{ material.numerical_difference }}" data-material-pk="{{material.pk}}">
+                                                <td class="material-difference" data-original-difference="{{ material.numerical_difference }}" data-material-pk="{{material.pk}}" data-title="Difference">
                                                     {{ material.difference }}
                                                     </td>       
-                                                <td class="{% if material.enough == True %}enough{% else %}notEnough{% endif %}">
+                                                <td class="{% if material.enough == True %}enough{% else %}notEnough{% endif %}" data-title="Enough">
                                                     <span class="icon">{% if material.enough == True %}1{% else %}-1{% endif %}</span>
                                                 </td>
                                             </tr>
