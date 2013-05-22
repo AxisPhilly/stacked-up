@@ -8,7 +8,7 @@
       <link rel="stylesheet" href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />
       <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tooltipster.css" />        
       <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css?v1">
+      <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css">
       {% block extra_css %}{% endblock %}
     {% endcompress %}
     <link rel="icon" href="https://s3.amazonaws.com/axisphilly-assets/images/favicon.png" type="image/x-icon" />
@@ -38,16 +38,18 @@
         <li class="social"><a href="http://www.facebook.com/AxisPhilly"><i class="social-foundicon-facebook"></i></a></li>
         <li class="social"><a href="http://www.axisphilly.org/?feed=rss"><i class="social-foundicon-rss"></i></a></li>
       </ul>
-    </div>
-    <div id="sub-header" class="top-bar">
-      <div class="container content-inner cf">
-        <a href="/" class="left">
-          <h1 id="project-header" class="h2">Stacked Up</h1>
-          <h2 id="project-sub-header" class="h4">Do Philly students have the books they need?</h2>
-        </a>
-        {% block index_social %}{% endblock %}
-      </div>
-    </div>    
+    </div>  
+    {% block subheader %} 
+      <div id="sub-header" class="top-bar">
+        <div class="container content-inner cf">
+          <a href="/" class="left">
+            <h1 id="project-header" class="h2">Stacked Up</h1>
+            <h2 id="project-sub-header" class="h4">Do Philly students have the books they need?</h2>
+          </a>
+          {% block index_social %}{% endblock %}
+        </div>
+      </div>     
+    {% endblock %} 
     {% block content %} 
     {% endblock %} 
     <div class="credits container content-inner">
