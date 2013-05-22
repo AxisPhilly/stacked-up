@@ -124,47 +124,41 @@ $(document).ready(function()
 
 // Search
 
-$(document).ready(function() {
-  var schoolObjects;
+var schoolObjects;
 
-  $.ajax({
-    url: '/api/v1/schools/?format=json',
-    success: function(resp) {
-      setupAutoComplete(resp);
-    },
-    select: function(event, ui) {
+function setupAutoComplete(resp) {
+  schoolObjects = resp.objects;
+  var sourceList = [];
 
-    }
-  });
-
-  function setupAutoComplete(resp) {
-    schoolObjects = resp.objects;
-    var sourceList = [];
-
-    for(var i=0; i<schoolObjects.length; i++) {
-      sourceList.push(schoolObjects[i].name);
-    }
-
-    $("#search").autocomplete({
-      source: sourceList,
-      minLength: 2,
-      delay: 0
-    });
+  for(var i=0; i<schoolObjects.length; i++) {
+    sourceList.push(schoolObjects[i].name);
   }
 
-  $("#search").on("autocompleteselect", function(event, ui) {
-    var school;
-
-    for(var i=0; i<schoolObjects.length; i++) {
-      if(schoolObjects[i].name === ui.item.value) {
-        school = schoolObjects[i];
-        break;
-      }
-    }
-
-    window.location = '/school/' + school.school_code;
+  $("#search").autocomplete({
+    source: sourceList,
+    minLength: 2,
+    delay: 0
   });
+}
 
+$.ajax({
+  url: '/api/v1/schools/?format=json',
+  success: function(resp) {
+    setupAutoComplete(resp);
+  }
+});
+
+$("#search").on("autocompleteselect", function(event, ui) {
+  var school;
+
+  for(var i=0; i<schoolObjects.length; i++) {
+    if(schoolObjects[i].name === ui.item.value) {
+      school = schoolObjects[i];
+      break;
+    }
+  }
+
+  window.location = '/school/' + school.school_code;
 });
 
 // Create data binding for "change assumptions" feature
