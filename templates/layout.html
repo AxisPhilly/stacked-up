@@ -58,15 +58,16 @@
     </div>
 
     {% compress js %}
-      <script src="{{ STATIC_URL }}js/jquery-1.7.2.js"></script>
-      <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
+      <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
       <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
       <script src="{{ STATIC_URL }}js/jquery.tooltipster.min.js"></script>
       <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
       <script src="{{ STATIC_URL }}js/canvasjs.min.js"></script>
-      <script src="{{ STATIC_URL }}js/site.js?v1"></script>
+      <script src="{{ STATIC_URL }}js/site.js"></script>
       {% block scripts %}{% endblock %}
     {% endcompress %}
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
+    
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, "ui_click": true};</script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5182ce4b100f38d0"></script>
     <script type="text/javascript">
