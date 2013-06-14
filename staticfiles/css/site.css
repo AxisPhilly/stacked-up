@@ -720,6 +720,28 @@ label {
 }
 
 @media only screen and (max-width: 761px) {
+  .col {
+    margin: 2em 0 0 0;
+  }
+  .col:first-child {
+    margin-top: 1em;
+  }
+  tr {
+    margin-bottom: 1em;
+  }
+  table td {
+    border-top: 0;
+    padding: 0;
+  }  
+  input {
+    border: 0;
+    padding: 0;
+  }
+
+  .tablesorter tbody td {
+    padding: 0;
+  }
+
   .index .mobile-full {
     clear: both;
     float: none;
@@ -752,6 +774,46 @@ label {
     height: 160px;
     margin-bottom: 2em;
     padding: 60px 40px 20px 40px;
+  }
+
+/* http://codepen.io/aarongustafson/pen/ucJGv */
+
+  table {
+    border: 0;
+    @include trailing-border;
+    padding-bottom: 0;
+    display: block;
+    width: 100%;
+  }
+    
+  caption {
+    display: block;
+  }
+    
+  thead {
+    display: none;
+    visibility: hidden;
+  }
+
+  tbody, tr, th, td {
+    border: 0;
+    display: block;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+  }
+  
+  tr {
+    @include trailer;
+  }
+  
+  th[data-title]:before,
+  td[data-title]:before {
+    content: attr(data-title) ":\00A0";
+    font-weight: bold;
+  }
+  th:not([data-title]) {
+    font-weight: bold;
   }
 
 }
