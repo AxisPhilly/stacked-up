@@ -5,6 +5,8 @@
 Explore the textbook inventory of Philadelphia public schools and see if schools have enough reported books
 to teach approved reading and math curriculum.
 
+Note that not all schools use the school district's official system. But for those that are, what's going on in the data?
+
 ## Running locally
 
 Getting started:
