@@ -28,7 +28,7 @@ Getting started:
 
         ./manage.py runserver 0.0.0.0:8000 # or sdprun for a shortcut
 
-Your app is then accessible on `localhost:8111` (where your vagrant port was setup, note that it will not be on 8000).
+Your app is then accessible on `localhost:8111` (where your vagrant port was setup).
 
 This is how you'll start the app when you want to work on it. You are now in a virtual environment, and should execute any `./manage.py` kinds of commands in here. Open another bash session to use git or other tools outside of your virtual environment.
 
