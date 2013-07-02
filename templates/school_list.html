@@ -15,19 +15,19 @@
                     <th>
                         School Type
                     </th>
-<!--                     <th class="tooltip" title="The absolute difference between the number of students in each grade and the minimum number of materials that would be required to teach the District-mandated curriculum in that grade.">
+                    <!-- <th class="tooltip" title="The absolute difference between the number of students in each grade and the minimum number of materials that would be required to teach the District-mandated curriculum in that grade.">
                         Shortfall
                         <span class="tooltip-icon"></span>
-                    </th>
- -->                </tr> 
+                    </th>-->                
+                </tr> 
             </thead>
             <tbody>
                 {% for school in schools %}
                     <tr>
                         <td><a href="/school/{{ school.school.school_code }}">{{ school.school.name.title }}</a></td>
                         <td>{{ school.school.school_level.title }}</td>
-<!--                         <td>{{ school.books_for_students }}</td>
- -->                    </tr>
+                        <!-- <td>{{ school.books_for_students }}</td> -->
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
