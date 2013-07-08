@@ -5,12 +5,12 @@
     <div class="container content-inner" id="inventory">
       <div class="section row">
         <div class="three col mobile-full" id="breadcrumbs">
-            <a href="/school/{{ school.school_code }}">&#8592; Back to School</a>
+            <a href="/school/{{ school.school_code }}">&#8592; Back </a>
         </div>
       </div>
       <div class="section row">       
                     <h3>{{ school.name.title }} | All Recorded Inventory</h3>
-                    <p><a href="http://webgui.phila.k12.pa.us/offices/e/etg/textbook-storage-system" target="_blank">Learn more about the textbook storage [inventory] system used by the School District of Philadelphia</a></p>
+                    <p>Inventory data below comes from the Textbook Storage System, available to all School District of Philadelphia principals. <a href="http://webgui.phila.k12.pa.us/offices/e/etg/textbook-storage-system" target="_blank">Learn more about it:</a></p>
                     {% if inventory %}                 
                         <table class="tablesorter">
                             <thead>
