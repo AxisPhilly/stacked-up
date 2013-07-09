@@ -108,8 +108,8 @@
                                                 <td class="material-difference" data-original-difference="{{ material.numerical_difference }}" data-material-pk="{{material.pk}}" data-title="Difference">
                                                     {{ material.difference }}
                                                     </td>       
-                                                <td class="{% if material.enough == True %}enough{% else %}notEnough{% endif %}" data-title="Enough">
-                                                    <span class="icon">{% if material.enough == True %}1{% else %}-1{% endif %}</span>
+                                                <td class="{% if material.enough %}enough{% else %}notEnough{% endif %}" data-title="Enough">
+                                                    <span class="icon">{% if material.enough == "True" %}1{% else %}-1{% endif %}</span>
                                                 </td>
                                             </tr>
                                         {% endfor %}
