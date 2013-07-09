@@ -320,20 +320,29 @@ a:active {
   position: relative;
   z-index: 10;
   padding: 120px 100px 60px 100px;
+  color: #fff;
+  text-align: left;
+}
+
+#hero h1, #hero h2, #hero h3 {
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+}
+
+#hero h1, #hero h2 {
+  color: #efefef;
 }
 
 #hero h1 {
-  font-size: 93px;
-  color: #fff;
-  text-align: left;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+  font-size: 6.15em;
 }
 
-#hero h2 {
-  font-size: 32px;
-  color: #fff;
-  text-align: left;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+.under-title {
+  font-size: 2.2em;
+}
+
+h3.under-title {
+  color: #aeaeae;
+  font-size: 1.45em;
 }
 
 /* Tables */
@@ -708,14 +717,14 @@ label {
 /*Media Query Overrides*/
 
 @media only screen and (min-width: 762px) and (max-width: 939px) {
-    #hero h1 {
-    font-size: 77px;
+  #hero h1 {
+    font-size: 5.1em;
     margin-bottom: .25em;
     line-height: 1;
   }
 
-  #hero h2 {
-    font-size: 26px;
+  .under-title {
+    font-size: 1.8em;
   }
 }
 
@@ -764,9 +773,13 @@ label {
     line-height: 1;
   }
 
-  #hero h2 {
-    font-size: 18px;
+  h2.under-title {
+    font-size: 1.1em;
     color: #fff;
+  }
+
+  h3.under-title {
+    font-size: 1em;
   }
 
   #hero {

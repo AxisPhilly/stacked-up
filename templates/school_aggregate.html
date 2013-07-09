@@ -20,13 +20,13 @@
                 <div class="col twelve mobile-full" id="graph-sidebar">        
                     <div class="col six mobile-full">        
                         <div class="h3">What's here?</div>
-                        <p>Below are inventory records about reading and math programs at {{ school.name.title }}. Depending upon the quality of school’s own records, it may or may not show what the school actually has. For each subject, we display any curricula that the school appears to have materials for.</p>
-                        <p>For each curriculum, we display the materials that students in this classroom are likely to need, based upon what that curriculum includes. If you see "no records" as the quantity, that means this material is typically used in this curriculum, but the school doesn’t appear to have it.</p>
+                        <p>Below are textbook inventory records from {{ school.name.title }}. We listed the curriculum this school is most likely using in reading and math. You’ll see the minimum instructional materials (usually a textbook and a workbook) we think would be required to learn this curriculum material effectively.</p>
+                        <p>"No records" means the school doesn’t appear to have the text at all. Cost estimates are based on the District’s negotiated prices. Enrollment data is from 2012-2013.</p>
+ 
                     </div>
                     <div class="col six mobile-full">
                         <div class="h3">How to use this tool</div>
-                        <p>For each curriculum, you'll see the materials students need. If you care about this school, you can calculate the cost of missing materials by changing the number in the “materials needed” column.</p>
-                        <p>The dollar figure you see at the end of each curriculum is an estimate of that cost, based on the District’s negotiated prices.</p>
+                        <p>It’s tricky to ask if a school has enough books. First, you have to ask which books are in the school, and then you have to ask if they are the required instructional materials. By "required" we mean "the books and materials that are aligned to Common Core educational standards and allow students to learn the concepts on state-mandated Keystone or PSSA tests." More simply: does this school have enough books so that its students can do their classwork and homework? If so, do the books cover all the stuff that’s going to be on the kids’ standardized tests? You can recalculate below by changing the number in the “materials needed” column.</p>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                                         <p>It would cost 
                                             <span class="shortfall-cost" data-original-cost="{{grade_curriculum.cost_shortfall}}"><strong>${{ grade_curriculum.cost_shortfall|floatformat:2|intcomma }}</strong></span>
                                             to purchase the 
-                                            <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}"><strong>{{ grade_curriculum.book_shortfall }}</strong></span> missing materials listed below for the students in grade {{ current_grade }} at {{ school.name.title }}. This does not take into account possible redistribution from other schools or the school district. You can <strong>change the number of needed materials</strong> by using the arrows above.</p>
+                                            <span class="shortfall-count" data-original-count="{{ grade_curriculum.book_shortfall }}"><strong>{{ grade_curriculum.book_shortfall }}</strong></span> missing materials listed above for the students in grade {{ current_grade }} at {{ school.name.title }}.</p>
                                         <hr>
                                     </div>                                    
                                 {% endfor %}
