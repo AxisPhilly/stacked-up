@@ -320,20 +320,28 @@ a:active {
   position: relative;
   z-index: 10;
   padding: 120px 100px 60px 100px;
+  color: #fff;
+  text-align: left;
+}
+
+#hero h1, #hero h2, #hero h3 {
+  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
+}
+
+#hero h1, #hero h2 {
+  color: #efefef;
+}
+
+#hero h3 {
+  color: #aeaeae;
 }
 
 #hero h1 {
   font-size: 93px;
-  color: #fff;
-  text-align: left;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 #hero h2 {
   font-size: 32px;
-  color: #fff;
-  text-align: left;
-  font-family: "nimbus-sans", "helvetica neue", "helvetica", helvetica, arial, sans-serif;  
 }
 
 /* Tables */
