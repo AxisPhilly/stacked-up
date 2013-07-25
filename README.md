@@ -46,6 +46,7 @@ This project leverages [vagrant-django-template](https://github.com/torchbox/vag
 
 Stacked Up is a web application that tracks curricula and learning
 material inventory for schools and school districts.
+
 Copyright (C) 2013 AxisPhilly
 
 This program is free software: you can redistribute it and/or modify
